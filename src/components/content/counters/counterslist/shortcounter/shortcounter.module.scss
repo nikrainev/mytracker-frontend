@@ -1,0 +1,44 @@
+
+
+.short_counter{
+  display: flex;
+  justify-content: space-between;
+  background: #f7f7f7;
+  margin-bottom: 8px;
+  padding: 10px 0px 10px 0px;
+}
+
+.name{
+  width: 20%;
+}
+.domen{
+  width: 20%;
+}
+.dayusers{
+  width: 20%;
+}
+.totalusers{
+  width: 20%;
+}
+.status{
+  width: 20%;
+  &.work{
+
+    span.work{
+      display: block;
+    }
+    span.notwork {
+      display: none;
+    }
+  }
+
+  &.notwork{
+    span.work{
+      display: none;
+    }
+    span.notwork {
+      display: block;
+    }
+  }
+
+}

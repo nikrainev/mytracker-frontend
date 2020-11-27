@@ -1,0 +1,22 @@
+.sidebar {
+  width: 15%;
+  background: #0e2336;
+  min-height: calc(100vh - 41px);
+}
+
+.sidebar_menu{
+  padding-top: 10px;
+}
+
+.sidebar_menu a{
+  display: block;
+  width: calc(100% - 20px);
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: .3s all;
+}
+
+.sidebar_menu a:hover{
+  background: #2f495c;
+}

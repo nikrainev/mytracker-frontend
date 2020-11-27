@@ -1,0 +1,22 @@
+.table_head{
+  display: flex;
+  justify-content: space-between;
+  .name{
+    width: 20%;
+  }
+  .domen{
+    width: 20%;
+  }
+  .dayusers{
+    width: 20%;
+  }
+  .totalusers{
+    width: 20%;
+  }
+  .status{
+    width: 20%;
+  }
+
+
+}
+

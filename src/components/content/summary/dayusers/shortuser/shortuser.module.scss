@@ -1,0 +1,40 @@
+.shortuser{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background: #f7f7f7;
+  margin-bottom: 8px;
+  padding: 10px 0px 6px 0px;
+  p{
+    text-align: left;
+  }
+
+}
+
+.user_alias{
+  width: 15%;
+  img{
+    width: 50px;
+  }
+}
+.user_country{
+  width: 25%;
+}
+
+.user_time {
+  width: 15%;
+}
+
+.user_date{
+  width: 25%;
+}
+
+.user_revenue{
+  width: 20%;
+}
+
+.dayuser_list{
+  padding-top: 10px;
+}
+

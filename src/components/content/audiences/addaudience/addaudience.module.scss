@@ -1,0 +1,90 @@
+.addaudience_button{
+  width: 270px;
+  display: block;
+  margin: auto;
+
+}
+.audience_selector{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 34px;
+  border: 2px solid #00416d;
+  width: 250px;
+  border-radius: 25px;
+  padding-left: 15px;
+  overflow: hidden;
+  select{
+    height: 34px;
+    border-radius: 20px 0px 0px 20px;
+    width: 150px;
+    border: none;
+    font-size: 14px;
+
+    outline: none !important;
+
+  }
+  button{
+    width: 90px;
+    border: none;
+    background: #006eb9;
+    color: white;
+    height: 100%;
+    outline: none !important;
+    transition: .2s all;
+    cursor: pointer;
+    border-left: 2px solid #00416d;
+    margin-left: 10px;
+    &:hover{
+      background: #005995;
+    }
+    &:focus:hover{
+      background: #00416d;
+    }
+
+  }
+}
+.add_form{
+  width: 400px;
+  label{
+    display: block;
+    padding-bottom: 9px;
+    padding-top: 8px;
+  }
+}
+
+.audience_badges{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.audience_badge{
+  height: 34px;
+  border: 2px solid #00416d;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #006eb9;
+  padding-left: 15px;
+  padding-right: 10px;
+  border-radius: 25px;
+  margin-top: 10px;
+  p{
+    color: white;
+    padding-left: 13px;
+    padding-right: 18px;
+    font-size: 16px;
+    margin-top: -2px;
+  }
+  svg{
+    cursor: pointer;
+  }
+
+  svg:hover path{
+    fill: red !important;
+
+  }
+}

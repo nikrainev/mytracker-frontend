@@ -1,0 +1,69 @@
+.graphic{
+  width: 600px;
+  padding-top: 150px;
+  &_bottom{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    border-top: 1px solid gray;
+    margin-top: 5px;
+    padding-top: 5px;
+    p{
+      color: gray;
+    }
+  }
+}
+.graphic_col_wr{
+  position: relative;
+  &:hover{
+    .graphic_col{
+      opacity: 0.7;
+    }
+    .graphic_col_text{
+      display: block;
+    }
+  }
+}
+
+.graphic_col_text{
+  width: 120px;
+  height: 65px;
+  box-shadow: 0px 0px 5px #c3c3c3;
+  display: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 0px;
+  margin-top: -70px;
+  background: white;
+}
+
+.graphic_col_day{
+  font-size: 11px;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.graphic_col_number{
+  color: #00A7CF;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-top: 2px;
+}
+
+
+
+.graphic_col{
+  display: block;
+  width: 7px;
+  background: #00A7CF;
+  height: 20px;
+  border-radius: 3px;
+
+}
+
+.graphic_cols{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
