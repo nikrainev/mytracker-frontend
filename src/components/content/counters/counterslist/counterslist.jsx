@@ -8,18 +8,27 @@ import * as axios from "axios";
 class Counterslist extends React.Component {
     componentDidMount() {
 
-        axios.get('http://195.161.62.108:3000/counters').then(response =>{
+        axios.get(`http://195.161.62.108:3000/counters?page=${this.props.currentPage}`).then(response =>{
 
             this.props.setCounters(response)
+            this.props.setTotalCounters(response)
         })
 
 
 
+
     }
+    changePage = (page) =>{
+        this.props.setCurrentPage(page)
+        axios.get(`http://195.161.62.108:3000/counters?page=${page}`).then(response =>{
+
+            this.props.setCounters(response)
+        })
+    }
+
    render (){
        let counters =  this.props.countersListData
        let countersElement = []
-       alert()
        console.log(counters)
        if (counters.length == 0){
 
@@ -29,11 +38,17 @@ class Counterslist extends React.Component {
 
        }
 
+       let pagesCount = Math.ceil(this.props.totalCounters / this.props.pageSize)
+       let pages =[]
+       for(let i=1; i<=pagesCount; i++){
+           pages.push(i)
+       }
+       let pagesButtonsElements = pages.map(page => <span className={this.props.currentPage === page && "current-page"}
+                                                          onClick={() => {this.changePage(page)}}>{page}</span>)
 
 
-       return (
 
-               <div className="container">
+       return <div className="container">
                    <div className={s.table_head}>
                        <div className={s.name}>
                            <p>Название счётчика</p>
@@ -54,8 +69,11 @@ class Counterslist extends React.Component {
                    <div className="list">
                        {countersElement}
                    </div>
+                   <div className="pages-buttons">
+                       {pagesButtonsElements}
+                   </div>
                </div>
-       );
+
    }
 
 }

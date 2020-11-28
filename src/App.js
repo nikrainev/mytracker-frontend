@@ -6,8 +6,7 @@ import Navbar from './components/navbar/navbar.jsx';
 import Summary from "./components/content/summary/summary";
 import Counters from "./components/content/counters/counters";
 import Audiences from "./components/content/audiences/audiences";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import store from "./redux/store";
+import { BrowserRouter, Route } from "react-router-dom";
 import ProfileSettings from "./components/profile/profilesettings/profilesettings";
 
 

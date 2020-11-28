@@ -2,7 +2,8 @@ let initialState = {
 
         counterslistData: [],
         pageSize: 5,
-        totalCounters: 10,
+        totalCounters: 20,
+        currentPage: 1,
         counterNameInput: '',
         counterDomenInput: ''
 
@@ -39,9 +40,22 @@ const countersReducer = (state = initialState,action) =>{
         case "SET-COUNTERS":{
             return {
                 ...state,
-                counterslistData: action.countersData.data.items[0] //зафиксить бэкэнд там лищняя вложеность
+                counterslistData: action.countersData.data.items
             }
         }
+        case "SET-CURRENT-PAGE":{
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case 'SET-TOTAL-COUNTERS':{
+            return {
+                ...state,
+                totalCounters: action.totalCounters.data.totalPages
+            }
+        }
+
 
         default:
             return state
@@ -56,6 +70,15 @@ export const setCountersActionCreator = (countersData) =>({
     type: 'SET-COUNTERS',
     countersData: countersData
 
+})
+export const setCurrentPageActionCreator = (currentPage) =>({
+    type: 'SET-CURRENT-PAGE',
+    currentPage: currentPage
+
+})
+export const setTotalCountersActionCreator = (totalCounters) =>({
+    type: 'SET-TOTAL-COUNTERS',
+    totalCounters: totalCounters
 })
 export const reloadCounterInputActionCreator = (value, inputName) =>({
     type: 'RELOAD-COUNTER-INPUT',
