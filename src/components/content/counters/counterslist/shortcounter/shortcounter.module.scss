@@ -5,7 +5,10 @@
   justify-content: space-between;
   background: #f7f7f7;
   margin-bottom: 8px;
-  padding: 10px 0px 10px 0px;
+  padding: 10px;
+  width: calc(100% - 20px);
+  color: black;
+  text-decoration: none;
 }
 
 .name{
@@ -22,10 +25,45 @@
 }
 .status{
   width: 20%;
+  span.work{
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: rgb(39,193,83);
+      background: radial-gradient(circle, rgba(39,193,83,1) 0%, rgba(70,153,116,1) 100%);
+      position: absolute;
+      left: -15px;
+      top: 8px;
+      border-radius: 50%;
+    }
+  }
+
+  span.notwork{
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: rgb(230,4,31);
+      background: radial-gradient(circle, rgba(230,4,31,1) 0%, rgba(145,66,66,1) 100%);
+      position: absolute;
+      left: -15px;
+      top: 8px;
+      border-radius: 50%;
+    }
+  }
+
+
+
   &.work{
 
     span.work{
       display: block;
+
     }
     span.notwork {
       display: none;

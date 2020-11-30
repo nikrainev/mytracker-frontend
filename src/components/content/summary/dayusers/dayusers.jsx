@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './dayusers.module.scss';
 import Shortuser from "./shortuser/shortuser";
-import * as axios from 'axios'
+
 
 const LoadingShortuser = () =>{
     return (
@@ -13,21 +13,11 @@ const LoadingShortuser = () =>{
 }
 
 
-class Dayusers extends React.Component {
-    componentDidMount() {
-
-            axios.get('http://195.161.62.108:3000/users').then(response =>{
-                this.props.setUsers(response)
-            })
+const Dayusers = (props) => {
 
 
 
-    }
-
-    render(){
-
-
-    let dayusers = this.props.dayusers;
+    let dayusers = props.dayusers;
 
     let dayUserElements = [];
     let i = 0
@@ -42,6 +32,7 @@ class Dayusers extends React.Component {
     }
 
 
+
     return  (
             <div className="container">
                 <div className={s.tablehead}>
@@ -53,6 +44,7 @@ class Dayusers extends React.Component {
                 </div>
                 <div className="dayuser_list">
                     {dayUserElements}
+                    <button className={s.loadmore_button+ " attractive-button"} onClick={() => {props.loadMore()}}>Загрузить ещё</button>
                 </div>
             </div>
 
@@ -60,7 +52,7 @@ class Dayusers extends React.Component {
 
 
     );
-}
+
 
 }
 

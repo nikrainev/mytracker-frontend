@@ -2,7 +2,7 @@ let initialState = {
 
         counterslistData: [],
         pageSize: 5,
-        totalCounters: 20,
+        totalCounters: '',
         currentPage: 1,
         counterNameInput: '',
         counterDomenInput: ''
@@ -19,7 +19,7 @@ const countersReducer = (state = initialState,action) =>{
                 name: state.counterNameInput,
                 domen: state.counterDomenInput,
                 dayusers: 0,
-                total: 0,
+                allusers: 0,
                 status: 'work'
             }
 

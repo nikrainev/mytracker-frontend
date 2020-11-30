@@ -15,7 +15,7 @@ const Shortcounter = (props) =>{
                             <p>{props.dayusers}</p>
                         </div>
                         <div className={s.totalusers}>
-                            <p>{props.total}</p>
+                            <p>{props.allusers}</p>
                         </div>
 
                         <div className={s.status+" "+ s[props.status]}>

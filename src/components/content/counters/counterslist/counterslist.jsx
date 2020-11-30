@@ -1,50 +1,35 @@
 import React from 'react';
 import s from './counterslist.module.scss';
 import Shortcounter from './shortcounter/shortcounter.jsx';
-import * as axios from "axios";
-
-
-
-class Counterslist extends React.Component {
-    componentDidMount() {
-
-        axios.get(`http://195.161.62.108:3000/counters?page=${this.props.currentPage}`).then(response =>{
-
-            this.props.setCounters(response)
-            this.props.setTotalCounters(response)
-        })
 
 
 
 
-    }
-    changePage = (page) =>{
-        this.props.setCurrentPage(page)
-        axios.get(`http://195.161.62.108:3000/counters?page=${page}`).then(response =>{
+const Counterslist = (props) => {
 
-            this.props.setCounters(response)
-        })
-    }
-
-   render (){
-       let counters =  this.props.countersListData
+       let counters =  props.countersListData
        let countersElement = []
        console.log(counters)
        if (counters.length == 0){
 
        }
        else{
-           countersElement = counters.map(counter => <Shortcounter  name={counter.name} domen={counter.domen} dayusers={counter.dayusers} total={counter.allusers} status={counter.status}/> )
+           countersElement = counters.map(counter => <Shortcounter id={counter._id}
+                                                                   name={counter.name}
+                                                                   domen={counter.domen}
+                                                                   dayusers={counter.dayusers}
+                                                                   allusers={counter.allusers}
+                                                                   status={counter.status}/> )
 
        }
 
-       let pagesCount = Math.ceil(this.props.totalCounters / this.props.pageSize)
+       let pagesCount = Math.ceil(props.totalCounters / props.pageSize)
        let pages =[]
        for(let i=1; i<=pagesCount; i++){
            pages.push(i)
        }
-       let pagesButtonsElements = pages.map(page => <span className={this.props.currentPage === page && "current-page"}
-                                                          onClick={() => {this.changePage(page)}}>{page}</span>)
+       let pagesButtonsElements = pages.map(page => <span className={props.currentPage === page && "current-page"}
+                                                          onClick={() => {props.changePage(page)}}>{page}</span>)
 
 
 
@@ -74,7 +59,6 @@ class Counterslist extends React.Component {
                    </div>
                </div>
 
-   }
 
 }
 export default Counterslist;
