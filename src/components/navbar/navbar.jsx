@@ -22,8 +22,8 @@ const Navbar = () => {
                     <a href="" className={s.link_item}>Профиль</a>
                     <div className='dropdown_block'>
                         <NavLink to="/profile" className='dropdown_link' activeClassName='active'>Настройки</NavLink>
-                        <a href="" className='dropdown_link' activeClassName='active'>Поделиться</a>
-                        <a href="" className='dropdown_link' activeClassName='active'>Выйти</a>
+                        <NavLink to="/share" className='dropdown_link' activeClassName='active'>Поделиться</NavLink>
+                        <NavLink to="/login" className='dropdown_link' activeClassName='active'>Войти</NavLink>
                     </div>
                 </div>
             </div>

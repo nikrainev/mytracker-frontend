@@ -13,10 +13,10 @@ const Addcounterblock = (props) =>{
     };
 
     let onNameInputChange = () =>{
-        props.reloadInput(name_input.current.value,'counterNameInput')
+        props.reloadCounterInput(name_input.current.value,'counterNameInput')
     }
     let onDomenInputChange = () =>{
-        props.reloadInput(domen_input.current.value,'counterDomenInput')
+        props.reloadCounterInput(domen_input.current.value,'counterDomenInput')
     }
 
 

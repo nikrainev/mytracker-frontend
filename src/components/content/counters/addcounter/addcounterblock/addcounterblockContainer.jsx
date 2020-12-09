@@ -1,6 +1,6 @@
 import React from "react";
 
-import {addCounterActionCreator, reloadCounterInputActionCreator} from "../../../../../redux/counters-reducer";
+import {addCounter, reloadCounterInput} from "../../../../../redux/counters-reducer";
 import Addcounterblock from "./addcounterblock";
 import {connect} from "react-redux";
 
@@ -12,21 +12,8 @@ let mapStateToProps = (state) =>{
         counterDomen: state.countersPage.counterDomenInput
     }
 }
-let mapDispatchToProps = (dispatch) =>{
-    return{
-        reloadInput:  (value,inputName) =>{
-            dispatch(reloadCounterInputActionCreator(value,inputName))
-
-        },
-        addCounter: ()=>{
-            dispatch(addCounterActionCreator())
-
-        }
 
 
-    }
-}
-
-const AddcounterblockContainer = connect(mapStateToProps, mapDispatchToProps)(Addcounterblock)
+const AddcounterblockContainer = connect(mapStateToProps, {reloadCounterInput, addCounter})(Addcounterblock)
 
 export default AddcounterblockContainer;

@@ -2,6 +2,18 @@ import React from 'react';
 import s from './counterslist.module.scss';
 import Shortcounter from './shortcounter/shortcounter.jsx';
 
+const LoadingCounters = ()=>{
+    return(
+            <div className="list">
+                <div className={s.loading_counter}></div>
+                <div className={s.loading_counter}></div>
+                <div className={s.loading_counter}></div>
+                <div className={s.loading_counter}></div>
+                <div className={s.loading_counter}></div>
+            </div>
+            )
+
+}
 
 
 
@@ -9,19 +21,15 @@ const Counterslist = (props) => {
 
        let counters =  props.countersListData
        let countersElement = []
-       console.log(counters)
-       if (counters.length == 0){
 
-       }
-       else{
-           countersElement = counters.map(counter => <Shortcounter id={counter._id}
+       countersElement = counters.map(counter => <Shortcounter id={counter._id}
                                                                    name={counter.name}
                                                                    domen={counter.domen}
                                                                    dayusers={counter.dayusers}
                                                                    allusers={counter.allusers}
                                                                    status={counter.status}/> )
 
-       }
+
 
        let pagesCount = Math.ceil(props.totalCounters / props.pageSize)
        let pages =[]
@@ -51,8 +59,9 @@ const Counterslist = (props) => {
                            <p>Статус</p>
                        </div>
                    </div>
-                   <div className="list">
-                       {countersElement}
+                   <div className={s.list}>
+
+                       {props.isFetching ? <LoadingCounters /> : countersElement}
                    </div>
                    <div className="pages-buttons">
                        {pagesButtonsElements}

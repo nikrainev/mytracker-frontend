@@ -5,7 +5,8 @@ let initialState = {
         totalCounters: '',
         currentPage: 1,
         counterNameInput: '',
-        counterDomenInput: ''
+        counterDomenInput: '',
+        isFetching: ''
 
 
 
@@ -55,6 +56,14 @@ const countersReducer = (state = initialState,action) =>{
                 totalCounters: action.totalCounters.data.totalPages
             }
         }
+        case 'TOGGLE-IS-FETCHING':{
+
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+
+        }
 
 
         default:
@@ -64,23 +73,30 @@ const countersReducer = (state = initialState,action) =>{
 
 }
 
-export default countersReducer
-export const addCounterActionCreator = () =>({type: 'ADD-COUNTER'})
-export const setCountersActionCreator = (countersData) =>({
+
+export const addCounter = () =>({type: 'ADD-COUNTER'})
+export const setCounters = (countersData) =>({
     type: 'SET-COUNTERS',
     countersData: countersData
 
 })
-export const setCurrentPageActionCreator = (currentPage) =>({
+export const setCurrentPage = (currentPage) =>({
     type: 'SET-CURRENT-PAGE',
     currentPage: currentPage
 
 })
-export const setTotalCountersActionCreator = (totalCounters) =>({
+export const setTotalCounters = (totalCounters) =>({
     type: 'SET-TOTAL-COUNTERS',
     totalCounters: totalCounters
 })
-export const reloadCounterInputActionCreator = (value, inputName) =>({
+export const reloadCounterInput = (value, inputName) =>({
     type: 'RELOAD-COUNTER-INPUT',
     value: value,
     inputName: inputName})
+
+export const toggleIsFetching = (isFetching) =>({
+    type: 'TOGGLE-IS-FETCHING',
+    isFetching: isFetching
+})
+
+export default countersReducer

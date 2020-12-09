@@ -22,3 +22,35 @@
 
 }
 
+
+
+.loading_counter{
+  height: 41px;
+  background: #f7f7f7;
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    display: block;
+    left: -20%;
+    top: 0px;
+    bottom: 0px;
+    width: 20%;
+    animation: loading 2s infinite ;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+}
+
+@keyframes loading {
+  from{left: -20%}
+  to{left:100%}
+}
+
+.list{
+  min-height: 245px;
+}
