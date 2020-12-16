@@ -9,33 +9,33 @@ import Audiences from "./components/content/audiences/audiences";
 import { BrowserRouter, Route } from "react-router-dom";
 import ProfileSettings from "./components/profile/profilesettings/profilesettings";
 import LoginContainer from "./components/profile/login/loginContainer"
+import ProfileContainer from "./components/profile/profilePage/profileContainer";
+
+const App = ()=> {
+
+    return (
+            <BrowserRouter >
+                <div className="app-wrapper">
+                    <NavbarContainer />
+                    <div className="row">
+                        <Sidebar />
+                        {/* <Redirect exact from='/' to='/summary'  /> */}
+                        <Route path='/summary'  render={ () => <Summary  /> } />
+                        <Route path='/counters' render={() => <Counters />}/>
+                        <Route path='/audiences' render={() => <Audiences />} />
+                        <Route path='/profile' render={() => <ProfileContainer />} />
+                        <Route path='/profilesettings' render={() => <ProfileSettings />} />
+                        <Route path='/login' render={()=> <LoginContainer />} />
 
 
+                    </div>
+                </div>
 
-const App = (props) =>{
+            </BrowserRouter>
 
-
-  return (
-      <BrowserRouter >
-      <div className="app-wrapper">
-          <NavbarContainer />
-          <div className="row">
-              <Sidebar />
-              {/* <Redirect exact from='/' to='/summary'  /> */}
-              <Route path='/summary'  render={ () => <Summary  /> } />
-              <Route path='/counters' render={() => <Counters />}/>
-              <Route path='/audiences' render={() => <Audiences />} />
-              <Route path='/profile' render={() => <ProfileSettings />} />
-              <Route path='/login' render={()=> <LoginContainer />} />
+    )
 
 
-          </div>
-      </div>
-      </BrowserRouter>
-
-
-    
-  );
 }
 
 

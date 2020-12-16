@@ -2,8 +2,13 @@ import React from 'react';
 import s from './navbar.module.scss';
 import {NavLink} from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    let logout = () =>{
+      props.logout()
+    }
     return  (
+
 
         <nav className={s.navbar}>
             <div className={s.logo}>
@@ -19,16 +24,21 @@ const Navbar = () => {
             </div>
             <div className={s.profile}>
                 <div className='dropdown'>
-                    <a href="" className={s.link_item}>Профиль</a>
+
+                    <NavLink to="/profile" className={s.link_item}>{props.isAuth == true ? props.profileLogin : "Профиль" }</NavLink>
                     <div className='dropdown_block'>
-                        <NavLink to="/profile" className='dropdown_link' activeClassName='active'>Настройки</NavLink>
+                        <NavLink to="/profilesettings" className='dropdown_link' activeClassName='active'>Настройки</NavLink>
                         <NavLink to="/share" className='dropdown_link' activeClassName='active'>Поделиться</NavLink>
-                        <NavLink to="/login" className='dropdown_link' activeClassName='active'>Войти</NavLink>
+                        {props.isAuth == true ? <div className="dropdown_link" onClick={logout}>Выйти</div> : <NavLink to="/login" className='dropdown_link' activeClassName='active'>Войти</NavLink>}
+
                     </div>
                 </div>
             </div>
 
+
         </nav>
+
+
 
     );
 }

@@ -8,6 +8,11 @@ import * as axios from "axios";
 class DayusersContainer extends React.Component {
 
     componentDidMount() {
+        axios.get('http://nikrainev.ru:3000/auth/me', {headers:{"Authorization": "Bearer "+ this.props.token}})
+                .then(response => {
+
+                })
+
         axios.get('http://195.161.62.108:3000/users').then(response =>{
             this.props.setTotalUsers(response.data.totalPages)
         })
@@ -42,7 +47,8 @@ let mapStateToProps = (state) =>{
         dayusers: state.summaryPage.dayusersData,
         currentPage: state.summaryPage.currentPage,
         totalUsers: state.summaryPage.totalUsers,
-        pageSize: state.summaryPage.pageSize
+        pageSize: state.summaryPage.pageSize,
+        token: state.auth.token
     }
 }
 let mapDispatchToProps =(dispatch) =>{

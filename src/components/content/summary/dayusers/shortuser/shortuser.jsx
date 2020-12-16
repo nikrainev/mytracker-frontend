@@ -22,7 +22,7 @@ const Shortuser = (props) =>{
 
                 <NavLink to={'/users/'+props.id} className={s.shortuser}>
                     <div className={s.user_alias}>
-                        <img src="https://nikrainev.ru/1img/profile.svg" alt=""/>
+
                     </div>
                     <div className={s.user_country}><p>{props.country}</p></div>
                     <div className={s.user_time}><p>{props.time}</p></div>
