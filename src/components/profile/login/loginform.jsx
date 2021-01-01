@@ -66,7 +66,7 @@ const LoginBlock = (props) => {
                               </div>
                               <button disabled={props.isButtonDisabled} onClick={onSendClick}>Отправить</button>
                               {/* eslint-disable-next-line react/jsx-no-undef */}
-                              <NavLink to='signup'>Нет акаунта ?</NavLink>
+                              <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
                           </div>
                           :
                           <div>Вы авторизованы</div>

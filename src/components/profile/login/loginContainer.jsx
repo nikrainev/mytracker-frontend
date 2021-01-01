@@ -1,6 +1,4 @@
 import React from 'react';
-import s from './login.module.scss';
-import {NavLink} from "react-router-dom";
 import LoginBlock from "./loginform";
 import axios from 'axios'
 import {connect} from "react-redux";

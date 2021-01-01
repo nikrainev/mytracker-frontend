@@ -1,10 +1,9 @@
 import React from 'react';
-import s from './navbar.module.scss';
-import {NavLink} from "react-router-dom";
 import Navbar from "./navbar";
 import axios from 'axios'
 import {connect} from "react-redux";
 import {setToken, setProfileData, deleteProfileData} from "../../redux/auth-reducer";
+import {authAPI} from '../../api/api'
 
 class NavbarContainer extends React.Component {
 
@@ -18,9 +17,8 @@ class NavbarContainer extends React.Component {
 
     componentDidMount() {
         let getAuth = () =>{
-            axios.get('http://nikrainev.ru:3000/auth/me', {headers:{"Authorization": "Bearer "+ this.props.token}})
-                    .then(response => {
-                     this.props.setProfileData(response.data)
+                   authAPI.getAuthInfo().then(response => {
+                     this.props.setProfileData(response)
                     })
         }
 

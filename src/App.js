@@ -10,7 +10,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import ProfileSettings from "./components/profile/profilesettings/profilesettings";
 import LoginContainer from "./components/profile/login/loginContainer"
 import ProfileContainer from "./components/profile/profilePage/profileContainer";
-
+import SignUpContainer from "./components/profile/signup/signupContainer"
 const App = ()=> {
 
     return (
@@ -26,6 +26,7 @@ const App = ()=> {
                         <Route path='/profile' render={() => <ProfileContainer />} />
                         <Route path='/profilesettings' render={() => <ProfileSettings />} />
                         <Route path='/login' render={()=> <LoginContainer />} />
+                        <Route path='/signup' render={()=> <SignUpContainer />} />
 
 
                     </div>

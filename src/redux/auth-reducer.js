@@ -1,3 +1,5 @@
+import store from "./redux-store";
+
 let initialState = {
     profileId: null,
     email: null,
@@ -5,13 +7,21 @@ let initialState = {
     regDate: null,
     token:'',
     isAuth: false,
+    loginInput: '',
     emailInput: '',
     passwordInput: '',
+    repeatPasswordInput: '',
     emailInputState: 'normal',
     passwordInputState: 'normal',
     isFetching: false,
     loginFormState: 'normal',
-    isLoginButtonDisabled: false
+    isLoginButtonDisabled: false,
+    signUpInputsDangers: {
+        loginDanger:'',
+        emailDanger:'',
+        passwordDanger: '',
+        repeatPasswordDanger: ''
+    }
 
 }
 
@@ -70,6 +80,12 @@ const authReducer =(state =initialState, action) =>{
                 ...state,
                 isLoginButtonDisabled: action.buttonState
             }
+        case 'SET_SIGNUP_INPUT_DANGER':
+            return {
+                ...state,
+                [action.inputName]: action.inputDanger
+            }
+
 
         default:
             return state
@@ -118,6 +134,12 @@ export const setLoginFormState = (formState) =>({
 export const toggleLoginButtonDisability = (buttonState) => ({
     type: 'TOGGLE_LOGIN_BUTTON_DISABILITY',
     buttonState: buttonState
+})
+
+export const setSignUpInputDanger = (inputName, inputDanger) => ({
+    type: 'SET_SIGNUP_INPUT_DANGER',
+    inputName: inputName,
+    inputDanger: inputDanger
 })
 
 export  default authReducer
