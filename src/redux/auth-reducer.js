@@ -21,7 +21,11 @@ let initialState = {
         emailDanger:'',
         passwordDanger: '',
         repeatPasswordDanger: ''
-    }
+    },
+    passwordStrength: ['none',''],
+    isSignUpButtonDisabled: false
+
+
 
 }
 
@@ -38,6 +42,7 @@ const authReducer =(state =initialState, action) =>{
 
             }
         case "RELOAD_INPUT":
+
             return {
                 ...state,
                 [action.inputName]: action.value
@@ -70,7 +75,6 @@ const authReducer =(state =initialState, action) =>{
                 isFetching: action.isFetching
             }
         case 'SET_LOGIN_FORM_STATE':
-
             return {
                 ...state,
                 loginFormState: action.formState
@@ -81,9 +85,29 @@ const authReducer =(state =initialState, action) =>{
                 isLoginButtonDisabled: action.buttonState
             }
         case 'SET_SIGNUP_INPUT_DANGER':
+            let stateCopy = {...state}
+            stateCopy.signUpInputsDangers = {...state.signUpInputsDangers}
+            stateCopy.signUpInputsDangers[action.inputName] = action.inputDanger
+            return stateCopy
+        case 'SET_PASSWORD_STRENGTH':
+
             return {
                 ...state,
-                [action.inputName]: action.inputDanger
+                passwordStrength: [action.strength, action.strengthText]
+
+            }
+        case 'TOGGLE_SIGNUP_BUTTON_DISABILITY':
+            let buttonDisability = false;
+            for(let key in state.signUpInputsDangers){
+                if(state.signUpInputsDangers[key] !== ''){
+                    console.log(state.signUpInputsDangers[key])
+                    buttonDisability = true
+                }
+            }
+
+            return {
+                ...state,
+                isSignUpButtonDisabled: buttonDisability
             }
 
 
@@ -141,5 +165,15 @@ export const setSignUpInputDanger = (inputName, inputDanger) => ({
     inputName: inputName,
     inputDanger: inputDanger
 })
+
+export const setPasswordStrength = (strength, strengthText) =>({
+    type: 'SET_PASSWORD_STRENGTH',
+    strength: strength,
+    strengthText: strengthText
+})
+export const toggleSignUpButtonDisability = () =>({
+    type: 'TOGGLE_SIGNUP_BUTTON_DISABILITY'
+})
+
 
 export  default authReducer

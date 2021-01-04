@@ -13,6 +13,14 @@ class NavbarContainer extends React.Component {
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
+    logOut = () =>{
+        document.cookie = 'token='+this.props.token+'; max-age=-1'
+        document.cookie = 'email='+this.props.emailInput+'; max-age=-1'
+        document.cookie = 'password='+this.props.passwordInput+'; max-age=-1'
+        this.props.deleteProfileData()
+
+    }
+
 
 
     componentDidMount() {
@@ -23,10 +31,8 @@ class NavbarContainer extends React.Component {
         }
 
         if (this.getCookie('email') && this.getCookie('password')){
-            axios.post('http://nikrainev.ru:3000/auth/login',{"email":this.getCookie('email'), "password":this.getCookie('password')})
-                    .then(response => {
-                        this.props.setToken(response.data.token)
-
+            authAPI.postLoginInfo(this.getCookie('email'), this.getCookie('password')).then(response => {
+                        this.props.setToken(response.token)
                         getAuth()
                     })
 
@@ -38,7 +44,7 @@ class NavbarContainer extends React.Component {
     render() {
         return <Navbar isAuth={this.props.isAuth}
                        profileLogin={this.props.profileLogin}
-                       logout={this.props.deleteProfileData}
+                       logout={this.logOut}
         />
     }
 }

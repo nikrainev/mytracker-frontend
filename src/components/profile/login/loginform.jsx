@@ -62,10 +62,12 @@ const LoginBlock = (props) => {
                               </div>
                               <div className={props.passwordInputState == 'normal' ? s.input_wr : s.input_wr + " " + s.danger}>
                                   <p className={s.input_danger}>Введите пароль</p>
-                                  <input type="password" placeholder="Введите пароль" onChange={onPasswordChange} value={props.passwordInput} ref={passwordInput}/>
+                                  <input type="password" placeholder="Введите пароль"
+                                         onChange={onPasswordChange}
+                                         value={props.passwordInput}
+                                         ref={passwordInput}/>
                               </div>
                               <button disabled={props.isButtonDisabled} onClick={onSendClick}>Отправить</button>
-                              {/* eslint-disable-next-line react/jsx-no-undef */}
                               <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
                           </div>
                           :
