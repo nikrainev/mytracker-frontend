@@ -43,14 +43,18 @@ class SignUpContainer extends React.Component {
 
             this.props.toggleIsFetching(false)
             console.log(response)
-            if(response.message === 'user created'){
+            if(response.data.message === 'user created'){
                 this.props.setProfileData(response)
             }
+
         }).catch(error =>{
-            this.props.toggleIsFetching(false)
-            console.log(error)
-
-
+            if(error.response.data.message === "Mail exists"){
+               this.setEmailInputDanger('Данная почта уже зарегистрирована')
+            }
+            else if(error.response.data.message === "Login exists"){
+                this.setLoginInputDanger('Данный логин уже зарегистрирован')
+            }
+             console.log(error.response)
         })
     }
 

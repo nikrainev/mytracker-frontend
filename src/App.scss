@@ -181,3 +181,85 @@ body{
 
   }
 }
+
+.labeled-line{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 16px;
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 5px;
+  padding-top: 2px;
+}
+
+.line-label{
+  padding-right: 10px;
+  color: #656565;
+}
+
+.fluent-line{
+  position: relative;
+
+  &:hover{
+    background: #d6d6d6;
+    .f_topborder, .f_rightborder, .f_bottomborder, .f_leftborder{
+      background: #d6d6d6;
+    }
+  }
+  .f_topborder{
+    width: 100%;
+    display: block;
+    height: 1px;
+    background: #e6e6e6;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    .f_borderbeam{
+      display: block;
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(to left,#d6d6d6, #a6a6a6, #d6d6d6);
+      position: absolute;
+      margin-left: -70px;
+      opacity: 0;
+    }
+  }
+  .f_rightborder{
+    width: 1px;
+    display: block;
+    height: 100%;
+    background: #e6e6e6;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .f_bottomborder{
+    width: 100%;
+    display: block;
+    height: 1px;
+    background: #e6e6e6;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+    .f_borderbeam{
+      display: block;
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(to left,#e6e6e6, #a6a6a6, #e6e6e6);
+      position: absolute;
+      margin-left: -70px;
+      opacity: 0;
+    }
+  }
+  .f_leftborder{
+    width: 1px;
+    display: block;
+    height: 100%;
+    background: #e6e6e6;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+}

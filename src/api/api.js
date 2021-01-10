@@ -26,9 +26,7 @@ export const signUpApi = {
     postSignUpInfo(email,login,password){
         return authedInstance.post('auth/signup',{"email":email,"login":login,"password":password})
                 .then(response =>{
-                    return response.data;
-                }).catch(error =>{
-                    return error.data;
+                    return response;
                 })
     }
 

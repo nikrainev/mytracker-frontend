@@ -107,3 +107,49 @@
     to{left:100%}
   }
 }
+
+.auth_info{
+  width: fit-content;
+  margin-right: 10px;
+:global(.line-label){
+  width: 160px;
+}
+}
+
+.profile_form_wr{
+  display: flex;
+  width: 700px;
+  justify-content: center;
+  margin: auto;
+  padding-top: 60px;
+}
+
+.profile_form{
+  width: 250px;
+  margin-left: 10px;
+  button{
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.photo_cont{
+  width: 70px;
+  display: block;
+  height: 70px;
+  background: #e4e4e4;
+  border-radius: 50%;
+  border: 2px solid #d4d4d4;
+
+}
+
+.add_photo_row{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 15px;
+  p{
+    color: #2673ff;
+    padding-left: 15px;
+  }
+}

@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './signup.module.scss';
 import {NavLink} from "react-router-dom";
-import {reloadInput, toggleSignUpButtonDisability} from "../../../redux/auth-reducer";
 
-const AuthForm = (props) =>{
+const SignUpForm = (props) =>{
     let loginInput = React.createRef()
     let emailInput = React.createRef()
     let passwordInput = React.createRef()
@@ -73,7 +72,7 @@ const AuthForm = (props) =>{
 
       }
       else if(passwordInput.current.value.length <= 4 && passwordInput.current.value.length >= 1){
-        console.log(passwordInput.current.value.length)
+
         props.setPasswordStrength('tooWeak', 'Слишком слабый пароль')
       }
       else if(passwordInput.current.value.length <= 6){
@@ -144,6 +143,40 @@ const AuthForm = (props) =>{
     )
 }
 
+const ProfileForm = ()=>{
+    return(
+        <div className={s.profile_form_wr}>
+            <div className={s.auth_info}>
+                <div className="labeled-line"><p className="line-label">Почта:</p><p className="line-text">nikrainev@gmail.com</p></div>
+                <div className="labeled-line"><p className="line-label">Логин:</p><p className="line-text">nikrainev</p></div>
+                <div className="labeled-line"><p className="line-label">Дата регистрации:</p><p className="line-text">01.06.2001</p></div>
+                <div className="labeled-line"><p className="line-label">ID</p><p className="line-text">gfy4g3t35345</p></div>
+            </div>
+            <div className={s.profile_form}>
+                    <div className={s.add_photo_row}>
+                         <div className={s.photo_cont}></div>
+                         <p className={s.add_photo}>Добавить фото</p>
+                    </div>
+                    <div className={s.input_wr}>
+                        <input className="plain_input" placeholder='Имя' type="text"/>
+                    </div>
+                    <div className={s.input_wr}>
+                        <input className="plain_input" placeholder='Фамилия' type="text"/>
+                    </div>
+                    <div className={s.input_wr}>
+                        <textarea className="plain_textarea" placeholder='Информация о вас' name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <button>Отправить</button>
+                    <NavLink to='/'>Пропустить</NavLink>
+                </div>
+
+
+        </div>
+    )
+}
+
+
+
 
 const SignUpBlock = (props) => {
 
@@ -153,7 +186,7 @@ const SignUpBlock = (props) => {
     return  (
             <div className="content">
                 <div className="container">
-                   <AuthForm reloadLoginInput={props.reloadLoginInput} reloadEmailInput={props.reloadEmailInput}
+                   <SignUpForm reloadLoginInput={props.reloadLoginInput} reloadEmailInput={props.reloadEmailInput}
                              reloadPasswordInput={props.reloadPasswordInput} reloadRepeatPasswordChange={props.reloadRepeatPasswordInput}
                              loginInput={props.loginInput} emailInput={props.emailInput}
                              passwordInput={props.passwordInput} repeatPasswordInput={props.repeatPasswordInput}
@@ -165,6 +198,7 @@ const SignUpBlock = (props) => {
                              isSignUpButtonDisabled={props.isSignUpButtonDisabled} toggleSignUpButtonDisability={props.toggleSignUpButtonDisability}
                              isFetching={props.isFetching} sendSignUpRequest={props.sendSignUpRequest}
                    />
+                   <ProfileForm />
                 </div>
             </div>
 
