@@ -138,19 +138,19 @@ const SignUpForm = (props) =>{
                            ref={repeatPasswordInput}/>
                 </div>
                 <button disabled={props.isSignUpButtonDisabled} onClick={onSendClick}>Отправить</button>
-                <p className={s.dont_reg_yet}>Уже есть аккаунт? <NavLink to='signup'>Войти</NavLink></p>
+                <p className={s.dont_reg_yet}>Уже есть аккаунт? <NavLink to='/login'>Войти</NavLink></p>
             </div>
     )
 }
 
-const ProfileForm = ()=>{
+const ProfileForm = (props)=>{
     return(
         <div className={s.profile_form_wr}>
             <div className={s.auth_info}>
-                <div className="labeled-line"><p className="line-label">Почта:</p><p className="line-text">nikrainev@gmail.com</p></div>
-                <div className="labeled-line"><p className="line-label">Логин:</p><p className="line-text">nikrainev</p></div>
-                <div className="labeled-line"><p className="line-label">Дата регистрации:</p><p className="line-text">01.06.2001</p></div>
-                <div className="labeled-line"><p className="line-label">ID</p><p className="line-text">gfy4g3t35345</p></div>
+                <div className="labeled-line"><p className="line-label">Почта:</p><p className="line-text">{props.email}</p></div>
+                <div className="labeled-line"><p className="line-label">Логин:</p><p className="line-text">{props.login}</p></div>
+                <div className="labeled-line"><p className="line-label">Дата регистрации:</p><p className="line-text">{props.regDate}</p></div>
+                <div className="labeled-line"><p className="line-label">ID</p><p className="line-text">{props.profileId}</p></div>
             </div>
             <div className={s.profile_form}>
                     <div className={s.add_photo_row}>
@@ -167,7 +167,7 @@ const ProfileForm = ()=>{
                         <textarea className="plain_textarea" placeholder='Информация о вас' name="" id="" cols="30" rows="10"></textarea>
                     </div>
                     <button>Отправить</button>
-                    <NavLink to='/'>Пропустить</NavLink>
+                    <NavLink to='/summary'>Пропустить</NavLink>
                 </div>
 
 
@@ -186,6 +186,7 @@ const SignUpBlock = (props) => {
     return  (
             <div className="content">
                 <div className="container">
+                    {props.signUpState == 'signUpForm' ?
                    <SignUpForm reloadLoginInput={props.reloadLoginInput} reloadEmailInput={props.reloadEmailInput}
                              reloadPasswordInput={props.reloadPasswordInput} reloadRepeatPasswordChange={props.reloadRepeatPasswordInput}
                              loginInput={props.loginInput} emailInput={props.emailInput}
@@ -197,8 +198,12 @@ const SignUpBlock = (props) => {
                              setPasswordStrength={props.setPasswordStrength} passwordStrength={props.passwordStrength}
                              isSignUpButtonDisabled={props.isSignUpButtonDisabled} toggleSignUpButtonDisability={props.toggleSignUpButtonDisability}
                              isFetching={props.isFetching} sendSignUpRequest={props.sendSignUpRequest}
-                   />
-                   <ProfileForm />
+                   /> : <ProfileForm profileId={props.profileId} email={props.email}
+                                     login={props.login} regDate={props.regDate}/>
+                    }
+
+
+
                 </div>
             </div>
 

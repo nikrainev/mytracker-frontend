@@ -1,4 +1,5 @@
 import store from "./redux-store";
+import {authAPI, signUpApi} from "../api/api";
 
 let initialState = {
     profileId: null,
@@ -23,8 +24,8 @@ let initialState = {
         repeatPasswordDanger: ''
     },
     passwordStrength: ['none',''],
-    isSignUpButtonDisabled: false
-
+    isSignUpButtonDisabled: false,
+    signUpState: 'signUpForm'
 
 
 }
@@ -109,7 +110,11 @@ const authReducer =(state =initialState, action) =>{
                 ...state,
                 isSignUpButtonDisabled: buttonDisability
             }
-
+        case 'TOGGLE_SIGNUP_STATE':
+            return {
+                ...state,
+                signUpState: action.signUpState
+            }
 
         default:
             return state
@@ -174,6 +179,78 @@ export const setPasswordStrength = (strength, strengthText) =>({
 export const toggleSignUpButtonDisability = () =>({
     type: 'TOGGLE_SIGNUP_BUTTON_DISABILITY'
 })
+export const setSignUpState = (signUpState) =>{return {
+    type: 'TOGGLE_SIGNUP_STATE',
+    signUpState: signUpState
+}}
+
+
+export const loginThunkCreator = (emailInput, passwordInput) =>{
+    return (dispatch)=>{
+    dispatch(toggleIsFetching(true))
+    authAPI.postLoginInfo(emailInput, passwordInput)
+            .then(response => {
+                dispatch(setToken(response.token))
+                dispatch(toggleIsFetching(false))
+                if(response.message == "Auth successful"){
+                    document.cookie = 'email='+emailInput+'; max-age=360000'
+                    document.cookie = 'password='+passwordInput+'; max-age=360000'
+                    authAPI.getAuthInfo()
+                            .then(response => {
+                                console.log(response)
+                                dispatch(setProfileData(response))
+                            })
+                }
+            })
+            .catch(error => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setLoginFormState('false_alert'))
+
+            })
+}
+}
+
+export const signUpThunkCreator = (email,login,password) =>{
+    return (dispatch) =>{
+        dispatch(toggleIsFetching(true))
+        signUpApi.postSignUpInfo(email,login,password).then(response => {
+            dispatch(toggleIsFetching(false))
+            if(response.data.message === 'user created'){
+
+                dispatch(setSignUpState('userInfoForm'))
+                authAPI.postLoginInfo(email, password)
+                        .then(response => {
+                            dispatch(setToken(response.token))
+                            if(response.message == "Auth successful"){
+                                document.cookie = 'email='+email+'; max-age=360000'
+                                document.cookie = 'password='+password+'; max-age=360000'
+                                authAPI.getAuthInfo()
+                                        .then(response => {
+                                            console.log(response)
+                                            dispatch(setProfileData(response))
+                                        })
+
+                            }
+                        })
+                        .catch(error => {
+                            dispatch(toggleIsFetching(false))
+                        })
+            }
+
+        }).catch(error =>{
+            dispatch(toggleIsFetching(false))
+            if(error.response.data.message === "Mail exists"){
+               dispatch(setSignUpInputDanger('emailDanger','Данная почта уже зарегистрирована'))
+            }
+            else if(error.response.data.message === "Login exists"){
+                dispatch(setSignUpInputDanger('loginDanger','Данный логин уже зарегистрирован'))
+            }
+
+        })
+    }
+}
+
+
 
 
 export  default authReducer

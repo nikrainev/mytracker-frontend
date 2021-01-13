@@ -1,37 +1,12 @@
 import React from 'react';
 import LoginBlock from "./loginform";
-import axios from 'axios'
 import {connect} from "react-redux";
 import {setProfileData, reloadInput, setToken, setInputState,
-    toggleIsFetching, setLoginFormState, toggleLoginButtonDisability} from "../../../redux/auth-reducer";
-
+    toggleIsFetching, setLoginFormState, toggleLoginButtonDisability, loginThunkCreator} from "../../../redux/auth-reducer";
 
 class LoginContainer extends React.Component {
-
-
-    sendLoginRequest = () =>{
-        this.props.toggleIsFetching(true)
-        axios.post('http://nikrainev.ru:3000/auth/login',{"email":this.props.emailInput, "password":this.props.passwordInput})
-                .then(response => {
-
-                    this.props.setToken(response.data.token)
-                    this.props.toggleIsFetching(false)
-                    if(response.data.message == "Auth successful"){
-                        document.cookie = 'token='+response.data.token+'; max-age=360000'
-                        document.cookie = 'email='+this.props.emailInput+'; max-age=360000'
-                        document.cookie = 'password='+this.props.passwordInput+'; max-age=360000'
-                    }
-                })
-                .catch(error => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setLoginFormState('false_alert')
-                    if(error.response.data.message === "Auth failed"){
-
-                    }
-
-                })
-
-
+    sendLoginRequest = () => {
+        this.props.loginThunkCreator(this.props.emailInput, this.props.passwordInput)
     }
     reloadEmailInput = (value) =>{
         this.props.reloadInput('emailInput',value)
@@ -89,4 +64,4 @@ let mapStateToProps = (state) =>{
 
 export default LoginContainer = connect(mapStateToProps,
         {setProfileData,reloadInput,setToken,setInputState,
-            toggleIsFetching,setLoginFormState, toggleLoginButtonDisability})(LoginContainer)
+            toggleIsFetching,setLoginFormState, toggleLoginButtonDisability, loginThunkCreator})(LoginContainer)

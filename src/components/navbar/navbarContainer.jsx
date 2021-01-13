@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from "./navbar";
-import axios from 'axios'
 import {connect} from "react-redux";
 import {setToken, setProfileData, deleteProfileData} from "../../redux/auth-reducer";
 import {authAPI} from '../../api/api'

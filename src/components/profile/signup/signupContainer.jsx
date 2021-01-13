@@ -1,9 +1,8 @@
 import React from 'react';
 import SignUpBlock from "./signup";
-import axios from 'axios'
 import {connect} from "react-redux";
-import {reloadInput, setSignUpInputDanger, setPasswordStrength, toggleSignUpButtonDisability, toggleIsFetching, setProfileData} from "../../../redux/auth-reducer";
-import {signUpApi} from '../../../api/api'
+import {reloadInput, setSignUpInputDanger, setPasswordStrength, toggleSignUpButtonDisability, setSignUpState, signUpThunkCreator} from "../../../redux/auth-reducer";
+import LoginBlock from "../login/loginform";
 
 class SignUpContainer extends React.Component {
     reloadLoginInput = (value) =>{
@@ -38,25 +37,9 @@ class SignUpContainer extends React.Component {
     }
 
     sendSignUpRequest = (email,login,password) =>{
-        this.props.toggleIsFetching(true)
-        signUpApi.postSignUpInfo(email,login,password).then(response => {
-
-            this.props.toggleIsFetching(false)
-            console.log(response)
-            if(response.data.message === 'user created'){
-                this.props.setProfileData(response)
-            }
-
-        }).catch(error =>{
-            if(error.response.data.message === "Mail exists"){
-               this.setEmailInputDanger('Данная почта уже зарегистрирована')
-            }
-            else if(error.response.data.message === "Login exists"){
-                this.setLoginInputDanger('Данный логин уже зарегистрирован')
-            }
-             console.log(error.response)
-        })
+      this.props.signUpThunkCreator(email,login,password)
     }
+
 
 
 
@@ -73,6 +56,11 @@ class SignUpContainer extends React.Component {
                 passwordStrength={this.props.passwordStrength}
                 isSignUpButtonDisabled={this.props.isSignUpButtonDisabled}
                 isFetching={this.props.isFetching}
+                signUpState={this.props.signUpState}
+                profileId={this.props.profileId}
+                email={this.props.email}
+                login={this.props.login}
+                regDate={this.props.regDate}
                 reloadLoginInput={this.reloadLoginInput}
                 reloadEmailInput={this.reloadEmailInput}
                 reloadPasswordInput={this.reloadPasswordInput}
@@ -84,7 +72,8 @@ class SignUpContainer extends React.Component {
                 setPasswordStrength={this.props.setPasswordStrength}
                 toggleSignUpButtonDisability={this.props.toggleSignUpButtonDisability}
                 sendSignUpRequest={this.sendSignUpRequest}
-                setProfileData={this.props.setProfileData}
+
+
 
 
         />
@@ -103,10 +92,15 @@ let mapStateToProps = (state) =>{
         repeatPasswordDanger: state.auth.signUpInputsDangers.repeatPasswordDanger,
         passwordStrength: state.auth.passwordStrength,
         isSignUpButtonDisabled: state.auth.isSignUpButtonDisabled,
-        isFetching: state.auth.isFetching
+        isFetching: state.auth.isFetching,
+        signUpState: state.auth.signUpState,
+        profileId: state.auth.profileId,
+        email: state.auth.email,
+        login: state.auth.login,
+        regDate: state.auth.regDate
 
     }
 }
 
 export default SignUpContainer = connect(mapStateToProps, {reloadInput,setSignUpInputDanger, setPasswordStrength,
-    toggleSignUpButtonDisability, toggleIsFetching, setProfileData})(SignUpContainer)
+    toggleSignUpButtonDisability, setSignUpState, signUpThunkCreator})(SignUpContainer)

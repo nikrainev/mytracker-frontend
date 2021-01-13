@@ -94,7 +94,7 @@ const Sidebar = () =>{
       }
 
     }
-    
+
     let onmouseout = () =>{
 
     }
@@ -106,9 +106,7 @@ const Sidebar = () =>{
                  <a href="" className={s.link_item + " fluent-line"}>Сводка</a>
                  <a href="" className={s.link_item + " fluent-line"}>Посетители</a>
                  <a href="" className={s.link_item + " fluent-line"}>Конверсии</a>
-                 <a href="" className={s.link_item + " fluent-line"}>Сводка</a>
-                 <a href="" className={s.link_item + " fluent-line"}>Посетители</a>
-                 <a href="" className={s.link_item + " fluent-line"}>Конверсии</a>
+
              </div>
         </div>
     );
