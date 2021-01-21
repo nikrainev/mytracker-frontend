@@ -1,12 +1,13 @@
 import React from 'react';
 import YourProfileContainer from "./yourprofile/yourprofileContainer";
 import HaveAccess from "./haveaccess/haveaccess";
-const ProfileSettings = (props) =>{
+import WithAuthRedirect from "../../../hoc/withAuthRedirect";
+const ProfileSettings = () =>{
     return(
             <div className="content">
                <YourProfileContainer />
                <HaveAccess />
             </div>
     )
-}
-export default ProfileSettings;
+};
+export default WithAuthRedirect(ProfileSettings );

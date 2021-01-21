@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from "./navbar";
 import {connect} from "react-redux";
 import {setToken, setProfileData, deleteProfileData} from "../../redux/auth-reducer";
-import {authAPI} from '../../api/api'
+import {authAPI} from '../../api/auth-api'
 
 class NavbarContainer extends React.Component {
 

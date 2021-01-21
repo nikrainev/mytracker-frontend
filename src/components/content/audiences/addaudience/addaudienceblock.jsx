@@ -7,7 +7,7 @@ const Addaudienceblock = (props) =>{
 
     }
 
-    let countersOptionsElements = props.countersSelect.map(counter => <option value={counter.counterId}>{counter.counterName}</option> )
+    let countersOptionsElements = props.countersSelect.map(counter => <option key={counter.counterId} value={counter.counterId}>{counter.counterName}</option> )
 
     let countersElements = props.counters.filter(counter => counter.counterName != undefined);
         countersElements = countersElements.map(counter => <div  className={s.audience_badge}>

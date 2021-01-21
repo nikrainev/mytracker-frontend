@@ -2,7 +2,7 @@ import React from 'react';
 import SignUpBlock from "./signup";
 import {connect} from "react-redux";
 import {reloadInput, setSignUpInputDanger, setPasswordStrength, toggleSignUpButtonDisability, setSignUpState, signUpThunkCreator} from "../../../redux/auth-reducer";
-import LoginBlock from "../login/loginform";
+
 
 class SignUpContainer extends React.Component {
     reloadLoginInput = (value) =>{

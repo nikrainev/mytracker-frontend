@@ -1,5 +1,5 @@
 import store from "./redux-store";
-import {authAPI, signUpApi} from "../api/api";
+import {authAPI, signUpAPI} from "../api/auth-api";
 
 let initialState = {
     profileId: null,
@@ -213,7 +213,7 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
 export const signUpThunkCreator = (email,login,password) =>{
     return (dispatch) =>{
         dispatch(toggleIsFetching(true))
-        signUpApi.postSignUpInfo(email,login,password).then(response => {
+        signUpAPI.postSignUpInfo(email,login,password).then(response => {
             dispatch(toggleIsFetching(false))
             if(response.data.message === 'user created'){
 

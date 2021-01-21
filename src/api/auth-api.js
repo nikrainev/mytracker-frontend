@@ -1,20 +1,20 @@
 import * as axios from 'axios';
 import store from "../redux/redux-store";
 const authedInstance = axios.create({
-    baseURL: 'http://nikrainev.ru:3000/'
+    baseURL: 'http://nikrainev.ru:3000/auth/'
 })
 
 
 
 export const authAPI = {
     getAuthInfo(){
-        return authedInstance.get('auth/me', {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+        return authedInstance.get('me', {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
                 .then(response =>{
                     return response.data;
                 })
     },
     postLoginInfo(email,password){
-        return authedInstance.post('auth/login',{"email": email, "password":password})
+        return authedInstance.post('login',{"email": email, "password":password})
                 .then(response =>{
             return response.data;
         })
@@ -22,9 +22,9 @@ export const authAPI = {
 
 }
 
-export const signUpApi = {
+export const signUpAPI = {
     postSignUpInfo(email,login,password){
-        return authedInstance.post('auth/signup',{"email":email,"login":login,"password":password})
+        return authedInstance.post('signup',{"email":email,"login":login,"password":password})
                 .then(response =>{
                     return response;
                 })

@@ -115,6 +115,8 @@ body{
   cursor: pointer;
   display: block;
   transition: .2s all;
+  text-align: center;
+  text-decoration: none;
   &:hover{
     background: darken(#006eb9, 7);
     box-shadow: 0px 4px 5px #dcdcdcjet;
@@ -262,4 +264,23 @@ body{
     top: 0px;
     left: 0px;
   }
+}
+
+.gotologinblock{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1{
+    font-size: 40px;
+    font-weight: 300;
+    display: block;
+  }
+  a{
+    margin-top: 20px;
+  }
+
+
 }

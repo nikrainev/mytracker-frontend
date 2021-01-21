@@ -1,28 +1,36 @@
 import React from "react";
 import YourProfile from "./yourprofile";
-import {reloadInputActionCreator,reloadTextareaActionCreator} from "../../../../redux/profile-reducer";
+import {reloadTextareaActionCreator} from "../../../../redux/profile-reducer";
 import {connect} from "react-redux";
 
 
 
-let mapStateToProps = (state) =>{
+class YourProfileContainer extends React.Component {
+
+
+    render() {
+        return <YourProfile userName={this.props.userName} userSoName={this.props.userSoName}
+                            userCompany={this.props.userCompany} userDescription={this.props.userDescription}
+
+        />
+    }
+}
+const mapStateToProps = (state) =>{
     return{
         userName: state.profilePage.userName,
+        userSoName: state.profilePage.userName,
+        userCompany: state.profilePage.userCompany,
         userDescription: state.profilePage.userDescription
 
     }
 }
-let mapDispatchToProps =(dispatch) =>{
+
+const mapDispatchToProps = (dispatch) =>{
     return{
-      reloadInput: (value) =>{
-          dispatch(reloadInputActionCreator(value, 'userName'))
-      },
         reloadTextarea: (value, inputName) =>{
-          dispatch(reloadTextareaActionCreator(value, 'userDescription'))
+            dispatch(reloadTextareaActionCreator(value, 'userDescription'))
         }
     }
 }
 
-const YourProfileContainer = connect(mapStateToProps, mapDispatchToProps)(YourProfile)
-
-export default YourProfileContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(YourProfileContainer);

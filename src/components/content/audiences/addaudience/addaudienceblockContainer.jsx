@@ -6,7 +6,9 @@ import {reloadAudienceInputActionCreator,
     addAudienceActionCreator,
     deleteAudienceCounterActionCreator
 } from "../../../../redux/audiences-reducer";
+import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 
 
@@ -32,6 +34,4 @@ let mapDispatchToProps =(dispatch) =>{
     }
 }
 
-const AddaudienceblockContainer = connect(mapStateToProps, mapDispatchToProps)(Addaudienceblock)
-
-export default AddaudienceblockContainer
+export default compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedirect)(Addaudienceblock)

@@ -1,6 +1,10 @@
 let initialState = {
-    userName: '',
-    userDescription: ''
+    userName: 'Никита',
+    userSoname: 'Крайнев',
+    userCompany: 'Гуап',
+    userDescription: 'Lorem Ipsum - это текст-"рыба", часто используемый в ' +
+            'печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" ' +
+            'для текстов на латинице с начала XVI века.'
 }
 
 const profileReducer = (state = initialState, action) =>{
@@ -26,16 +30,12 @@ const profileReducer = (state = initialState, action) =>{
 
     }
 }
-export default profileReducer
+
 export const saveInfoActionCreator = () =>({type: 'SAVE-INFO'})
-export const reloadInputActionCreator = (value, inputName) =>({
-    type: 'RELOAD-INPUT',
-    value: value,
-    inputName: inputName
-})
 export const reloadTextareaActionCreator = (value, inputName) =>({
     type: 'RELOAD-TEXTAREA',
     value: value,
     inputName: inputName
 })
 
+export default profileReducer

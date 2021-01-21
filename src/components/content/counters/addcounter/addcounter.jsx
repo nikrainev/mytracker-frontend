@@ -11,13 +11,13 @@ const Addcounterbutton =()=>{
 }
 const Addcounter = (props) =>{
     return (
-            <BrowserRouter>
+
 
             <div className="container">
                 <Route exact path='/counters' render={() => <Addcounterbutton />} />
                 <Route path='/counters/addcounter' render={ () => <AddcounterblockContainer countersData={props.countersData} dispatch={props.dispatch} />} />
             </div>
-            </BrowserRouter>
+
     );
 }
 export default Addcounter;

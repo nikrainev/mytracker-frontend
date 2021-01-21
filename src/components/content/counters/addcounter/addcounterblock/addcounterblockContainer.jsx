@@ -2,7 +2,10 @@ import React from "react";
 
 import {addCounter, reloadCounterInput} from "../../../../../redux/counters-reducer";
 import Addcounterblock from "./addcounterblock";
+
+import WithAuthRedirect from "../../../../../hoc/withAuthRedirect";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 
 
@@ -14,6 +17,5 @@ let mapStateToProps = (state) =>{
 }
 
 
-const AddcounterblockContainer = connect(mapStateToProps, {reloadCounterInput, addCounter})(Addcounterblock)
 
-export default AddcounterblockContainer;
+export default compose(connect(mapStateToProps, {reloadCounterInput, addCounter}), WithAuthRedirect)(Addcounterblock);

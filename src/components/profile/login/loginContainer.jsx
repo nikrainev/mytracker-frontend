@@ -5,6 +5,7 @@ import {setProfileData, reloadInput, setToken, setInputState,
     toggleIsFetching, setLoginFormState, toggleLoginButtonDisability, loginThunkCreator} from "../../../redux/auth-reducer";
 
 class LoginContainer extends React.Component {
+
     sendLoginRequest = () => {
         this.props.loginThunkCreator(this.props.emailInput, this.props.passwordInput)
     }

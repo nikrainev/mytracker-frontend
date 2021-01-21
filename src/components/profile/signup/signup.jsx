@@ -7,6 +7,7 @@ const SignUpForm = (props) =>{
     let emailInput = React.createRef()
     let passwordInput = React.createRef()
     let repeatPasswordInput = React.createRef()
+    console.log(window.history.state)
     let onSendClick = () =>{
 
       if(loginInput.current.value === ''){
