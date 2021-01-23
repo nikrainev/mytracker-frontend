@@ -1,4 +1,4 @@
-import store from "./redux-store";
+
 import {authAPI, signUpAPI} from "../api/auth-api";
 
 let initialState = {

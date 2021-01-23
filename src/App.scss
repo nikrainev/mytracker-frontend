@@ -284,3 +284,26 @@ body{
 
 
 }
+
+.withedit-current{
+  min-height: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ececec;
+  padding-top: 8px;
+  padding-bottom: 9px;
+  cursor: pointer;
+  transition: .25s all;
+  &:hover{
+    border-bottom: 2px solid #cacaca;
+  }
+
+}
+
+.withedit-block{
+  .plain_input{
+    font-size: 16px;
+  }
+  .plain_textarea{
+    font-size: 16px;
+  }
+}
