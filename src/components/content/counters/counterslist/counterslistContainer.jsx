@@ -1,34 +1,17 @@
 import React from "react";
 import Counterslist from "./counterslist";
 import {connect} from "react-redux";
-import {setCounters, setCurrentPage, setTotalCounters,toggleIsFetching} from "../../../../redux/counters-reducer";
-import * as axios from "axios";
-
+import {setCounters, setCurrentPage, setTotalCounters,toggleIsFetching, getCounters} from "../../../../redux/counters-reducer";
+import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
+import {compose} from   "redux"
 class CounterslistContainer extends React.Component{
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios.get(`http://195.161.62.108:3000/counters?page=${this.props.currentPage}&limit=${this.props.pageSize}`).then(response =>{
-
-            this.props.setCounters(response)
-            this.props.setTotalCounters(response)
-            this.props.toggleIsFetching(false)
-        })
-
-
-
-
+       this.props.getCounters()
     }
+
     changePage = (page) =>{
-
-
         this.props.setCurrentPage(page)
-        this.props.toggleIsFetching(true)
-        axios.get(`http://195.161.62.108:3000/counters?page=${page}&limit=${this.props.pageSize}`).then(response =>{
-
-            this.props.setCounters(response)
-            this.props.toggleIsFetching(false)
-        })
-
+        this.props.getCounters()
     }
     render(){
       return <Counterslist
@@ -38,6 +21,7 @@ class CounterslistContainer extends React.Component{
               currentPage={this.props.currentPage}
               isFetching={this.props.isFetching}
               changePage={this.changePage}
+
       />
     }
 }
@@ -54,5 +38,6 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default CounterslistContainer = connect(mapStateToProps, {setCounters, setCurrentPage,setTotalCounters,toggleIsFetching})(CounterslistContainer)
+export default CounterslistContainer = compose(connect(mapStateToProps, {setCounters, setCurrentPage,setTotalCounters,
+    toggleIsFetching, getCounters}), WithAuthRedirect)(CounterslistContainer)
 

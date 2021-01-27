@@ -1,7 +1,8 @@
 import React from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
-
+import WithAuthRedirect from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 class ProfileContainer extends React.Component {
     render(){
         return <Profile profileId={this.props.profileId}
@@ -23,5 +24,5 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default  ProfileContainer = connect(mapStateToProps)(ProfileContainer)
+export default compose(connect(mapStateToProps), WithAuthRedirect)(ProfileContainer)
 

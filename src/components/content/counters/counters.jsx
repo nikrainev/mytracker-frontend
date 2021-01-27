@@ -7,7 +7,7 @@ const Counters = (props) =>{
 
             <div className='content'>
              <Addcounter/>
-            <CounterslistContainer />
+             <CounterslistContainer />
 
 
 

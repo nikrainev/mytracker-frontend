@@ -1,27 +1,23 @@
+import {countersAPI} from "../api/counters-api";
+import store from "./redux-store"
 let initialState = {
-
         counterslistData: [],
         pageSize: 5,
         totalCounters: '',
         currentPage: 1,
-        counterNameInput: '',
-        counterDomenInput: '',
         isFetching: ''
-
-
-
 }
 
 const countersReducer = (state = initialState,action) =>{
     switch (action.type){
         case "ADD-COUNTER":{
             let newCounter = {
-                id: 5,
-                name: state.counterNameInput,
-                domen: state.counterDomenInput,
-                dayusers: 0,
-                allusers: 0,
-                status: 'work'
+                id: action.counterData._id,
+                name: action.counterData.name,
+                domen: action.counterData.domen,
+                dayusers: action.counterData.dayusers,
+                allusers: action.counterData.allusers,
+                status: action.counterData.status
             }
 
             return {
@@ -41,7 +37,7 @@ const countersReducer = (state = initialState,action) =>{
         case "SET-COUNTERS":{
             return {
                 ...state,
-                counterslistData: action.countersData.data.items
+                counterslistData: action.countersData.items
             }
         }
         case "SET-CURRENT-PAGE":{
@@ -53,7 +49,7 @@ const countersReducer = (state = initialState,action) =>{
         case 'SET-TOTAL-COUNTERS':{
             return {
                 ...state,
-                totalCounters: action.totalCounters.data.totalPages
+                totalCounters: action.totalCounters.totalPages
             }
         }
         case 'TOGGLE-IS-FETCHING':{
@@ -74,7 +70,10 @@ const countersReducer = (state = initialState,action) =>{
 }
 
 
-export const addCounter = () =>({type: 'ADD-COUNTER'})
+export const addCounter = (counterData) =>({
+    type: 'ADD-COUNTER',
+    counterData: counterData
+})
 export const setCounters = (countersData) =>({
     type: 'SET-COUNTERS',
     countersData: countersData
@@ -98,5 +97,32 @@ export const toggleIsFetching = (isFetching) =>({
     type: 'TOGGLE-IS-FETCHING',
     isFetching: isFetching
 })
+
+
+
+export const getCounters = () =>{
+    return (dispatch) =>{
+        dispatch(toggleIsFetching(true))
+        countersAPI.getCounters(store.getState().countersPage.currentPage, store.getState().countersPage.pageSize).then(response =>{
+            dispatch(setCounters(response))
+            dispatch(setTotalCounters(response))
+            dispatch(toggleIsFetching(false))
+        })
+    }
+}
+
+export const postCounter = (data) => {
+    return (dispatch) => {
+        countersAPI.postCounter(data).then(response =>{
+            dispatch(setCurrentPage(1))
+            dispatch(toggleIsFetching(true))
+            countersAPI.getCounters(store.getState().countersPage.currentPage, store.getState().countersPage.pageSize).then(response =>{
+                dispatch(setCounters(response))
+                dispatch(setTotalCounters(response))
+                dispatch(toggleIsFetching(false))
+            })
+        })
+    }
+}
 
 export default countersReducer

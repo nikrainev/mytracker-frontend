@@ -10,4 +10,4 @@ const ProfileSettings = () =>{
             </div>
     )
 };
-export default WithAuthRedirect(ProfileSettings );
+export default WithAuthRedirect(ProfileSettings);
