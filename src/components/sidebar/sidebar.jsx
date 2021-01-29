@@ -23,7 +23,6 @@ const Sidebar = () =>{
         let procent = Math.round((event.clientY - targetCoords.top)*(100/92))
         procent = 100 - Math.abs(procent)
         procent = procent+"%"
-        console.log(event.target)
         return procent
     }
 

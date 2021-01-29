@@ -7,15 +7,13 @@ const Addcounterblock = (props) =>{
 
 
 
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const onSubmit = async (values, form)=> {
-        await sleep(300);
         props.postCounter(values.counterName, values.counterDomen)
         setTimeout(form.reset, 1)
     };
 
-    const required = value => (value ? undefined : "Required");
+    const required = value => (value ? undefined : "Обязательно");
 
 
 
@@ -34,9 +32,9 @@ const Addcounterblock = (props) =>{
                                 <Field name="counterName" validate={required} >
                                     {({ input, meta }) => (
                                             <div>
-
-                                                <input {...input} className='plain_input' type="text" placeholder="Название счётчика" />
                                                 {meta.error && meta.touched && <span>{meta.error}</span>}
+                                                <input {...input} className='plain_input' type="text" placeholder="Название счётчика" />
+
 
                                             </div>
                                     )}
@@ -44,9 +42,9 @@ const Addcounterblock = (props) =>{
                                 <Field name="counterDomen" validate={required} >
                                     {({ input, meta }) => (
                                             <div>
-
-                                                <input {...input} className='plain_input' type="text" placeholder="Домен" />
                                                 {meta.error && meta.touched && <span>{meta.error}</span>}
+                                                <input {...input} className='plain_input' type="text" placeholder="Домен" />
+
 
                                             </div>
                                     )}

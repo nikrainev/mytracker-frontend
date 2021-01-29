@@ -1,0 +1,42 @@
+.withedit_current{
+  min-height: 30px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ececec;
+  cursor: pointer;
+  transition: .25s all;
+
+  &:hover{
+    border-bottom: 2px solid #cacaca;
+  }
+
+}
+
+.withedit_block{
+  min-height: 50px;
+  position: relative;
+  .plain_input{
+    font-size: 16px;
+  }
+  .plain_textarea{
+    font-size: 16px;
+  }
+}
+
+.loading_bar{
+  position: absolute;
+  width: 20px;
+  right: 0px;
+  top: 5px;
+  animation: loading 1s infinite;
+  @keyframes loading {
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+  }
+}
+
+.done_check{
+  position: absolute;
+  width: 20px;
+  right: 0px;
+  top: 5px;
+}
