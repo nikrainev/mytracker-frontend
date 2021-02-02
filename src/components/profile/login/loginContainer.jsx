@@ -6,8 +6,8 @@ import {setProfileData, reloadInput, setToken, setInputState,
 
 class LoginContainer extends React.Component {
 
-    sendLoginRequest = () => {
-        this.props.loginThunkCreator(this.props.emailInput, this.props.passwordInput)
+    sendLoginRequest = (email, password) => {
+        this.props.loginThunkCreator(email, password)
     }
     reloadEmailInput = (value) =>{
         this.props.reloadInput('emailInput',value)

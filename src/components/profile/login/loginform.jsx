@@ -1,6 +1,24 @@
 import React from 'react';
 import s from './login.module.scss';
 import {NavLink} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
+import {Input} from "../../../components/common/formControls"
+
+
+const LoginForm = (props) =>{
+
+
+    const required = value => (value ? undefined : "Обязательно");
+    return (
+            <form onSubmit={props.handleSubmit}>
+                <Field name="emailInput" type="text"  component={Input} />
+                <button className='control_button' disabled={props.submitting}  type="submit" >Отправить</button>
+                <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
+            </form>
+    )
+}
+
+const LoginReduxForm = reduxForm({form: 'login-form'})(LoginForm)
 
 const LoginBlock = (props) => {
     let emailInput = React.createRef()
@@ -22,9 +40,6 @@ const LoginBlock = (props) => {
         props.toggleButtonDisability(true)
 
 
-
-
-
     }
 
     let onEmailChange = () =>{
@@ -42,13 +57,17 @@ const LoginBlock = (props) => {
     }
 
 
-
     return  (
           <div className="container">
 
 
-
+              <LoginReduxForm />
               <div className="login_block">
+
+
+
+
+
                   {props.isAuth == false ?
                           <div className={s.form}>
                               <div className={s.false_alert}><p>{props.loginFormState === 'normal' ? ' ' : 'Невереные данные'}</p></div>

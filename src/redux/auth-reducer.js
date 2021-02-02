@@ -185,7 +185,13 @@ export const setSignUpState = (signUpState) =>{return {
 }}
 
 
+
+
+
+
+
 export const loginThunkCreator = (emailInput, passwordInput) =>{
+
     return (dispatch)=>{
     dispatch(toggleIsFetching(true))
     authAPI.postLoginInfo(emailInput, passwordInput)
@@ -198,6 +204,7 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
                     authAPI.getAuthInfo()
                             .then(response => {
                                 console.log(response)
+
                                 dispatch(setProfileData(response))
                             })
                 }

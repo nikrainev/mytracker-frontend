@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './yourprofile.module.scss'
-import {Form, Field} from "react-final-form";
 import {EditInput, EditTextarea} from "../../../common/editinput";
 
 class YourProfile extends React.Component{
