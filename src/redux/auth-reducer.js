@@ -1,5 +1,6 @@
 
 import {authAPI, signUpAPI} from "../api/auth-api";
+import {stopSubmit} from "redux-form";
 
 let initialState = {
     profileId: null,
@@ -65,25 +66,11 @@ const authReducer =(state =initialState, action) =>{
                 isAuth: false
 
             }
-        case 'SET_LOGIN_INPUT_STATE':
-            return{
-                ...state,
-                [action.inputName]: action.inputState
-        }
+
         case 'TOGGLE_IS_FETCHING':
             return {
                 ...state,
                 isFetching: action.isFetching
-            }
-        case 'SET_LOGIN_FORM_STATE':
-            return {
-                ...state,
-                loginFormState: action.formState
-            }
-        case 'TOGGLE_LOGIN_BUTTON_DISABILITY':
-            return {
-                ...state,
-                isLoginButtonDisabled: action.buttonState
             }
         case 'SET_SIGNUP_INPUT_DANGER':
             let stateCopy = {...state}
@@ -155,15 +142,9 @@ export const toggleIsFetching = (isFetching)=>({
     isFetching: isFetching
 })
 
-export const setLoginFormState = (formState) =>({
-    type: 'SET_LOGIN_FORM_STATE',
-    formState: formState
-})
 
-export const toggleLoginButtonDisability = (buttonState) => ({
-    type: 'TOGGLE_LOGIN_BUTTON_DISABILITY',
-    buttonState: buttonState
-})
+
+
 
 export const setSignUpInputDanger = (inputName, inputDanger) => ({
     type: 'SET_SIGNUP_INPUT_DANGER',
@@ -210,8 +191,8 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
                 }
             })
             .catch(error => {
+                dispatch(stopSubmit('login-form', {_error : "Неверные данные"}))
                 dispatch(toggleIsFetching(false))
-                dispatch(setLoginFormState('false_alert'))
 
             })
 }

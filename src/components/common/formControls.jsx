@@ -1,17 +1,13 @@
 import React from "react";
-export const Input = ({
-                                input,
-                                label,
-                                type,
-                                meta
-                            }) =>{
+import s from "../profile/login/login.module.scss";
+export const Input = ({input, meta, ...props}) =>{
     return (
-            <div>
-                <div>
-                    <input {...input} placeholder={label} type={type} />
-                    {meta.touched && meta.error && <span>"error"</span> }
+
+                <div className={s.input_wr}>
+                    {meta.touched && meta.error && <span className={s.input_danger}>{meta.error}</span>}
+                    <input className="plain_input" {...input} {...props} />
                 </div>
-            </div>
+
     )
 
 }

@@ -3,16 +3,17 @@ import s from './login.module.scss';
 import {NavLink} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../../../components/common/formControls"
-
-
+import {required} from "../../../utils/validation";
+import doneImg from "../../../assets/icons/done.svg";
 const LoginForm = (props) =>{
 
-
-    const required = value => (value ? undefined : "Обязательно");
     return (
             <form onSubmit={props.handleSubmit}>
-                <Field name="emailInput" type="text"  component={Input} />
-                <button className='control_button' disabled={props.submitting}  type="submit" >Отправить</button>
+                {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
+                <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
+                <Field name="emailInput" type="text"  component={Input} placeholder="Введите почту" validate={required}/>
+                <Field name="passwordInput" type="password"  component={Input} placeholder="Введите пароль" validate={required}/>
+                <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</button>
                 <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
             </form>
     )
@@ -21,76 +22,20 @@ const LoginForm = (props) =>{
 const LoginReduxForm = reduxForm({form: 'login-form'})(LoginForm)
 
 const LoginBlock = (props) => {
-    let emailInput = React.createRef()
-    let passwordInput = React.createRef()
 
-    let onSendClick = () =>{
-        if(emailInput.current.value == ''){
-            props.setEmailInputState('empty_danger')
-        }
-        else if(passwordInput.current.value == ''){
-            props.setPasswordInputState('empty_danger')
-        }
-        else{
-
-            props.sendLoginRequest()
-
-        }
-
-        props.toggleButtonDisability(true)
-
+    const onSubmit = (values) =>{
+        props.sendLoginRequest(values.emailInput, values.passwordInput)
 
     }
-
-    let onEmailChange = () =>{
-        props.reloadEmailInput(emailInput.current.value)
-        props.setEmailInputState('normal')
-        props.setLoginFormState('normal')
-        props.toggleButtonDisability(false)
-    }
-
-    let onPasswordChange = () =>{
-        props.reloadPasswordInput(passwordInput.current.value)
-        props.setPasswordInputState('normal')
-        props.setLoginFormState('normal')
-        props.toggleButtonDisability(false)
-    }
-
-
     return  (
           <div className="container">
-
-
-              <LoginReduxForm />
               <div className="login_block">
-
-
-
-
-
                   {props.isAuth == false ?
                           <div className={s.form}>
-                              <div className={s.false_alert}><p>{props.loginFormState === 'normal' ? ' ' : 'Невереные данные'}</p></div>
-                              <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
-                              <div className={props.emailInputState == 'normal' ? s.input_wr : s.input_wr + " " + s.danger}>
-                                  <p className={s.input_danger}>Введите почту</p>
-                                  <input type="text" placeholder="Введите почту"
-                                         onChange={onEmailChange}
-                                         value={props.emailInput}
-                                         ref={emailInput}/>
-                              </div>
-                              <div className={props.passwordInputState == 'normal' ? s.input_wr : s.input_wr + " " + s.danger}>
-                                  <p className={s.input_danger}>Введите пароль</p>
-                                  <input type="password" placeholder="Введите пароль"
-                                         onChange={onPasswordChange}
-                                         value={props.passwordInput}
-                                         ref={passwordInput}/>
-                              </div>
-                              <button disabled={props.isButtonDisabled} onClick={onSendClick}>Отправить</button>
-                              <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
+                              <LoginReduxForm isFetching={props.isFetching} onSubmit={onSubmit}/>
                           </div>
                           :
-                          <div>Вы авторизованы</div>
+                          <div className={s.success_auth}><img src={doneImg} alt=""/><p>Вы авторизованы</p></div>
 
                   }
                       </div>
