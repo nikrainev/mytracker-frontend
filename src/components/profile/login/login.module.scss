@@ -8,7 +8,6 @@
     width: calc(100% - 22px);
     padding: 10px;
     border: 1px solid gray;
-    margin-bottom: 20px;
 
   }
   button{
@@ -21,6 +20,7 @@
 
 .input_wr{
   position: relative;
+  margin-top: 20px;
   .input_danger{
     font-size: 12px;
     position: absolute;
@@ -119,4 +119,50 @@
     font-size: 20px;
     margin-top: 15px;
   }
+}
+
+.password_strength{
+  position: absolute;
+  bottom: 1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-radius: 0px 4px 0px 4px;
+  overflow: hidden;
+  animation: smoothappearance 0.5s;
+  div{
+
+    width: 125px;
+    height: 6px;
+    display: block;
+  }
+  p{
+    font-size: 11px;
+    letter-spacing: -0.4px;
+    background: white;
+    width: 120px;
+    padding-left: 4px;
+    line-height: 10px;
+  }
+}
+@keyframes smoothappearance{
+  from{
+    opacity: 0%;
+  }
+  to{
+    opacity: 100%;
+  }
+}
+
+.tooWeak{
+  background: red;
+}
+.weak{
+  background: orange;
+}
+.medium{
+  background: #2fafb9;
+}
+.good{
+  background: green;
 }

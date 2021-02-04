@@ -123,7 +123,7 @@ export class EditTextarea extends React.Component{
                                   onBlur={() => {this.changeCondition(false)}} autoFocus={true}> </textarea>
                     </div>
                     :
-                    <div className={s.withedit_current}>{this.formatText(this.props.inputText)}</div>
+                    <div className={s.withedit_current}>{this.props.inputText === '' ? this.props.placeholder : this.formatText(this.props.inputText)}</div>
             }
 
 

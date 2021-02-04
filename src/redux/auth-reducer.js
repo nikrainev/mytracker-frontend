@@ -9,23 +9,7 @@ let initialState = {
     regDate: null,
     token:'',
     isAuth: false,
-    loginInput: '',
-    emailInput: '',
-    passwordInput: '',
-    repeatPasswordInput: '',
-    emailInputState: 'normal',
-    passwordInputState: 'normal',
     isFetching: false,
-    loginFormState: 'normal',
-    isLoginButtonDisabled: false,
-    signUpInputsDangers: {
-        loginDanger:'',
-        emailDanger:'',
-        passwordDanger: '',
-        repeatPasswordDanger: ''
-    },
-    passwordStrength: ['none',''],
-    isSignUpButtonDisabled: false,
     signUpState: 'signUpForm'
 
 
@@ -42,12 +26,6 @@ const authReducer =(state =initialState, action) =>{
                 login: action.data.login,
                 regDate: action.data.regDate,
 
-            }
-        case "RELOAD_INPUT":
-
-            return {
-                ...state,
-                [action.inputName]: action.value
             }
         case "SET_TOKEN":
             return {
@@ -66,37 +44,12 @@ const authReducer =(state =initialState, action) =>{
                 isAuth: false
 
             }
-
         case 'TOGGLE_IS_FETCHING':
             return {
                 ...state,
                 isFetching: action.isFetching
             }
-        case 'SET_SIGNUP_INPUT_DANGER':
-            let stateCopy = {...state}
-            stateCopy.signUpInputsDangers = {...state.signUpInputsDangers}
-            stateCopy.signUpInputsDangers[action.inputName] = action.inputDanger
-            return stateCopy
-        case 'SET_PASSWORD_STRENGTH':
 
-            return {
-                ...state,
-                passwordStrength: [action.strength, action.strengthText]
-
-            }
-        case 'TOGGLE_SIGNUP_BUTTON_DISABILITY':
-            let buttonDisability = false;
-            for(let key in state.signUpInputsDangers){
-                if(state.signUpInputsDangers[key] !== ''){
-                    console.log(state.signUpInputsDangers[key])
-                    buttonDisability = true
-                }
-            }
-
-            return {
-                ...state,
-                isSignUpButtonDisabled: buttonDisability
-            }
         case 'TOGGLE_SIGNUP_STATE':
             return {
                 ...state,
@@ -105,24 +58,13 @@ const authReducer =(state =initialState, action) =>{
 
         default:
             return state
-
-
-
     }
-
-
 }
 
 
 export const setProfileData = (authProfileData) => ({
     type: "SET_USER_DATA",
     data: authProfileData})
-export const reloadInput = (inputName, value) => ({
-    type: 'RELOAD_INPUT',
-    inputName: inputName,
-    value: value
-})
-
 export const setToken = (token) =>({
     type: 'SET_TOKEN',
     token: token
@@ -143,31 +85,10 @@ export const toggleIsFetching = (isFetching)=>({
 })
 
 
-
-
-
-export const setSignUpInputDanger = (inputName, inputDanger) => ({
-    type: 'SET_SIGNUP_INPUT_DANGER',
-    inputName: inputName,
-    inputDanger: inputDanger
-})
-
-export const setPasswordStrength = (strength, strengthText) =>({
-    type: 'SET_PASSWORD_STRENGTH',
-    strength: strength,
-    strengthText: strengthText
-})
-export const toggleSignUpButtonDisability = () =>({
-    type: 'TOGGLE_SIGNUP_BUTTON_DISABILITY'
-})
 export const setSignUpState = (signUpState) =>{return {
     type: 'TOGGLE_SIGNUP_STATE',
     signUpState: signUpState
 }}
-
-
-
-
 
 
 
@@ -214,7 +135,6 @@ export const signUpThunkCreator = (email,login,password) =>{
                                 document.cookie = 'password='+password+'; max-age=360000'
                                 authAPI.getAuthInfo()
                                         .then(response => {
-                                            console.log(response)
                                             dispatch(setProfileData(response))
                                         })
 
@@ -228,12 +148,11 @@ export const signUpThunkCreator = (email,login,password) =>{
         }).catch(error =>{
             dispatch(toggleIsFetching(false))
             if(error.response.data.message === "Mail exists"){
-               dispatch(setSignUpInputDanger('emailDanger','Данная почта уже зарегистрирована'))
+               dispatch(stopSubmit('signup-form', {email : 'Данная почта уже зарегистрирована'}))
             }
             else if(error.response.data.message === "Login exists"){
-                dispatch(setSignUpInputDanger('loginDanger','Данный логин уже зарегистрирован'))
+                dispatch(stopSubmit('signup-form', {login : 'Данный логин уже зарегистрирован'}))
             }
-
         })
     }
 }
