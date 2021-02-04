@@ -6,8 +6,7 @@ import {Input, PasswordScoreInput} from "../../common/formControls";
 import {required, checkLogin, checkEmail, checkPassword, passwordsMatch} from "../../../utils/validation";
 
 
-const SignUpFormm = (props) =>{
-
+const SignUpForm = (props) =>{
     return (
             <form onSubmit={props.handleSubmit}>
                 {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
@@ -22,10 +21,10 @@ const SignUpFormm = (props) =>{
     )
 }
 
-const SignUpReduxForm = reduxForm({form: 'signup-form'})(SignUpFormm)
+const SignUpReduxForm = reduxForm({form: 'signup-form'})(SignUpForm)
 
 
-const SignUpForm = (props) =>{
+const SignUpFormBlock = (props) =>{
 
     const onSubmit = (values) =>{
         props.sendSignUpRequest( values.email, values.login, values.password)
@@ -83,7 +82,7 @@ const SignUpBlock = (props) => {
             <div className="content">
                 <div className="container">
                     {props.signUpState == 'signUpForm' ?
-                   <SignUpForm
+                   <SignUpFormBlock
                              isFetching={props.isFetching} sendSignUpRequest={props.sendSignUpRequest}
                    /> : <ProfileForm profileId={props.profileId} email={props.email}
                                      login={props.login} regDate={props.regDate}/>

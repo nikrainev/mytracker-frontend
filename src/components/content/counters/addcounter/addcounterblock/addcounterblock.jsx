@@ -2,52 +2,31 @@ import React from 'react';
 import s from '../addcounter.module.scss';
 import {Field, reduxForm} from "redux-form";
 import handleSubmit from "redux-form/lib/handleSubmit";
-
+import {Input} from "../../../../common/formControls";
+import {required} from "../../../../../utils/validation";
 
 const AddCounterForm = (props) =>{
-    const onSubmit = async (values, form)=> {
-        props.postCounter(values.counterName, values.counterDomen)
-
-        setTimeout(form.reset, 1)
-    };
-
-    const required = value => (value ? undefined : "Обязательно");
+    console.log(props)
     return (
-            <form onSubmit={handleSubmit}>
-                <Field name="counterName" validate={required} component="input">
-                    {({ input, meta }) => (
-                            <div>
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                                <input {...input} className='plain_input' type="text" placeholder="Название счётчика" />
-
-
-                            </div>
-                    )}
-                </Field>
-                <Field name="counterDomen" validate={required} component="input">
-                    {({ input, meta }) => (
-                            <div>
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                                <input {...input} className='plain_input' type="text" placeholder="Домен" />
-
-
-                            </div>
-                    )}
-                </Field>
-                <button className='control_button'  type="submit" >Добавить счётчик</button>
+            <form onSubmit={props.handleSubmit}>
+                {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
+                <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
+                <Field name="counterName" type="text"  component={Input} placeholder="Название счётчика" validate={required}/>
+                <Field name="counterDomen" type="text"  component={Input} placeholder="Домен" validate={required}/>
+                <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</button>
             </form>
     )
 }
 
-
-const AddCounterReduxForm = reduxForm({form: 'add-counter'})(AddCounterForm)
-
+const AddCounterReduxForm = reduxForm({form: 'addcounter-form'})(AddCounterForm)
 
 
 
 
 const Addcounterblock = (props) =>{
-
+    const onSubmit = (values) =>{
+        props.postCounter(values.counterName, values.counterDomen)
+    }
 
     return (
       <div className="row">
@@ -56,11 +35,7 @@ const Addcounterblock = (props) =>{
           </div>
           <div className="col-6">
                <div className={s.addcounter_form}>
-                  <AddCounterReduxForm />
-
-
-
-
+                  <AddCounterReduxForm onSubmit={onSubmit}/>
               </div>
 
           </div>

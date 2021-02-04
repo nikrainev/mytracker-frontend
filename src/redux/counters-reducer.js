@@ -1,5 +1,6 @@
 import {countersAPI} from "../api/counters-api";
 import store from "./redux-store"
+import {reset} from 'redux-form';
 let initialState = {
         counterslistData: [],
         pageSize: 5,
@@ -88,10 +89,6 @@ export const setTotalCounters = (totalCounters) =>({
     type: 'SET-TOTAL-COUNTERS',
     totalCounters: totalCounters
 })
-export const reloadCounterInput = (value, inputName) =>({
-    type: 'RELOAD-COUNTER-INPUT',
-    value: value,
-    inputName: inputName})
 
 export const toggleIsFetching = (isFetching) =>({
     type: 'TOGGLE-IS-FETCHING',
@@ -120,6 +117,7 @@ export const postCounter = (data) => {
                 dispatch(setCounters(response))
                 dispatch(setTotalCounters(response))
                 dispatch(toggleIsFetching(false))
+                dispatch(reset('addcounter-form'))
             })
         })
     }
