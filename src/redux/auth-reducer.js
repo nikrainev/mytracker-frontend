@@ -11,8 +11,6 @@ let initialState = {
     isAuth: false,
     isFetching: false,
     signUpState: 'signUpForm'
-
-
 }
 
 
@@ -157,6 +155,27 @@ export const signUpThunkCreator = (email,login,password) =>{
     }
 }
 
+export const AuthThunkCreator = () => (dispatch)=>{
+    let getCookie = (name) =>{
+        let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    let getAuth = () =>{
+        authAPI.getAuthInfo().then(response => {
+            dispatch(setProfileData(response))
+        })
+    }
+
+    if (getCookie('email') && getCookie('password')){
+       return  authAPI.postLoginInfo(getCookie('email'), getCookie('password')).then(response => {
+            dispatch(setToken(response.token))
+            getAuth()
+        })
+
+    }
+}
 
 
 

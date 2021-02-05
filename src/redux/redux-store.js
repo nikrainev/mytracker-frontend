@@ -4,6 +4,7 @@ import audiencesReducer from "./audiences-reducer";
 import summaryReducer from "./summary-reducer";
 import profileReducer from './profile-reducer'
 import authReducer from "./auth-reducer";
+import appReducer from "./app-reducer";
 import thunk from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
@@ -13,6 +14,7 @@ let reducers = combineReducers({
     audiencePage: audiencesReducer,
     profilePage: profileReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer
 });
 

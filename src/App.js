@@ -11,34 +11,42 @@ import ProfileSettings from "./components/profile/profilesettings/profilesetting
 import LoginContainer from "./components/profile/login/loginContainer"
 import ProfileContainer from "./components/profile/profilePage/profileContainer";
 import SignUpContainer from "./components/profile/signup/signupContainer"
-const App = ()=> {
+import {InitializingApp} from "./redux/app-reducer";
+import {connect} from "react-redux";
+class App extends React.Component {
+    componentDidMount() {
+        this.props.InitializingApp()
+    }
 
-    return (
+    render (){
+        return <div className="app-wrapper">
+            <NavbarContainer />
+            <div className="row">
+                <Sidebar />
+                {/* <Redirect exact from='/' to='/summary'  /> */}
 
-                <div className="app-wrapper">
-                    <NavbarContainer />
-                    <div className="row">
-                        <Sidebar />
-                        {/* <Redirect exact from='/' to='/summary'  /> */}
-
-                        <Route path='/summary'  render={ () => <Summary  /> } />
-                        <Route path='/counters' render={() => <Counters />}/>
-                        <Route path='/audiences' render={() => <Audiences />} />
-                        <Route path='/profile' render={() => <ProfileContainer />} />
-                        <Route path='/profilesettings' render={() => <ProfileSettings />} />
-                        <Route exact path='/login'  render={()=> <LoginContainer />} />
-                        <Route path='/signup' render={()=> <SignUpContainer />} />
-
-
-                    </div>
-                </div>
-
-
-
-    )
+                <Route path='/summary'  render={ () => <Summary  /> } />
+                <Route path='/counters' render={() => <Counters />}/>
+                <Route path='/audiences' render={() => <Audiences />} />
+                <Route path='/profile' render={() => <ProfileContainer />} />
+                <Route path='/profilesettings' render={() => <ProfileSettings />} />
+                <Route exact path='/login'  render={()=> <LoginContainer />} />
+                <Route path='/signup' render={()=> <SignUpContainer />} />
 
 
+            </div>
+        </div>
+    }
 }
 
 
-export default App;
+let mapStateToProps = (state) =>{
+    return{
+
+    }
+}
+
+
+export default connect(mapStateToProps, {InitializingApp})(App)
+
+

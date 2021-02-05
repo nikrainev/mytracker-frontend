@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from "./navbar";
 import {connect} from "react-redux";
 import {setToken, setProfileData, deleteProfileData} from "../../redux/auth-reducer";
-import {authAPI} from '../../api/auth-api'
 
 class NavbarContainer extends React.Component {
 
@@ -17,26 +16,6 @@ class NavbarContainer extends React.Component {
         document.cookie = 'email='+this.props.emailInput+'; max-age=-1'
         document.cookie = 'password='+this.props.passwordInput+'; max-age=-1'
         this.props.deleteProfileData()
-
-    }
-
-
-
-    componentDidMount() {
-        let getAuth = () =>{
-                   authAPI.getAuthInfo().then(response => {
-                     this.props.setProfileData(response)
-                    })
-        }
-
-        if (this.getCookie('email') && this.getCookie('password')){
-            authAPI.postLoginInfo(this.getCookie('email'), this.getCookie('password')).then(response => {
-                        this.props.setToken(response.token)
-                        getAuth()
-                    })
-
-        }
-
 
     }
 

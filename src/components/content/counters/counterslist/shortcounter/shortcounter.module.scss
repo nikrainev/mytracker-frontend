@@ -3,9 +3,11 @@
 .short_counter{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #f7f7f7;
   margin-bottom: 8px;
-  padding: 10px;
+  padding: 0px 10px 0px 10px;
+  height: 47px;
   width: calc(100% - 20px);
   color: black;
   text-decoration: none;
