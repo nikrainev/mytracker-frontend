@@ -29,7 +29,7 @@ export class EditInput extends React.Component{
 
             if(prevState.isFetching === true){
                 this.setState({wasUpdated: true})
-                setInterval(()=>{this.setState({wasUpdated: false})}, 1000)
+                setTimeout(()=>{this.setState({wasUpdated: false})}, 1000)
             }
         }
     }
@@ -66,26 +66,42 @@ export class EditTextarea extends React.Component{
         wasUpdated: false
     }
 
-    formatText = (text) =>{
+    formatedText = (text) =>{
+
         let textarr = text.split('\n');
-        let hasHrefPosition = 0;
+
         const isUrl = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
-        for (let brPosition = 1; brPosition < textarr.length; brPosition = brPosition + 2){
-            textarr.splice(brPosition,0, <br />)
-            if(isUrl.test(textarr[hasHrefPosition])){
-                textarr[hasHrefPosition] = <a href='https://ya.ru'>{textarr[hasHrefPosition]}</a>
-            }
-            hasHrefPosition = hasHrefPosition + 2
+
+        for (let i = 0; i < textarr.length; i=i+2){
+            textarr.splice(i+1,0,<br />)
         }
 
+        for (let lineNumber = 0; lineNumber < textarr.length; lineNumber++){
+            if(typeof textarr[lineNumber] === 'string'){
+                let line = textarr[lineNumber].split(' ')
+                for (let wordNumber = 0; wordNumber < line.length; wordNumber++){
+                    if(line[wordNumber] == '') {line[wordNumber] = <span>&nbsp;</span>}
+
+                    if(isUrl.test(line[wordNumber])){
+                        line[wordNumber] = <a target="blank" href={'https://'+line[wordNumber]}>{line[wordNumber]}</a>
+                    }
+                }
+                textarr[lineNumber] = line
+            }
+
+        }
         return(
                 <p>{textarr}</p>
         )
     }
 
+lj
 
+    changeCondition = (inputState,e) =>{
+        if(e){
+            console.log(e.target)
+        }
 
-    changeCondition = (inputState) =>{
         this.setState({inputEditMode: inputState})
         if(!inputState && this.state.inputText !== this.props.inputText){
             this.setState({isFetching: true})
@@ -105,11 +121,11 @@ export class EditTextarea extends React.Component{
 
         if(prevState.isFetching === true && prevProps !== this.props){
             this.setState({wasUpdated: true})
-            setInterval(()=>{this.setState({wasUpdated: false})}, 1000)
+            setTimeout(()=>{this.setState({wasUpdated: false})}, 1000)
         }
     }
     render (){
-        return <div  onClick={() =>{this.changeCondition(true)}}  className={s.withedit_block}>
+        return <div  onClick={(e) =>{this.changeCondition(true, e)}}  className={s.withedit_block}>
             {this.state.isFetching === true ? <img className={s.loading_bar} src={loadingImg} alt=""/> : ''}
             {this.state.wasUpdated === true ? <img className={s.done_check} src={doneImg} alt=""/> : ''}
             {this.state.inputEditMode
@@ -123,7 +139,8 @@ export class EditTextarea extends React.Component{
                                   onBlur={() => {this.changeCondition(false)}} autoFocus={true}> </textarea>
                     </div>
                     :
-                    <div className={s.withedit_current}>{this.props.inputText === '' ? this.props.placeholder : this.formatText(this.props.inputText)}</div>
+                    <div className={s.withedit_current}>{this.props.inputText === '' ? this.props.placeholder : this.formatedText(this.props.inputText)}</div>
+
             }
 
 
