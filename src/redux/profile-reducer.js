@@ -4,7 +4,13 @@ let initialState = {
     name: '',
     soName: '',
     company: '',
-    description: ''
+    description: '',
+    pageSize: 5,
+    proposals: [],
+    profilesList: [],
+    totalProfiles: undefined
+
+
 }
 
 
@@ -14,6 +20,17 @@ const profileReducer = (state = initialState, action) =>{
         case 'SET-PROFILE-INFO':
             return {
                 ...state, ...action.data
+            }
+        case 'SET-PROFILES-LIST':
+            return {
+                ...state,
+                profilesList: action.data
+            }
+        case 'SET-TOTAL-PROFILES':
+            return {
+                ...state,
+                totalProfiles: action.count
+
             }
         default:
                 return state
@@ -34,6 +51,15 @@ export const setProfileInfo = (data) =>({
     data: data
 })
 
+export const setProfilesList = (data) =>({
+    type: 'SET-PROFILES-LIST',
+    data: data
+})
+
+export const setTotalProfiles = (count) =>({
+    type: 'SET-TOTAL-PROFILES',
+    count: count
+})
 
 
 export const getProfileInfo = () =>{
@@ -43,6 +69,13 @@ export const getProfileInfo = () =>{
                     dispatch(setProfileInfo(response))
                 })
     }
+}
+
+export const getProfilesList = (page,limit) => (dispatch) =>{
+    profileAPI.getProfilesList(page,limit).then(response =>{
+        dispatch(setProfilesList(response.items))
+        dispatch(setTotalProfiles(response.totalPages))
+    })
 }
 
 export const putProfileInfo = (data) =>{

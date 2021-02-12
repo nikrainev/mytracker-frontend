@@ -19,7 +19,7 @@ let AccountNotExist = (props) =>{
 
 
 
- const WithAuthRedirect = (Component) =>{
+const WithAuthRedirect = (Component) =>{
 
 
     let RedirectComponent = (props) =>{
