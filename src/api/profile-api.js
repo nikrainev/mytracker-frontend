@@ -28,3 +28,21 @@ export const profileAPI = {
                 })
     }
 }
+
+
+export const profileActionsAPI = {
+    postProposal(userId){
+        console.log(userId)
+        return axiosInstance.post('/proposal/'+userId, null, {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+                .then(response =>{
+                    return response.data;
+                })
+    },
+
+    deleteProposal(userId){
+        return axiosInstance.delete('/proposal/'+userId,  {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+                .then(response =>{
+                    return response.data;
+                })
+    }
+}

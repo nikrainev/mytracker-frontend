@@ -4,9 +4,7 @@ import {reset} from 'redux-form';
 let initialState = {
         counterslistData: [],
         pageSize: 5,
-        totalCounters: '',
-        currentPage: 1,
-        isFetching: ''
+        totalCounters: ''
 }
 
 const countersReducer = (state = initialState,action) =>{
@@ -29,22 +27,10 @@ const countersReducer = (state = initialState,action) =>{
             }
         }
 
-        case "RELOAD-COUNTER-INPUT":{
-            return {
-                ...state,
-                [action.inputName] : action.value
-            }
-        }
         case "SET-COUNTERS":{
             return {
                 ...state,
                 counterslistData: action.countersData.items
-            }
-        }
-        case "SET-CURRENT-PAGE":{
-            return {
-                ...state,
-                currentPage: action.currentPage
             }
         }
         case 'SET-TOTAL-COUNTERS':{
@@ -53,15 +39,6 @@ const countersReducer = (state = initialState,action) =>{
                 totalCounters: action.totalCounters.totalPages
             }
         }
-        case 'TOGGLE-IS-FETCHING':{
-
-            return {
-                ...state,
-                isFetching: action.isFetching
-            }
-
-        }
-
 
         default:
             return state
@@ -80,30 +57,19 @@ export const setCounters = (countersData) =>({
     countersData: countersData
 
 })
-export const setCurrentPage = (currentPage) =>({
-    type: 'SET-CURRENT-PAGE',
-    currentPage: currentPage
-
-})
 export const setTotalCounters = (totalCounters) =>({
     type: 'SET-TOTAL-COUNTERS',
     totalCounters: totalCounters
 })
 
-export const toggleIsFetching = (isFetching) =>({
-    type: 'TOGGLE-IS-FETCHING',
-    isFetching: isFetching
-})
 
 
 
-export const getCounters = () =>{
+export const getCounters = (page) =>{
     return (dispatch) =>{
-        dispatch(toggleIsFetching(true))
-        countersAPI.getCounters(store.getState().countersPage.currentPage, store.getState().countersPage.pageSize).then(response =>{
+        countersAPI.getCounters(page, store.getState().countersPage.pageSize).then(response =>{
             dispatch(setCounters(response))
             dispatch(setTotalCounters(response))
-            dispatch(toggleIsFetching(false))
         })
     }
 }
@@ -111,12 +77,9 @@ export const getCounters = () =>{
 export const postCounter = (data) => {
     return (dispatch) => {
         countersAPI.postCounter(data).then(response =>{
-            dispatch(setCurrentPage(1))
-            dispatch(toggleIsFetching(true))
             countersAPI.getCounters(store.getState().countersPage.currentPage, store.getState().countersPage.pageSize).then(response =>{
                 dispatch(setCounters(response))
                 dispatch(setTotalCounters(response))
-                dispatch(toggleIsFetching(false))
                 dispatch(reset('addcounter-form'))
             })
         })

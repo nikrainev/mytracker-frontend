@@ -1,24 +1,17 @@
 import React from 'react';
 import s from './counterslist.module.scss';
 import Shortcounter from './shortcounter/shortcounter.jsx';
+import {Pagination} from "../../../common/pagination";
 
-const LoadingCounters = ()=>{
-    return(
-            <div className="list">
-                <div className={s.loading_counter}></div>
-                <div className={s.loading_counter}></div>
-                <div className={s.loading_counter}></div>
-                <div className={s.loading_counter}></div>
-                <div className={s.loading_counter}></div>
-            </div>
-            )
+const LoadingCounter = ()=>{
+    return <div className={s.loading_counter}> </div>
 
 }
 
 
 
 const Counterslist = (props) => {
-
+       console.log(props.countersListData)
        let counters =  props.countersListData
        let countersElement = []
 
@@ -29,18 +22,10 @@ const Counterslist = (props) => {
                                                                    allusers={counter.allusers}
                                                                    status={counter.status}/> )
 
-
-
-       let pagesCount = Math.ceil(props.totalCounters / props.pageSize)
-       let pages =[]
-       for(let i=1; i<=pagesCount; i++){
-           pages.push(i)
-       }
-       let pagesButtonsElements = pages.map(page => <span className={props.currentPage === page && "current-page"}
-                                                          onClick={() => {props.changePage(page)}}>{page}</span>)
-
-
-
+       let firstLoader = []
+            for(let i=0; i < props.pageSize; i++){
+            firstLoader.push(<LoadingCounter />)
+        }
        return <div className="container">
                    <div className={s.table_head}>
                        <div className={s.name}>
@@ -61,11 +46,14 @@ const Counterslist = (props) => {
                    </div>
                    <div className={s.list}>
 
-                       {props.isFetching ? <LoadingCounters /> : countersElement}
+                       {props.countersListData.length == 0  ? firstLoader  : <Pagination pages={countersElement} pageSize={props.pageSize} totalPages={props.totalCounters}
+                           pageChanger={props.changePage} loader={<LoadingCounter />}/>
+
+                       }
+
+
                    </div>
-                   <div className="pages-buttons">
-                       {pagesButtonsElements}
-                   </div>
+
                </div>
 
 

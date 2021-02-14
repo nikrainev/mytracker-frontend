@@ -9,13 +9,21 @@ const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
 }
 const UsersList = (props) => {
+    let postProposal = (id) =>{
+       props.postProposal(id)
 
-    let buttonSelector = (status) =>{
+    }
+
+    let deleteProposal = (id) =>{
+       props.deleteProposal(id)
+    }
+
+    let buttonSelector = (status,id) =>{
         switch (status){
             case 'It is you': return
-            case 'proposal sent': return <p>Заявка отправлена</p>
+            case 'proposal sent': return <p onClick={()=>{deleteProposal(id)}}>Заявка отправлена</p>
             case 'Your friend': return <p>Ваш друг</p>
-            case 'plain user':return <button className={s2.add_button}>Добавить в друзья</button>
+            case 'plain user':return <button onClick={()=>{postProposal(id)}} className={s2.add_button}>Добавить в друзья</button>
             default: return
         }
 
@@ -28,7 +36,7 @@ const UsersList = (props) => {
                 </div>
                 <div className={s.company}>{profile.company}</div>
                 <div className={s.description}><p className={s.description_p}>{offsetText(profile.description)}</p></div>
-                {buttonSelector(profile.friendStatus)}
+                {buttonSelector(profile.friendStatus, profile._id)}
             </div>
     )
 

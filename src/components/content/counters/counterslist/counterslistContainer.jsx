@@ -1,7 +1,7 @@
 import React from "react";
 import Counterslist from "./counterslist";
 import {connect} from "react-redux";
-import {setCounters, setCurrentPage, setTotalCounters,toggleIsFetching, getCounters} from "../../../../redux/counters-reducer";
+import {setCounters, setTotalCounters, getCounters} from "../../../../redux/counters-reducer";
 import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {compose} from   "redux"
 class CounterslistContainer extends React.Component{
@@ -10,8 +10,7 @@ class CounterslistContainer extends React.Component{
     }
 
     changePage = (page) =>{
-        this.props.setCurrentPage(page)
-        this.props.getCounters()
+        this.props.getCounters(page)
     }
     render(){
       return <Counterslist
@@ -38,6 +37,6 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default CounterslistContainer = compose(connect(mapStateToProps, {setCounters, setCurrentPage,setTotalCounters,
-    toggleIsFetching, getCounters}), WithAuthRedirect)(CounterslistContainer)
+export default CounterslistContainer = compose(connect(mapStateToProps, {setCounters, setTotalCounters,
+    getCounters}), WithAuthRedirect)(CounterslistContainer)
 

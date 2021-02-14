@@ -14,11 +14,11 @@
 }
 
 .loading_profile{
-  height: 47px;
+  height: 63px;
   background: #f7f7f7;
   width: 100%;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   position: relative;
   &:after{
     content: '';
@@ -33,4 +33,9 @@
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
   }
+}
+
+@keyframes loading {
+  from{left: -20%}
+  to{left:100%}
 }

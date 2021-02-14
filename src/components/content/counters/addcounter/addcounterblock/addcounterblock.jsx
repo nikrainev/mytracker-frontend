@@ -1,12 +1,10 @@
 import React from 'react';
 import s from '../addcounter.module.scss';
 import {Field, reduxForm} from "redux-form";
-import handleSubmit from "redux-form/lib/handleSubmit";
 import {Input} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 
 const AddCounterForm = (props) =>{
-    console.log(props)
     return (
             <form onSubmit={props.handleSubmit}>
                 {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
