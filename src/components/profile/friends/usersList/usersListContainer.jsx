@@ -4,8 +4,52 @@ import {connect} from "react-redux";
 import {getProfilesList, postProposal, deleteProposal} from "../../../../redux/profile-reducer";
 import {selectProfilesList, getTotalProfiles, getPageSize} from "../../../../redux/selectors/profileselectors"
 class UsersListContainer extends React.Component{
+
+    state ={
+        listButtons: [],
+        profilesList: [],
+        currentPage: 1
+    }
+
     componentDidMount() {
         this.props.getProfilesList(1,5)
+
+    }
+
+    getCurrentPage = (currentPage) =>{
+        this.setState({currentPage: currentPage})
+    }
+
+    changeButtonState = (buttonId) =>{
+        let copyListButtons = {...this.state.listButtons}
+        copyListButtons[buttonId].isFetching = true
+        this.setState({listButtons: copyListButtons})
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props !== prevProps){
+            this.setState({profilesList: this.props.profilesList})
+            for(let i = 0; i < this.state.profilesList.length; i++){
+
+                if(this.state.profilesList[i] && this.props.profilesList[i]){
+
+                    if( this.state.profilesList[i].friendStatus !== this.props.profilesList[i].friendStatus){
+                        let copyListButtons = {...this.state.listButtons}
+                        copyListButtons[i].isFetching = false
+                        this.setState({listButtons: copyListButtons})
+
+                    }
+                }
+
+            }
+            if(this.state.listButtons.length == 0){
+                let i = 0
+                let listButtons = this.props.profilesList.map((profile)=> ({buttonId: i++, isFetching: false}))
+                this.setState({listButtons: listButtons})
+            }
+
+        }
+
     }
 
     getProfilesList = (page) =>{
@@ -17,9 +61,13 @@ class UsersListContainer extends React.Component{
                 <UsersList profilesList={this.props.profilesList}
                            totalProfiles={this.props.totalProfiles}
                            pageSize={this.props.pageSize}
+                           currentPage={this.state.currentPage}
                            getProfilesList={this.getProfilesList}
                            postProposal={this.props.postProposal}
                            deleteProposal={this.props.deleteProposal}
+                           changeButtonState={this.changeButtonState}
+                           buttonsStates={this.state.listButtons}
+                           getCurrentPage={this.getCurrentPage}
                 />
         )
     }

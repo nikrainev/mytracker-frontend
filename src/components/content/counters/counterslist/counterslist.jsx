@@ -46,12 +46,8 @@ const Counterslist = (props) => {
                    </div>
                    <div className={s.list}>
 
-                       {props.countersListData.length == 0  ? firstLoader  : <Pagination pages={countersElement} pageSize={props.pageSize} totalPages={props.totalCounters}
+                     <Pagination pages={countersElement} pageSize={props.pageSize} totalPages={props.totalCounters}
                            pageChanger={props.changePage} loader={<LoadingCounter />}/>
-
-                       }
-
-
                    </div>
 
                </div>

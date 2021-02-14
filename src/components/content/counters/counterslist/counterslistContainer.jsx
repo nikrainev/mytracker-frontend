@@ -6,7 +6,7 @@ import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {compose} from   "redux"
 class CounterslistContainer extends React.Component{
     componentDidMount() {
-       this.props.getCounters()
+           this.props.getCounters(1)
     }
 
     changePage = (page) =>{
