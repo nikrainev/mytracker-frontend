@@ -17,19 +17,38 @@ const PaginationComponent = (props) =>{
 export class Pagination extends React.Component{
     state = {
         isFetching: false,
-        currentPage: 1
+        currentPage: 1,
+        pages: this.props.pages
     }
     changePage = (page) =>{
         this.setState({currentPage:page})
-        this.props.getCurrentPage(page)
+
         this.props.pageChanger(page)
         this.setState({isFetching:true})
+        if(this.props.getCurrentPage){
+            this.props.getCurrentPage(page)
+        }
+
+
 
     }
     loaders = []
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props){
-            this.setState({isFetching: false})
+            this.setState({pages: this.props.pages})
+            if(this.props.getCurrentPage === undefined){
+                this.setState({isFetching: false})
+            }
+        else{
+
+                if(this.state.pages !== prevState.pages){
+
+                    this.setState({isFetching: false})
+                }
+
+            }
+
+
         }
     }
 

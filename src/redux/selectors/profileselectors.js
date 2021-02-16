@@ -9,3 +9,11 @@ export const getTotalProfiles = (state) =>{
 export const getPageSize = (state) =>{
     return state.profilePage.pageSize
 }
+
+export const getProposalsList = (state) =>{
+    return state.profilePage.proposals
+}
+
+export const getFriends = (state) =>{
+    return state.profilePage.friendsList
+}
