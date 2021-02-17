@@ -12,7 +12,7 @@ class UsersListContainer extends React.Component{
     }
 
     componentDidMount() {
-        this.props.getProfilesList(1,5)
+        this.props.getProfilesList(1, this.props.pageSize)
 
     }
 

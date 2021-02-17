@@ -5,11 +5,12 @@ let initialState = {
     soName: '',
     company: '',
     description: '',
-    pageSize: 5,
+    pageSize: 2,
     totalProfiles: undefined,
     proposals: [],
     profilesList: [],
-    friendsList: []
+    friendsList: [],
+    totalFriends: undefined
 
 
 }
@@ -41,7 +42,14 @@ const profileReducer = (state = initialState, action) =>{
         case 'SET-FRIENDS-LIST':
             return {
                 ...state,
-                friendsList: action.friends
+                friendsList: action.friends,
+                totalFriends: action.totalDocs
+            }
+        case 'ADD-FRIENDS-LIST':
+            return {
+                ...state,
+                friendsList: [...state.friendsList, ...action.friends],
+                totalFriends: action.totalDocs
             }
         default:
                 return state
@@ -77,9 +85,15 @@ export const setProposals = (proposals) => ({
     proposals: proposals
 })
 
-export const setFriendsList = (friends) =>({
+export const setFriendsList = (friends, totalDocs) =>({
     type: 'SET-FRIENDS-LIST',
-    friends: friends
+    friends: friends,
+    totalDocs: totalDocs
+})
+export const addToFriendsList = (friends, totalDocs) =>({
+    type: 'ADD-FRIENDS-LIST',
+    friends: friends,
+    totalDocs: totalDocs
 })
 
 
@@ -129,7 +143,8 @@ export const deleteProposal = (userId, currentPage) => (dispatch) =>{
 export const acceptProposal = (userId) => (dispatch) =>{
     profileActionsAPI.acceptProposal(userId).then(response =>{
         if(response.message === "Friend added"){
-            dispatch(getProposals)
+            dispatch(getProposals())
+            dispatch(getFriendsList())
         }
     })
 }
@@ -137,7 +152,7 @@ export const acceptProposal = (userId) => (dispatch) =>{
 export const denyProposal = (userId) => (dispatch) => {
     profileActionsAPI.denyProposal(userId).then(response => {
         if (response.message === "Proposal denied") {
-            dispatch(getProposals)
+            dispatch(getProposals())
         }
     })
 }
@@ -151,16 +166,25 @@ export const putProfileInfo = (data) =>{
     }
 }
 
-export const getFriendsList = () => (dispatch) =>{
-    profileAPI.getFriendsList().then(response =>{
-      dispatch(setFriendsList(response))
+export const getFriendsList = (page,limit) => (dispatch) =>{
+    profileAPI.getFriendsList(page,limit).then(response =>{
+      dispatch(setFriendsList(response.friendsPage, response.totalDocs))
+    })
+}
+
+export const addFriendsList = (page, limit) => (dispatch) =>{
+
+    profileAPI.getFriendsList(page, limit).then(response=>{
+        console.log(response)
+        dispatch(addToFriendsList(response.friendsPage, response.totalDocs))
     })
 }
 
 export const deleteFriend = (userId) => (dispatch) =>{
     profileActionsAPI.deleteFriend(userId).then(response=>{
         if(response.message === "friend deleted"){
-            dispatch(getFriendsList)
+            dispatch(getFriendsList())
+
         }
 
     })

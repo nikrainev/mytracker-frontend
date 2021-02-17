@@ -1,20 +1,24 @@
 import React from 'react';
 import YourFriends from "./yourFriends";
-import {getFriends} from "../../../../redux/selectors/profileselectors";
-import {getFriendsList, deleteFriend} from "../../../../redux/profile-reducer";
+import {getFriends, getPageSize, getTotalFriends} from "../../../../redux/selectors/profileselectors";
+import {getFriendsList, deleteFriend, addFriendsList} from "../../../../redux/profile-reducer";
+
 import {connect} from "react-redux";
 
 class YourFriendsContainer extends React.Component{
+    
     componentDidMount() {
-        this.props.getFriendsList()
+        this.props.getFriendsList(1, this.props.pageSize)
     }
 
     render(){
         return  (
                 <YourFriends
                         friends={this.props.friends}
-                        getFriends={this.props.getFriendsList}
+                        pageSize={this.props.pageSize}
+                        totalFriends={this.props.totalFriends}
                         deleteFriend={this.props.deleteFriend}
+                        addToFriendsList={this.props.addFriendsList}
                 />
         )
     }
@@ -22,7 +26,9 @@ class YourFriendsContainer extends React.Component{
 
 let mapStateToProps = (state)=>{
     return{
-        friends: getFriends(state)
+        friends: getFriends(state),
+        pageSize: getPageSize(state),
+        totalFriends: getTotalFriends(state)
     }
 }
-export default connect(mapStateToProps,{getFriendsList, deleteFriend})(YourFriendsContainer);
+export default connect(mapStateToProps,{getFriendsList, deleteFriend, addFriendsList})(YourFriendsContainer);

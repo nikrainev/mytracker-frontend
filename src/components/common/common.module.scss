@@ -52,3 +52,33 @@
     text-align: center;
     color: red;
 }
+
+.load_more{
+  width: 200px;
+  margin: auto;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: block;
+  background: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.all_loaded{
+  width: 250px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: block;
+  background: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 15px auto auto;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #8a9ba8;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #8a9ba8;
+}

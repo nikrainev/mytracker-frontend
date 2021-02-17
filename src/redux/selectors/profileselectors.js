@@ -17,3 +17,7 @@ export const getProposalsList = (state) =>{
 export const getFriends = (state) =>{
     return state.profilePage.friendsList
 }
+
+export const getTotalFriends = (state) =>{
+    return state.profilePage.totalFriends
+}

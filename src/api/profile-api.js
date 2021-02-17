@@ -40,10 +40,10 @@ export const profileAPI = {
                     return response.data;
                 })
     },
-    getFriendsList(){
-        return axiosInstance.get('/friends/', {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+    getFriendsList(page, limit){
+        return axiosInstance.get('/friends/', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
                 .then(response =>{
-                    return response.data.friends;
+                    return response.data;
                 })
     }
 }

@@ -9,7 +9,7 @@ const NewFriends = (props) => {
             props.denyProposal(userId)
         }
         let proposalsList = []
-        console.log(typeof props.proposals)
+
         if(props.proposals !== "no proposals"){
              proposalsList = props.proposals.map((proposal)=> <div className={s.line}>
                 <div className={s.names_row}>
@@ -17,8 +17,8 @@ const NewFriends = (props) => {
                     <p className="soname">{proposal.soName}</p>
                 </div>
                 <div className={s.buttons_row}>
-                    <button className={s.deny} onClick={() =>{acceptProposal(proposal.userId)}}>Отказать</button>
-                    <button className={s.accept} onClick={()=>{denyProposal(proposal.userId)}}>Принять</button>
+                    <button className={s.deny} onClick={() =>{denyProposal(proposal.userId)}}>Отказать</button>
+                    <button className={s.accept} onClick={()=>{acceptProposal(proposal.userId)}}>Принять</button>
                 </div>
             </div>)
         }else{
