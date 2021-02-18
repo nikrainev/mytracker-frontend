@@ -1,20 +1,31 @@
 import React from 'react';
 import s from './friends.module.scss';
 import NewFriendsContainer from "./newFriends/newFriendsContainer";
-import YourFriendsContainer from "./yourFriends/yourFriendsContainer";
 import UsersListContainer from "./usersList/usersListContainer";
+import {connect} from "react-redux";
+import {FriendsPageLoader} from "../../common/loadingSchemes";
 const FriendsPage = (props) => {
     return  (
             <div className="content">
-                <div className="container">
-                    <p>Добавляйте другие аккаунты в друзья, для совместной работы.</p>
-                    <NewFriendsContainer />
-                    <YourFriendsContainer />
-                    <UsersListContainer />
-                </div>
+                {props.isInitialized ?
+
+                        <div className="container">
+                             <p>Добавляйте другие аккаунты в друзья, для совместной работы.</p>
+                            <NewFriendsContainer />
+                            <UsersListContainer />
+                         </div>
+
+                    : <FriendsPageLoader />}
             </div>
 
 
-    );
+
+                    );
 }
-export default FriendsPage;
+
+const mapStateToProps = (state) => {
+    return {
+        isInitialized: state.app.isInitialized
+    }
+}
+export default connect(mapStateToProps)(FriendsPage)

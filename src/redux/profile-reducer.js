@@ -5,12 +5,13 @@ let initialState = {
     soName: '',
     company: '',
     description: '',
-    pageSize: 2,
+    pageSize: 3,
     totalProfiles: undefined,
     proposals: [],
     profilesList: [],
     friendsList: [],
-    totalFriends: undefined
+    totalFriends: undefined,
+    deletedFriend: undefined
 
 
 }
@@ -45,11 +46,10 @@ const profileReducer = (state = initialState, action) =>{
                 friendsList: action.friends,
                 totalFriends: action.totalDocs
             }
-        case 'ADD-FRIENDS-LIST':
+        case 'SET-DELETED-FRIEND':
             return {
                 ...state,
-                friendsList: [...state.friendsList, ...action.friends],
-                totalFriends: action.totalDocs
+                deletedFriend: [action.friendId]
             }
         default:
                 return state
@@ -90,11 +90,12 @@ export const setFriendsList = (friends, totalDocs) =>({
     friends: friends,
     totalDocs: totalDocs
 })
-export const addToFriendsList = (friends, totalDocs) =>({
-    type: 'ADD-FRIENDS-LIST',
-    friends: friends,
-    totalDocs: totalDocs
+
+export const setDeletedFriend = (friendId)=>({
+    type: 'SET-DELETED-FRIEND',
+    friendId: friendId
 })
+
 
 
 
@@ -144,7 +145,6 @@ export const acceptProposal = (userId) => (dispatch) =>{
     profileActionsAPI.acceptProposal(userId).then(response =>{
         if(response.message === "Friend added"){
             dispatch(getProposals())
-            dispatch(getFriendsList())
         }
     })
 }
@@ -175,16 +175,15 @@ export const getFriendsList = (page,limit) => (dispatch) =>{
 export const addFriendsList = (page, limit) => (dispatch) =>{
 
     profileAPI.getFriendsList(page, limit).then(response=>{
-        console.log(response)
-        dispatch(addToFriendsList(response.friendsPage, response.totalDocs))
+
+        dispatch(setFriendsList(response.friendsPage, response.totalDocs))
     })
 }
 
-export const deleteFriend = (userId) => (dispatch) =>{
+export const deleteFriend = (userId, buttonId) => (dispatch) =>{
     profileActionsAPI.deleteFriend(userId).then(response=>{
         if(response.message === "friend deleted"){
-            dispatch(getFriendsList())
-
+          dispatch(setDeletedFriend(buttonId))
         }
 
     })

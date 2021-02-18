@@ -21,3 +21,7 @@ export const getFriends = (state) =>{
 export const getTotalFriends = (state) =>{
     return state.profilePage.totalFriends
 }
+
+export const getDeletedFriend = (state) =>{
+    return state.profilePage.deletedFriend
+}

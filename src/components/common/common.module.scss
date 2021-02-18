@@ -82,3 +82,78 @@
   text-transform: uppercase;
   color: #8a9ba8;
 }
+
+.loading_scheme{
+  display: block;
+  width: 100%;
+  background: white;
+}
+
+
+.loading_scheme{
+  .elem{
+    background: #dcdcdc;
+    animation: loadingScheme 1s infinite ;
+  }
+  @keyframes loadingScheme {
+    0%{background: #efefef}
+    50%{background: #dcdcdc}
+    100%{background: #efefef}
+  }
+  .add_button{
+    display: block;
+    width: 204px;
+    height: 42px;
+    margin: 30px auto auto;
+  }
+  .counters_table_head{
+    height: 35px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 40px auto 10px;
+  }
+  .list_ul{
+    height: 47px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 8px auto auto;
+  }
+  .page_buttons{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 30px;
+    margin-top: 20px;
+  }
+  .page_button{
+    display: block;
+    width: 47px;
+    height: 47px;
+    margin-right: 6px;
+  }
+
+  .text_line{
+    height: 40px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 40px auto 10px;
+  }
+  .big_ul{
+    height: 63px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 10px auto auto;
+  }
+  .list{
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .h2{
+    height: 63px;
+    margin-bottom: 10px;
+    display: block;
+    width: 50%;
+    margin-left: 30px;
+  }
+}

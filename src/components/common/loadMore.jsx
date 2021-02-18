@@ -3,8 +3,7 @@ import s from "./common.module.scss"
 const LoadMoreComponent = (props) =>{
     let pagesCount = Math.ceil(props.totalPages / props.pageSize)
     const buttonSelector = () =>{
-        console.log(props.pages)
-        if(props.pages === 'empty' || props.inizialized === false){
+        if(props.pages === 'empty' || props.inizialized === false || props.pages.length < props.pageSize){
             return (<></>)
         }
         else if(pagesCount > props.currentPage){
@@ -44,10 +43,12 @@ export class LoadMore extends React.Component{
     loaders = []
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props){
+
             this.setState({pages: this.props.pages})
             this.setState({isFetching: false})
             this.setState({initialized: true})
         }
+
     }
 
     componentDidMount() {
@@ -55,12 +56,33 @@ export class LoadMore extends React.Component{
         for(let i=0; i < this.props.pageSize; i++){
             this.loaders.push(this.props.loader)
         }
-        this.setState({isFetching: true})
+        if(this.props.pages.length === 0){
+            this.setState({isFetching: true})
+        }
     }
+    pagesSelector = () =>{
+        if(this.state.isFetching && this.state.pages !== 'empty'){
+            return [this.loaders,this.props.pages]
+        }
+        else{
+            if(this.state.pages === 'empty'){
+                return this.props.emptyBlock
+            }
+            else{
+                return this.props.pages
+            }
+
+        }
+
+    }
+
+
+
+
 
     render (){
         return (<>
-            {this.state.isFetching && this.state.pages !== 'empty' ? [this.loaders,this.props.pages] : this.props.pages}
+            {this.pagesSelector()}
 
             <LoadMoreComponent   currentPage={this.state.currentPage}
                                  pageSize={this.props.pageSize}

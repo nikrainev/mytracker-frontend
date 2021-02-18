@@ -1,6 +1,6 @@
 import React from 'react';
-import s from '../friends.module.scss';
-import s2 from './usersList.module.scss'
+import s2 from '../friends.module.scss';
+import s from './usersList.module.scss'
 import {offsetText} from "../../../../utils/textTransformation";
 import {Pagination} from "../../../common/pagination";
 
@@ -27,7 +27,7 @@ const UsersList = (props) => {
                 case 'It is you': return
                 case 'proposal sent': return <p onClick={()=>{deleteProposal(id, buttonId)}}>Заявка отправлена</p>
                 case 'Your friend': return <p>Ваш друг</p>
-                case 'plain user':return <button onClick={()=>{postProposal(id, buttonId)}} className={s2.add_button}>Добавить в друзья</button>
+                case 'plain user':return <button onClick={()=>{postProposal(id, buttonId)}} className={s.add_button}>Добавить в друзья</button>
                 default: return
             }
         }
@@ -39,13 +39,13 @@ const UsersList = (props) => {
     }
     let i = 0
     let profilesArr = props.profilesList.map((profile) =>
-            <div className={s.line}>
-                <div className={s.names_row}>
+            <div className={s2.line}>
+                <div className={s2.names_row}>
                    <p className="name">{profile.name}</p>
                    <p className="soname">{profile.soName}</p>
                 </div>
-                <div className={s.company}>{profile.company}</div>
-                <div className={s.description}><p className={s.description_p}>{offsetText(profile.description)}</p></div>
+                <div className={s2.company}>{profile.company}</div>
+                <div className={s2.description}><p className={s2.description_p}>{offsetText(profile.description)}</p></div>
                 {buttonSelector(profile.friendStatus, profile._id, i++)}
             </div>
     )

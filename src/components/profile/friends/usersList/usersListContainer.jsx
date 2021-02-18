@@ -42,9 +42,8 @@ class UsersListContainer extends React.Component{
                 }
 
             }
-            if(this.state.listButtons.length == 0){
-                let i = 0
-                let listButtons = this.props.profilesList.map((profile)=> ({buttonId: i++, isFetching: false}))
+            if(this.state.listButtons.length === 0){
+                let listButtons = this.props.profilesList.map((profile)=> ({isFetching: false}))
                 this.setState({listButtons: listButtons})
             }
 
