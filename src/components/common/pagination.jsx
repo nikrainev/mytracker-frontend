@@ -8,8 +8,16 @@ const PaginationComponent = (props) =>{
     }
     let pagesButtonsElements = pages.map(page => <span className={props.currentPage === page && "current-page"}
                                                        onClick={() => {props.changePage(page)}}>{page}</span>)
+    let buttonsSelector = () =>{
+        if (props.pages === 'empty' || pagesCount === 1){
+            return (<></>)
+        }
+        else{
+            return   <div className="pages-buttons">{pagesButtonsElements}</div>
+        }
+    }
     return(
-            <div className="pages-buttons">{pagesButtonsElements}</div>
+            buttonsSelector()
     )
 }
 
@@ -62,14 +70,31 @@ export class Pagination extends React.Component{
 
     }
 
+    pagesSelector = () =>{
+        if(this.state.isFetching){
+            return this.loaders
+        }
+        else{
+            if(this.state.pages === 'empty'){
+                return this.props.emptyBlock
+            }
+            else{
+                return this.props.pages
+            }
+
+        }
+
+    }
+
     render (){
         return (<>
-            {this.state.isFetching ? this.loaders : this.props.pages}
+            {this.pagesSelector()}
 
                 <PaginationComponent currentPage={this.state.currentPage}
                                      pageSize={this.props.pageSize}
                                      totalPages={this.props.totalPages}
                                      changePage={this.changePage}
+                                     pages={this.state.pages}
                 />
                </> )
 

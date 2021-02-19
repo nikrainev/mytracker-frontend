@@ -3,6 +3,7 @@ import s from './shortcounter.module.scss';
 import {NavLink} from "react-router-dom";
 
 const Shortcounter = (props) =>{
+    console.log(props)
     return(
                     <NavLink to={'/counters/'+props.id} className={s.short_counter}>
                         <div className={s.name}>
@@ -19,7 +20,8 @@ const Shortcounter = (props) =>{
                         </div>
 
                         <div className={s.status+" "+ s[props.status]}>
-                            <p><span className={s.work}>Активен</span><span className={s.notwork}>Не активен</span></p>
+                            <p><span className={s.work}>Активен</span><span className={s.notwork}>Не активен</span>
+                               <span className={s.checking}>Проверяется</span></p>
                         </div>
                     </NavLink>
             )

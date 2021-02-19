@@ -59,6 +59,21 @@
     }
   }
 
+  span.checking{
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: rgb(230,4,31);
+      background: radial-gradient(circle, rgba(230,4,31,1) 0%, rgba(145,66,66,1) 100%);
+      position: absolute;
+      left: -15px;
+      top: 8px;
+      border-radius: 50%;
+    }
+  }
 
 
   &.work{
@@ -70,6 +85,9 @@
     span.notwork {
       display: none;
     }
+    span.checking {
+      display: none;
+    }
   }
 
   &.notwork{
@@ -77,6 +95,21 @@
       display: none;
     }
     span.notwork {
+      display: block;
+    }
+    span.checking {
+      display: none;
+    }
+  }
+
+  &.checking{
+    span.work{
+      display: none;
+    }
+    span.notwork {
+      display: none;
+    }
+    span.checking {
       display: block;
     }
   }

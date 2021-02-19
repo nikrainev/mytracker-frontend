@@ -1,7 +1,7 @@
 import React from 'react';
 import UsersList from "./usersList";
 import {connect} from "react-redux";
-import {getProfilesList, postProposal, deleteProposal} from "../../../../redux/profile-reducer";
+import {getProfilesList, postProposal, deleteProposal, setProposals} from "../../../../redux/profile-reducer";
 import {selectProfilesList, getTotalProfiles, getPageSize} from "../../../../redux/selectors/profileselectors"
 class UsersListContainer extends React.Component{
 
@@ -51,6 +51,10 @@ class UsersListContainer extends React.Component{
 
     }
 
+    componentWillUnmount() {
+        this.props.setProposals([])
+    }
+
     getProfilesList = (page) =>{
         this.props.getProfilesList(page,this.props.pageSize)
     }
@@ -81,4 +85,4 @@ let mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps, {getProfilesList, postProposal, deleteProposal})(UsersListContainer);
+export default connect(mapStateToProps, {getProfilesList, postProposal, deleteProposal, setProposals})(UsersListContainer);

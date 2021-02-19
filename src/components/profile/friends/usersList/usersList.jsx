@@ -51,7 +51,7 @@ const UsersList = (props) => {
     )
 
     return  (
-            <div className="usersList">
+            <div className={s.usersList}>
                 <h2>Список пользователей:</h2>
                  <Pagination pages={profilesArr} pageSize={props.pageSize} totalPages={props.totalProfiles}
                              pageChanger={props.getProfilesList} loader={<LoadingProfile />} getCurrentPage={props.getCurrentPage}/>

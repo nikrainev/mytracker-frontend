@@ -5,7 +5,7 @@ let initialState = {
     soName: '',
     company: '',
     description: '',
-    pageSize: 3,
+    pageSize: 5,
     totalProfiles: undefined,
     proposals: [],
     profilesList: [],

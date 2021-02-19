@@ -3,14 +3,14 @@ import s2 from '../../friends/friends.module.scss';
 import s from './yourFriends.module.scss'
 import {offsetText} from "../../../../utils/textTransformation";
 import {LoadMore} from "../../../common/loadMore";
-import friendIcon from '../../../../assets/icons/friends.svg'
+import friendIcon from '../../../../assets/icons/users.svg'
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
 }
 
 const NoFriends = () =>{
-    return <div className={s2.noFriends}>
+    return <div className={s.noFriends}>
         <img src={friendIcon} alt=""/>
         <p>У вас ещё нет друзей</p>
     </div>
@@ -49,7 +49,6 @@ const YourFriends = (props) => {
     return  (
             <div className={s2.yourFriends}>
                 <h2>Ваши друзья:</h2>
-                {console.log(props.friends)}
                 <LoadMore pages={friendsList} pageSize={props.pageSize} totalPages={props.totalFriends}
                           pageChanger={props.addToFriendsList} loader={<LoadingProfile />} emptyBlock={<NoFriends />}
                 />

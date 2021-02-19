@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './newFriends.module.scss';
 import s2 from './../friends.module.scss'
-
+import openfolder from '../../../../assets/icons/mail-open.svg'
 const Loader = () =>{
     return (<>
             <div className={s2.loading_profile}> </div>
@@ -49,7 +49,10 @@ const NewFriends = (props) => {
                     {buttonSelector(proposal.userId, i++)}
                 </div>)
             }else{
-                proposalsList = <p>У вас ещё нет заявок</p>
+                proposalsList = <div className={s.noProposals}>
+                    <img src={openfolder} alt=""/>
+                    <p>У вас нет заявок</p>
+                </div>
             }
         }
         else {

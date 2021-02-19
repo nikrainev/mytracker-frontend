@@ -7,7 +7,6 @@ const ProfileSettings = () =>{
     return(
             <div className="content">
                <YourProfileContainer />
-               <HaveAccess />
                <YourFriendsContainer />
             </div>
     )

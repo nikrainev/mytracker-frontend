@@ -54,3 +54,17 @@
 .list{
   min-height: 245px;
 }
+
+.noCounters{
+  background: #f7f7f7;
+  padding: 15px;
+  width: calc(100% - 30px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  img{
+    width: 60px;
+    opacity: .6;
+    margin-right: 20px;
+  }
+}

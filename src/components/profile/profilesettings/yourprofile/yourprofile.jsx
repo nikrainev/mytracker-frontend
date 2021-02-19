@@ -19,7 +19,6 @@ class YourProfile extends React.Component{
                                 <EditInput inputText={this.props.company} putInfo={this.props.putProfileInfo} name={"company"} placeholder={"Введите вашу компанию"}/>
                                 <EditTextarea inputText={this.props.description} putInfo={this.props.putProfileInfo} name={"description"} placeholder={"Введите описание"} />
                             </div>
-                            <button className='control_button'>Сохранить</button>
                         </div>
 
                     </div>
