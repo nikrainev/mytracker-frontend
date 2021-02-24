@@ -41,8 +41,8 @@ const NewFriends = (props) => {
         if(props.isFetching === false){
             if(props.proposals !== "no proposals"){
                 let i = 0
-                proposalsList = props.proposals.map((proposal)=> <div className={s.line}>
-                    <div className={s.names_row}>
+                proposalsList = props.proposals.map((proposal)=> <div key={proposal.userId} className={s.line}>
+                    <div className={s.names_row} >
                         <p className="name">{proposal.name}</p>
                         <p className="soname">{proposal.soName}</p>
                     </div>

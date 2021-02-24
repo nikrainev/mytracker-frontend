@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 import store from "../redux/redux-store";
 const authedInstance = axios.create({
-    baseURL: 'http://nikrainev.ru:3000/auth/'
+    baseURL: 'https://trackyour.site:3443/auth/'
 })
 
 

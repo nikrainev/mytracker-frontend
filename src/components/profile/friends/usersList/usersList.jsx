@@ -39,7 +39,7 @@ const UsersList = (props) => {
     }
     let i = 0
     let profilesArr = props.profilesList.map((profile) =>
-            <div className={s2.line}>
+            <div className={s2.line} key={profile._id.toString()}>
                 <div className={s2.names_row}>
                    <p className="name">{profile.name}</p>
                    <p className="soname">{profile.soName}</p>

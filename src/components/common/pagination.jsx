@@ -6,7 +6,7 @@ const PaginationComponent = (props) =>{
     for(let i=1; i<=pagesCount; i++){
         pages.push(i)
     }
-    let pagesButtonsElements = pages.map(page => <span className={props.currentPage === page && "current-page"}
+    let pagesButtonsElements = pages.map(page => <span key={page} className={props.currentPage === page && "current-page"}
                                                        onClick={() => {props.changePage(page)}}>{page}</span>)
     let buttonsSelector = () =>{
         if (props.pages === 'empty' || pagesCount === 1){
@@ -21,6 +21,11 @@ const PaginationComponent = (props) =>{
     )
 }
 
+const Loader = (props) =>{
+    return(
+            props.elem
+    )
+}
 
 export class Pagination extends React.Component{
     state = {
@@ -63,7 +68,8 @@ export class Pagination extends React.Component{
     componentDidMount() {
 
         for(let i=0; i < this.props.pageSize; i++){
-            this.loaders.push(this.props.loader)
+
+            this.loaders.push(<Loader elem={this.props.loader} key={i} />)
         }
 
         this.setState({isFetching: true})

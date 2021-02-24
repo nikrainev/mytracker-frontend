@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 import store from "../redux/redux-store";
 const axiosInstance = axios.create({
-    baseURL: 'http://nikrainev.ru:3000/profile'
+    baseURL: 'https://trackyour.site:3443/profile'
 })
 
 export const profileAPI = {

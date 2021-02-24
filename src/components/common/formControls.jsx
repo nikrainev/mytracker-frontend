@@ -7,10 +7,15 @@ export const Input = ({input, meta, ...props}) =>{
                     {meta.touched && meta.error && <span className={s.input_danger}>{meta.error}</span>}
                     <input className="plain_input" {...input} {...props} />
                 </div>
-
     )
-
 }
+
+export const Select = () =>{
+    return(
+            <p>gj</p>
+    )
+}
+
 
 export const PasswordScoreInput = ({input, meta, ...props}) =>{
         let strengthValue = 'none'
