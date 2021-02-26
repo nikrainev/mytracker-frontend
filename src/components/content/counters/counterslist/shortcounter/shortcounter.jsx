@@ -3,7 +3,6 @@ import s from './shortcounter.module.scss';
 import {NavLink} from "react-router-dom";
 
 const Shortcounter = (props) =>{
-    console.log(props)
     return(
                     <NavLink to={'/counters/'+props.id} className={s.short_counter}>
                         <div className={s.name}>

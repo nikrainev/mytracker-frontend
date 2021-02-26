@@ -4,7 +4,8 @@ import {reset} from 'redux-form';
 let initialState = {
         counterslistData: [],
         pageSize: 5,
-        totalCounters: ''
+        totalCounters: '',
+        pixelCode: '',
 }
 
 const countersReducer = (state = initialState,action) =>{
@@ -21,12 +22,16 @@ const countersReducer = (state = initialState,action) =>{
 
             return {
                 ...state,
-                counterslistData : [...state.counterslistData, newCounter],
-                counterNameInput: '',
-                counterDomenInput: ''
+                counterslistData : [newCounter, ...state.counterslistData],
+                pixelCode: action.pixelCode
             }
         }
-
+        case "CLEAR-PIXEL-CODE":{
+            return {
+                ...state,
+                pixelCode: ''
+            }
+        }
         case "SET-COUNTERS":{
             return {
                 ...state,
@@ -48,9 +53,10 @@ const countersReducer = (state = initialState,action) =>{
 }
 
 
-export const addCounter = (counterData) =>({
+export const addCounter = (counterData, pixelCode) =>({
     type: 'ADD-COUNTER',
-    counterData: counterData
+    counterData: counterData,
+    pixelCode: pixelCode
 })
 export const setCounters = (countersData) =>({
     type: 'SET-COUNTERS',
@@ -60,6 +66,10 @@ export const setCounters = (countersData) =>({
 export const setTotalCounters = (totalCounters) =>({
     type: 'SET-TOTAL-COUNTERS',
     totalCounters: totalCounters
+})
+
+export const clearPixelCode = () =>({
+    type: 'CLEAR-PIXEL-CODE'
 })
 
 
@@ -77,11 +87,8 @@ export const getCounters = (page) =>{
 export const postCounter = (data) => {
     return (dispatch) => {
         countersAPI.postCounter(data).then(response =>{
-            countersAPI.getCounters(store.getState().countersPage.currentPage, store.getState().countersPage.pageSize).then(response =>{
-                dispatch(setCounters(response))
-                dispatch(setTotalCounters(response))
+                dispatch(addCounter(response.newCounter, response.pixelCode))
                 dispatch(reset('addcounter-form'))
-            })
         })
     }
 }
