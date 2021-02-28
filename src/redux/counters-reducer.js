@@ -1,11 +1,16 @@
 import {countersAPI} from "../api/counters-api";
 import store from "./redux-store"
 import {reset} from 'redux-form';
+import {usersAPI} from "../api/users-api";
 let initialState = {
         counterslistData: [],
-        pageSize: 5,
+        pageSize: 10,
         totalCounters: '',
         pixelCode: '',
+        currentCounter:{
+            counterInfo: '',
+            counterUsers: ''
+        }
 }
 
 const countersReducer = (state = initialState,action) =>{
@@ -44,7 +49,25 @@ const countersReducer = (state = initialState,action) =>{
                 totalCounters: action.totalCounters.totalPages
             }
         }
+        case 'SET-CURRENT-COUNTER-INFO':{
+            return {
+                ...state,
+                currentCounter: {
+                    ...state.currentCounter,
+                    counterInfo: action.counterInfo
+                }
+            }
+        }
 
+        case 'SET-CURRENT-COUNTER-USERS':{
+            return {
+                ...state,
+                currentCounter: {
+                    ...state.currentCounter,
+                    counterUsers: action.counterUsers
+                }
+            }
+        }
         default:
             return state
 
@@ -72,6 +95,16 @@ export const clearPixelCode = () =>({
     type: 'CLEAR-PIXEL-CODE'
 })
 
+export const setCurrentCounterInfo = (counterInfo) =>({
+    type: 'SET-CURRENT-COUNTER-INFO',
+    counterInfo: counterInfo
+})
+
+export const setCurrentCounterUsers = (counterUsers) =>({
+    type: 'SET-CURRENT-COUNTER-USERS',
+    counterUsers: counterUsers
+})
+
 
 
 
@@ -91,6 +124,16 @@ export const postCounter = (data) => {
                 dispatch(reset('addcounter-form'))
         })
     }
+}
+
+export const getCurrentCounter = (counterId) => (dispatch) =>{
+    Promise.all([countersAPI.getCounterById(counterId),
+        usersAPI.getCounterUsers(counterId, 1, store.getState().countersPage.pageSize)]).then(response =>{
+        dispatch(setCurrentCounterInfo(response[0]))
+        dispatch(setCurrentCounterUsers(response[1]))
+            console.log(response)
+    })
+
 }
 
 export default countersReducer

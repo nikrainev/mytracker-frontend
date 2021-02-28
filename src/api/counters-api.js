@@ -21,7 +21,7 @@ export const countersAPI = {
                 })
     },
     getCounterById(counterId){
-        return axiosInstance.get('/', {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+        return axiosInstance.get('/'+counterId, {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
                 .then(response =>{
                     return response.data;
                 })

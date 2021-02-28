@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const Shortcounter = (props) =>{
     return(
-                    <NavLink to={'/counters/'+props.id} className={s.short_counter}>
+                    <NavLink to={'/counter/'+props.id} className={s.short_counter}>
                         <div className={s.name}>
                             <p>{props.name}</p>
                         </div>

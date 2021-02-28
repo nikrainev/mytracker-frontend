@@ -12,10 +12,9 @@ const Addcounterbutton =()=>{
 const Addcounter = (props) =>{
     return (
 
-
             <div className="container">
                 <Route exact path='/counters' render={() => <Addcounterbutton />} />
-                <Route path='/counters/addcounter' render={ () => <AddcounterblockContainer countersData={props.countersData} dispatch={props.dispatch} />} />
+                <Route exact path='/counters/addcounter' render={ () => <AddcounterblockContainer countersData={props.countersData} dispatch={props.dispatch} />} />
             </div>
 
     );
