@@ -99,3 +99,4 @@ const Addcounterblock = (props) => {
     )
 }
 export default Addcounterblock;
+export {PixelCodeBlock}

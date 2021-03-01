@@ -9,7 +9,8 @@ let initialState = {
         pixelCode: '',
         currentCounter:{
             counterInfo: '',
-            counterUsers: ''
+            counterUsers: '',
+            totalUsers: ''
         }
 }
 
@@ -49,25 +50,39 @@ const countersReducer = (state = initialState,action) =>{
                 totalCounters: action.totalCounters.totalPages
             }
         }
-        case 'SET-CURRENT-COUNTER-INFO':{
+        case 'SET-CURRENT-COUNTER':{
             return {
                 ...state,
                 currentCounter: {
                     ...state.currentCounter,
-                    counterInfo: action.counterInfo
+                    counterInfo: action.counterInfo,
+                    counterUsers: action.counterUsers.usersPage,
+                    totalUsers: action.counterUsers.totalDocs
+                }
+            }
+        }
+        case 'CLEAR-CURRENT-COUNTER':{
+            return {
+                ...state,
+                currentCounter: {
+                    ...state.currentCounter,
+                    counterInfo: '',
+                    counterUsers: '',
+                    totalUsers: ''
+                }
+            }
+        }
+        case 'ADD-COUNTER-USERS':{
+            debugger
+            return {
+                ...state,
+                currentCounter: {
+                    ...state.currentCounter,
+                    counterUsers: [...state.currentCounter.counterUsers, ...action.users]
                 }
             }
         }
 
-        case 'SET-CURRENT-COUNTER-USERS':{
-            return {
-                ...state,
-                currentCounter: {
-                    ...state.currentCounter,
-                    counterUsers: action.counterUsers
-                }
-            }
-        }
         default:
             return state
 
@@ -95,18 +110,20 @@ export const clearPixelCode = () =>({
     type: 'CLEAR-PIXEL-CODE'
 })
 
-export const setCurrentCounterInfo = (counterInfo) =>({
-    type: 'SET-CURRENT-COUNTER-INFO',
-    counterInfo: counterInfo
-})
-
-export const setCurrentCounterUsers = (counterUsers) =>({
-    type: 'SET-CURRENT-COUNTER-USERS',
+export const setCurrentCounter = (counterInfo, counterUsers) =>({
+    type: 'SET-CURRENT-COUNTER',
+    counterInfo: counterInfo,
     counterUsers: counterUsers
 })
 
+export const clearCurrentCounter = () => ({
+    type: 'CLEAR-CURRENT-COUNTER'
+})
 
-
+export const addCounterUsers = (users) =>({
+    type: 'ADD-COUNTER-USERS',
+    users: users
+})
 
 export const getCounters = (page) =>{
     return (dispatch) =>{
@@ -129,11 +146,17 @@ export const postCounter = (data) => {
 export const getCurrentCounter = (counterId) => (dispatch) =>{
     Promise.all([countersAPI.getCounterById(counterId),
         usersAPI.getCounterUsers(counterId, 1, store.getState().countersPage.pageSize)]).then(response =>{
-        dispatch(setCurrentCounterInfo(response[0]))
-        dispatch(setCurrentCounterUsers(response[1]))
-            console.log(response)
+        dispatch(setCurrentCounter(response[0], response[1]) )
     })
-
 }
+
+export const getMoreUsers = (page) => (dispatch) =>{
+    usersAPI.getCounterUsers(store.getState().countersPage.currentCounter.counterInfo._id,
+            page, store.getState().countersPage.pageSize).then(response =>{
+
+                dispatch(addCounterUsers(response.usersPage))
+    })
+}
+
 
 export default countersReducer

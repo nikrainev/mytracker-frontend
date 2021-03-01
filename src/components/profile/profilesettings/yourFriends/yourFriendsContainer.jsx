@@ -15,7 +15,6 @@ class YourFriendsContainer extends React.Component{
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props){
             if(prevProps.deletedFriend !== this.props.deletedFriend){
-                console.log(this.props.deletedFriend)
                 this.deleteFriendLocal(this.props.deletedFriend[0])
             }
 

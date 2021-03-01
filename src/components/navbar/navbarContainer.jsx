@@ -5,12 +5,6 @@ import {setToken, setProfileData, deleteProfileData} from "../../redux/auth-redu
 
 class NavbarContainer extends React.Component {
 
-    getCookie = (name) =>{
-        let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
     logOut = () =>{
         document.cookie = 'token='+this.props.token+'; max-age=-1'
         document.cookie = 'email='+this.props.emailInput+'; max-age=-1'

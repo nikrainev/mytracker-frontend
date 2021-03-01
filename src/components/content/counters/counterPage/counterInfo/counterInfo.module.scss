@@ -1,0 +1,59 @@
+.names{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .id{
+    width: 50%;
+    p{
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+  .name{
+    width: 50%;
+    p{
+      display: block;
+      text-align: center;
+      font-size: 30px;
+      line-height: 100%;
+    }
+  }
+
+}
+
+.counterInfo {
+  span{
+    text-align: center;
+    font-size: 12px;
+    display: block;
+  }
+}
+
+
+.domen{
+  width: 100%;
+  p{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    line-height: 100%;
+  }
+}
+
+.results{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  .dayusers, .allusers{
+
+    width: 50%;
+    p{
+      display: block;
+      text-align: center;
+      font-size: 30px;
+      line-height: 100%;
+    }
+  }
+}

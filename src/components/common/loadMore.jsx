@@ -43,7 +43,6 @@ export class LoadMore extends React.Component{
     loaders = []
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props){
-
             this.setState({pages: this.props.pages})
             this.setState({isFetching: false})
             this.setState({initialized: true})
@@ -58,6 +57,9 @@ export class LoadMore extends React.Component{
         }
         if(this.props.pages.length === 0){
             this.setState({isFetching: true})
+        }
+        else{
+            this.setState({initialized: true})
         }
     }
     pagesSelector = () =>{

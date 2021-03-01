@@ -7,7 +7,9 @@ import {connect} from "react-redux";
 const CounterInfoContainer = (props) => {
 
 
-    return <CounterInfo counterId={props.counterId}/>
+    return <CounterInfo counterId={props.counterId}
+                        counterInfo={props.counterInfo}
+    />
 }
 
 let mapStateToProps = (state) =>{
