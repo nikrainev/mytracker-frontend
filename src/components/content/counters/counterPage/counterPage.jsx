@@ -26,7 +26,6 @@ const CounterPage = (props) =>{
 
     return (
             <div className="content">
-                {console.log(pageState)}
                 {pageState === 'fetching' ?<p>Загрузка</p> :<><CounterInfoContainer counterInfo={props.counterInfo}
                     counterId={counterId} />
                     <UsersListContainer counterUsers={props.counterUsers}

@@ -73,7 +73,7 @@ const countersReducer = (state = initialState,action) =>{
             }
         }
         case 'ADD-COUNTER-USERS':{
-            debugger
+
             return {
                 ...state,
                 currentCounter: {

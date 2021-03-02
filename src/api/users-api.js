@@ -11,6 +11,12 @@ export const usersAPI = {
                 .then(response =>{
                     return response.data;
                 })
+    },
+    getUser(tysId){
+        return  axiosInstance.get('/user/'+tysId)
+                .then(response =>{
+                    return response.data;
+                })
     }
 }
 

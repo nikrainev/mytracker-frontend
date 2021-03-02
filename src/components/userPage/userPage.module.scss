@@ -1,0 +1,12 @@
+.label_row{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  label{
+    width: 150px;
+  }
+  p{
+    width: calc(100% - 150px);
+  }
+}
