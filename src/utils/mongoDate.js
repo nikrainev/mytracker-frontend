@@ -1,14 +1,12 @@
 const mongoDate = (mongoDate) => {
-    let daysSeparate = mongoDate.split('T')
-    let date = daysSeparate[0];
-    let timeSeparate = daysSeparate[1];
-    timeSeparate = timeSeparate.split(':')
-    let time = timeSeparate.slice(0,2).join(':')
-    let seconds = timeSeparate[2].replace('Z','')
+    let d = new Date(mongoDate)
+    let formatter = new Intl.DateTimeFormat("ru");
+    let formatter2 = new Intl.DateTimeFormat("ru",{hour: '2-digit', minute: '2-digit'});
+
     return{
-        date: date,
-        time: time,
-        seconds: seconds
+        date: formatter.format(d),
+        time: formatter2.format(d),
+        seconds: d.getSeconds()
     }
 }
 export default mongoDate

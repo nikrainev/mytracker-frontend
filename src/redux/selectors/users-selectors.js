@@ -16,40 +16,30 @@ export const getUserSessionsList = createSelector(getSessions, (sessions) => {
             let nextIndex = i + 1
             let session = ''
 
-            const makeSessionPare = (enterDate, enterTime, awayDate, awayTime) =>{
+            const makeSessionPare = (enterTime, awayTime) =>{
                 return  {
-                    entryTime : {
-                        date: enterDate,
-                        time: enterTime
-                    },
-                    awayTime : {
-                        date: awayDate,
-                        time: awayTime
-                    }
+                    entryTime : enterTime,
+                    awayTime : awayTime
                 }
             }
 
             if(sessions[i] && sessions[nextIndex]){
                 if(Object.keys(sessions[i])[0] === "entryTime" && Object.keys(sessions[nextIndex])[0] === "goAwayTime"){
-                    session = makeSessionPare(mongoDate(sessions[i].entryTime).date, mongoDate(sessions[i].entryTime).time,
-                            mongoDate(sessions[nextIndex].goAwayTime).date, mongoDate(sessions[nextIndex].goAwayTime).time
-                    )
+                    session = makeSessionPare(sessions[i].entryTime, sessions[nextIndex].goAwayTime)
                 }
                 else if (Object.keys(sessions[i])[0] === "entryTime" && Object.keys(sessions[nextIndex])[0] === "entryTime"){
-                    session = makeSessionPare(mongoDate(sessions[i].entryTime).date, mongoDate(sessions[i].entryTime).time,
-                            undefined, undefined)
+                    session = makeSessionPare(sessions[i].entryTime, undefined)
                     i--
                 }
             }
             else if (sessions[i]){
-                session = makeSessionPare(mongoDate(sessions[i].entryTime).date, mongoDate(sessions[i].entryTime).time,
-                        undefined, undefined)
+                session = makeSessionPare(sessions[i].entryTime,  undefined)
             }
             else {
-                session = makeSessionPare(undefined, undefined, undefined, undefined)
+                session = makeSessionPare(undefined, undefined)
             }
 
-            sessionsArray.push(session)
+            sessionsArray.unshift(session)
         }
 
 

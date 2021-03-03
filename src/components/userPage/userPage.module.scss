@@ -3,10 +3,120 @@
   justify-content: space-between;
   width: 100%;
   text-align: left;
+  margin-bottom: 10px;
   label{
     width: 150px;
+    font-size: 18px;
+    color: #616161;
   }
   p{
     width: calc(100% - 150px);
+    font-size: 18px;
   }
+}
+
+.session{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  .sessionNumber{
+    margin-right: 20px;
+  }
+  .entryTime{
+    position: relative;
+    margin-right: 70px;
+    &:after{
+      content: '';
+      width: 40px;
+      height: 2px;
+      background: #dcdcdc;
+      display: block;
+      position: absolute;
+      right: -56px;
+      top: 10px;
+    }
+  }
+
+}
+
+.h4{
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.main_info{
+  border: 1px solid #eaeaea;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: calc(100% - 22px);
+}
+
+.visits{
+  border: 1px solid #eaeaea;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: calc(100% - 22px);
+}
+
+.device_info{
+  border: 1px solid #eaeaea;
+  margin: 30px 10px 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: calc(100% - 22px);
+}
+
+.geo_info{
+  border: 1px solid #eaeaea;
+  margin: 30px 10px 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: calc(100% - 22px);
+}
+
+.headers_info{
+  border: 1px solid #eaeaea;
+  margin: 30px 10px 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: calc(100% - 22px);
+}
+
+
+
+.session{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3px;
+  span{
+    margin-right: 20px;
+    background: #2980ea;
+    border-radius: 50%;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+  }
+}
+
+.date_divider{
+  color: gray;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #dcdcdc;
+  max-width: 185px;
+}
+
+.col_head{
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
