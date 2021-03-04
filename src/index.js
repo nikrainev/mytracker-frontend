@@ -7,13 +7,20 @@ import App from "./App";
 import './index.css';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import {CookiesProvider} from "react-cookie";
 
 
 
     ReactDOM.render(
-            <BrowserRouter>
-            <Provider store={store}>  <App  /></Provider></BrowserRouter> ,
-            document.getElementById('root'));
+            <CookiesProvider>
+                <BrowserRouter>
+                    <Provider store={store}>
+                        <App  />
+                    </Provider>
+                </BrowserRouter>
+            </CookiesProvider> ,
+            document.getElementById('root')
+            );
 
 
 

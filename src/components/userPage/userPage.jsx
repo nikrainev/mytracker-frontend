@@ -64,7 +64,7 @@ const UserPage = (props) => {
 
         return (
                 <div className='container'>
-                    
+
                     <div className="row">
                         <div className="col-6">
                             <div className={s.main_info}>

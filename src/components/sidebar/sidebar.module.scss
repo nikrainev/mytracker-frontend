@@ -1,25 +1,122 @@
 .sidebar {
-  width: 15%;
+  width: 320px;
   background: #e6e6e6;
-  min-height: calc(100vh - 47px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow: hidden;
+  transition: .3s all;
+  &.sidebar_closed{
+    width: 47px;
+    .logo{
+      letter-spacing: 50px;
+    }
+  }
 }
 
 .sidebar_menu{
   padding-top: 10px;
+  width: 100%;
 }
 
-.sidebar_menu a{
-  display: block;
-  width: calc(100% - 47px);
+
+
+.link_item{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
   color: black;
   text-decoration: none;
-  padding: 13px 21px 13px 26px;
-
   font-size: 16px;
-
-
+  height: 47px;
+  position: relative;
+  &.active{
+    &:before{
+      content: '';
+      display: block;
+      height: 23px;
+      width: 4px;
+      background: #0078d7;
+      position: absolute;
+      left: 0px;
+    }
+  }
 }
 
+.menu_icon{
+  width: 47px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  img{
+    width: 20px;
+    margin-left: 15px;
+  }
+}
 
+.empty_img{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #c1c1c1;
+  background: #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: .25s all;
+  img{
+    width: 25px;
+  }
+}
 
+.profile_cont{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 320px;
+  margin-bottom: 15px;
+  transition: .25s all;
+  &.sidebar_closed{
+     margin-left: -35px;
+    .empty_img{
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
+
+.user_login{
+  margin-left: 10px;
+
+  a{
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.sidebar_top{
+  width: 320px;
+}
+
+.hamburger{
+  width: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 20px;
+  img{
+    width: 100%;
+  }
+}
+
+.logo{
+  font-weight: 500;
+  font-size: 20px;
+  padding-left: 19px;
+  padding-top: 10px;
+  transition: .3s all;
+}
 

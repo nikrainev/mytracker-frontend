@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './sidebar.module.scss';
+import {NavLink} from "react-router-dom";
 
-const Sidebar = () =>{
-    let i = 0;
+import hamburgerIcon from '../../assets/icons/menu/hamburger.svg'
+import summaryIcon from '../../assets/icons/menu/summary.svg'
+import eyeIcon from '../../assets/icons/menu/eye.svg'
+import auditoriesIcon from '../../assets/icons/menu/auditories.svg'
+import friendsIcon from '../../assets/icons/menu/friend.svg'
+import settingsIcon from '../../assets/icons/menu/settings.svg'
+import shortMenuIcon from '../../assets/icons/menu/short-menu.svg'
+import profileIcon from '../../assets/icons/menu/profile.svg'
+let Sidebar = (props) =>{
+
+    /* let i = 0;
     let setBorders = () =>{
         let allelements = document.querySelectorAll(".fluent-line")
         for(let i = 0; i < allelements.length; i++){
@@ -96,17 +106,64 @@ const Sidebar = () =>{
 
     let onmouseout = () =>{
 
+    } */
+
+    let logout = () =>{
+        props.logout()
     }
+
+
+
 
     return (
 
-        <div className={s.sidebar} >
-             <div className={s.sidebar_menu + " fluent-menu"} onMouseOver={onmouseover} onMouseOut={onmouseout}>
-                 <a href="" className={s.link_item + " fluent-line"}>Сводка</a>
-                 <a href="" className={s.link_item + " fluent-line"}>Посетители</a>
-                 <a href="" className={s.link_item + " fluent-line"}>Конверсии</a>
 
+        <div className={props.menuState === 'collapsed' ? s.sidebar : s.sidebar + " " + s.sidebar_closed} > {console.log(props)}
+        <div className={s.sidebar_top}>
+            <div className={s.logo}>Трекер</div>
+            <div className={s.hamburger} onClick={()=>{props.toggleMenuState()}}>
+                <img src={hamburgerIcon} alt=""/>
+            </div>
+             <div className={s.sidebar_menu + " fluent-menu"} onMouseOver={onmouseover} onMouseOut={onmouseout}>
+                 <NavLink to={'/summary'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                    <div className={s.menu_icon}><img src={summaryIcon} alt=""/></div>
+                    <p>Сводка</p>
+                 </NavLink>
+                 <NavLink to={'/counters'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                     <div className={s.menu_icon}><img src={eyeIcon} alt=""/></div>
+                     <p>Счётчики</p>
+                 </NavLink>
+                 <NavLink to={'/audiences'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                     <div className={s.menu_icon}><img src={auditoriesIcon} alt=""/></div>
+                     <p>Аудитории</p>
+                 </NavLink>
+                 <NavLink to={'/friends'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                     <div className={s.menu_icon}><img src={friendsIcon} alt=""/></div>
+                     <p>Друзья</p>
+                 </NavLink>
+                 <NavLink to={'/profilesettings'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                     <div className={s.menu_icon}><img src={settingsIcon} alt=""/></div>
+                     <p>Настройки</p>
+                 </NavLink>
              </div>
+        </div>
+            <div className={props.menuState === 'collapsed' ? s.profile_cont : s.profile_cont + " " + s.sidebar_closed}>
+              <div className="dropdown-menu">
+                  <div className='dropdown-menu-dots'><img  src={shortMenuIcon} alt=""/></div>
+                  <div className="dropdown-menu-content">
+                      {props.isAuth === true ?
+                              <div className="dropdown-menu-link" onClick={logout}>Выйти</div> :
+                              <NavLink to="/login" className='dropdown-menu-link' activeClassName='active'>Войти</NavLink>}
+                  </div>
+              </div>
+               <div className={s.empty_img}>
+                   <img src={profileIcon} alt=""/>
+               </div>
+                <div className={s.user_login}>
+                    {props.isAuth === true ? <NavLink to="/profile" >{props.profileLogin}</NavLink> : "Профиль" }
+                </div>
+
+            </div>
         </div>
     );
 }

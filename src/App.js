@@ -1,8 +1,8 @@
 import React from 'react';
 /*import logo from './logo.svg'; */
 import './App.scss';
-import Sidebar from "./components/sidebar/sidebar.jsx";
-import NavbarContainer from './components/navbar/navbarContainer.jsx';
+
+import SideBarContainer from "./components/sidebar/sidebarContainer";
 import Summary from "./components/content/summary/summary";
 import Counters from "./components/content/counters/counters";
 import Audiences from "./components/content/audiences/audiences";
@@ -23,17 +23,13 @@ class App extends React.Component {
 
     render (){
         return <div className="app-wrapper">
-            <NavbarContainer />
+
             <div className="row">
-                <Sidebar />
-                {/* <Redirect exact from='/' to='/summary'  /> */}
 
+                <SideBarContainer />
                 <Route path='/summary'  render={ () => <Summary  /> } />
-
-                    <Route path='/counter/:counterId' render={()=> <CounterPage />} />
-
+                <Route path='/counter/:counterId' render={()=> <CounterPage />} />
                 <Route path='/counters' render={() => <Counters />}/>
-
                 <Route path='/audiences' render={() => <Audiences />} />
                 <Route path='/profile' render={() => <ProfileContainer />} />
                 <Route path='/profilesettings' render={() => <ProfileSettings />} />

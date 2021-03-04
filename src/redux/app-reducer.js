@@ -2,7 +2,8 @@ import {AuthThunkCreator} from './auth-reducer'
 
 
 let initialState = {
-    isInitialized: false
+    isInitialized: false,
+    menuState: 'collapsed'
 }
 
 
@@ -13,7 +14,22 @@ const appReducer =(state =initialState, action) =>{
                 ...state,
                 isInitialized: true
             }
+        case "TOGGLE-MENU-STATE":
+            let menuState = ''
+            switch (state.menuState ){
+                case 'collapsed':
+                    menuState = 'closed';
+                    break;
+                case 'closed':
+                    menuState = 'collapsed';
+                    break
+                default: menuState = 'closed'
+            }
 
+            return {
+                ...state,
+                menuState: menuState
+            }
         default:
             return state
     }
@@ -28,9 +44,11 @@ export const InitializingApp = () => (dispatch) =>{
     Promise.all([promise]).then(()=>{
                 dispatch(setInitializedSuccess())
             })
-
 }
 
+export const toggleMenuState = () => ({
+    type: "TOGGLE-MENU-STATE"
+})
 
 
 export  default appReducer
