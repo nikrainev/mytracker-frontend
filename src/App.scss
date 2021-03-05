@@ -31,6 +31,13 @@ body{
 .content{
   width: calc(100% - 320px);
   min-height: calc(100vh - 47px);
+  transition: .25s ;
+  transition-property: margin-left, width;
+  margin-left: 320px;
+  &.sidebar_closed{
+    width: calc(100% - 47px);
+    margin-left: 47px;
+  }
 }
 
 

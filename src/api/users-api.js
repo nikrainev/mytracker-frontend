@@ -12,6 +12,12 @@ export const usersAPI = {
                     return response.data;
                 })
     },
+    getProfileUsers(page,limit){
+        return axiosInstance.get('/profile', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
+                .then(response =>{
+                    return response.data
+                })
+    },
     getUser(tysId){
         return  axiosInstance.get('/user/'+tysId)
                 .then(response =>{

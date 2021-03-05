@@ -9,12 +9,12 @@ let initialState = {
 
 const appReducer =(state =initialState, action) =>{
     switch (action.type){
-        case "INITIALIZED_SUCCESS":
+        case "app/INITIALIZED_SUCCESS":
             return{
                 ...state,
                 isInitialized: true
             }
-        case "TOGGLE-MENU-STATE":
+        case "app/TOGGLE-MENU-STATE":
             let menuState = ''
             switch (state.menuState ){
                 case 'collapsed':
@@ -36,7 +36,7 @@ const appReducer =(state =initialState, action) =>{
 }
 
 
-export const setInitializedSuccess = () => ({type: "INITIALIZED_SUCCESS"})
+export const setInitializedSuccess = () => ({type: "app/INITIALIZED_SUCCESS"})
 
 
 export const InitializingApp = () => (dispatch) =>{
@@ -47,7 +47,7 @@ export const InitializingApp = () => (dispatch) =>{
 }
 
 export const toggleMenuState = () => ({
-    type: "TOGGLE-MENU-STATE"
+    type: "app/TOGGLE-MENU-STATE"
 })
 
 

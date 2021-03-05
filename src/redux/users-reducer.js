@@ -1,4 +1,4 @@
-import store from "../redux/redux-store";
+
 import {usersAPI} from "../api/users-api";
 
 let initialState = {
@@ -7,13 +7,13 @@ let initialState = {
 
 let usersReducer = (state = initialState, action) =>{
     switch (action.type){
-        case 'SET-USER-INFO' : {
+        case 'users/SET-USER-INFO' : {
             return {
                 ...state,
                 userInfo: action.userInfo
             }
         }
-        case 'CLEAR-USER-INFO' : {
+        case 'users/CLEAR-USER-INFO' : {
             return {
                 ...state,
                 userInfo: ''
@@ -29,18 +29,18 @@ let usersReducer = (state = initialState, action) =>{
 
 
 const setUserInfo = (userInfo) =>({
-    type: 'SET-USER-INFO',
+    type: 'users/SET-USER-INFO',
     userInfo: userInfo
 })
 
 export const clearUserInfo = () => ({
-    type: 'CLEAR-USER-INFO'
+    type: 'users/CLEAR-USER-INFO'
 })
 
-export const getUserInfo = (tysId) => (dispatch) =>{
-    usersAPI.getUser(tysId).then(response =>{
-        dispatch(setUserInfo(response))
-    })
+export const getUserInfo = (tysId) => async (dispatch) =>{
+    let response = await usersAPI.getUser(tysId)
+    dispatch(setUserInfo(response))
+
 }
 
 export default usersReducer

@@ -16,7 +16,7 @@ let initialState = {
 
 const authReducer =(state =initialState, action) =>{
     switch (action.type){
-        case "SET_USER_DATA":
+        case "auth/SET_USER_DATA":
             return{
                 ...state,
                 profileId: action.data.userId,
@@ -25,13 +25,13 @@ const authReducer =(state =initialState, action) =>{
                 regDate: action.data.regDate,
 
             }
-        case "SET_TOKEN":
+        case "auth/SET_TOKEN":
             return {
                 ...state,
                 token: action.token,
                 isAuth: true
             }
-        case "DELETE_PROFILE_DATA":
+        case "auth/DELETE_PROFILE_DATA":
             return {
                 ...state,
                 profileId: null,
@@ -42,13 +42,13 @@ const authReducer =(state =initialState, action) =>{
                 isAuth: false
 
             }
-        case 'TOGGLE_IS_FETCHING':
+        case 'auth/TOGGLE_IS_FETCHING':
             return {
                 ...state,
                 isFetching: action.isFetching
             }
 
-        case 'TOGGLE_SIGNUP_STATE':
+        case 'auth/TOGGLE_SIGNUP_STATE':
             return {
                 ...state,
                 signUpState: action.signUpState
@@ -61,30 +61,30 @@ const authReducer =(state =initialState, action) =>{
 
 
 export const setProfileData = (authProfileData) => ({
-    type: "SET_USER_DATA",
+    type: "auth/SET_USER_DATA",
     data: authProfileData})
 export const setToken = (token) =>({
-    type: 'SET_TOKEN',
+    type: 'auth/SET_TOKEN',
     token: token
 })
 export const deleteProfileData = () => ({
-    type: 'DELETE_PROFILE_DATA'
+    type: 'auth/DELETE_PROFILE_DATA'
 })
 
 export const setInputState = (inputName, inputState) =>({
-    type: 'SET_LOGIN_INPUT_STATE',
+    type: 'auth/SET_LOGIN_INPUT_STATE',
     inputName: inputName,
     inputState: inputState
 })
 
 export const toggleIsFetching = (isFetching)=>({
-    type: 'TOGGLE_IS_FETCHING',
+    type: 'auth/TOGGLE_IS_FETCHING',
     isFetching: isFetching
 })
 
 
 export const setSignUpState = (signUpState) =>{return {
-    type: 'TOGGLE_SIGNUP_STATE',
+    type: 'auth/TOGGLE_SIGNUP_STATE',
     signUpState: signUpState
 }}
 
@@ -155,25 +155,24 @@ export const signUpThunkCreator = (email,login,password) =>{
     }
 }
 
-export const AuthThunkCreator = () => (dispatch)=>{
+export const AuthThunkCreator = () => async (dispatch)=>{
     let getCookie = (name) =>{
         let matches = document.cookie.match(new RegExp(
                 "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-    let getAuth = () =>{
-        authAPI.getAuthInfo().then(response => {
-            dispatch(setProfileData(response))
-        })
+    let getAuth  = async() =>{
+        let response  = await authAPI.getAuthInfo()
+        dispatch(setProfileData(response))
+
     }
 
-    if (getCookie('email') && getCookie('password')){
-       return  authAPI.postLoginInfo(getCookie('email'), getCookie('password')).then(response => {
-            dispatch(setToken(response.token))
-            getAuth()
-        })
 
+    if (getCookie('email') && getCookie('password')){
+       let response = await authAPI.postLoginInfo(getCookie('email'), getCookie('password'))
+            dispatch(setToken(response.token))
+            await getAuth()
     }
 }
 

@@ -25,12 +25,12 @@ const UserPageContainer = (props) =>{
     },[props.userInfo])
 
     return (
-            <div className="content">
+            <>
                 {pageState === 'fetching' ?<p>Загрузка</p> :<UserPage userInfo={props.userInfo}
                                                                       userSessions={props.userSessions}
                                                                       tysId={props.tysId}
                 /> }
-            </div>
+            </>
     );
 }
 

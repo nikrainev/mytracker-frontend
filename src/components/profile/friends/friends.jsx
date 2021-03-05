@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {FriendsPageLoader} from "../../common/loadingSchemes";
 const FriendsPage = (props) => {
     return  (
-            <div className="content">
+            <>
                 {props.isInitialized ?
 
                         <div className="container">
@@ -16,7 +16,7 @@ const FriendsPage = (props) => {
                          </div>
 
                     : <FriendsPageLoader />}
-            </div>
+            </>
 
 
 

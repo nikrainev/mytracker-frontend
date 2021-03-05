@@ -6,9 +6,9 @@ import {connect} from "react-redux";
 const Counters = (props) =>{
     return (
 
-            <div className='content'>
+            <>
                 {props.isInitialized ? <><Addcounter/><CounterslistContainer /> </>: <CountersListLoading />}
-            </div>
+           </>
     );
 }
 

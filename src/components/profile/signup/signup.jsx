@@ -79,7 +79,7 @@ const SignUpBlock = (props) => {
 
 
     return  (
-            <div className="content">
+
                 <div className="container">
                     {props.signUpState == 'signUpForm' ?
                    <SignUpFormBlock
@@ -88,7 +88,7 @@ const SignUpBlock = (props) => {
                                      login={props.login} regDate={props.regDate}/>
                     }
                 </div>
-            </div>
+
 
 
     );

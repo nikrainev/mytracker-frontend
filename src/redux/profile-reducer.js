@@ -20,33 +20,33 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) =>{
     switch(action.type){
-        case 'SET-PROFILE-INFO':
+        case 'profile/SET-PROFILE-INFO':
             return {
                 ...state, ...action.data
             }
-        case 'SET-PROFILES-LIST':
+        case 'profile/SET-PROFILES-LIST':
             return {
                 ...state,
                 profilesList: action.data
             }
-        case 'SET-TOTAL-PROFILES':
+        case 'profile/SET-TOTAL-PROFILES':
             return {
                 ...state,
                 totalProfiles: action.count
 
             }
-        case 'SET-PROPOSALS':
+        case 'profile/SET-PROPOSALS':
             return {
                 ...state,
                 proposals: action.proposals
             }
-        case 'SET-FRIENDS-LIST':
+        case 'profile/SET-FRIENDS-LIST':
             return {
                 ...state,
                 friendsList: action.friends,
                 totalFriends: action.totalDocs
             }
-        case 'SET-DELETED-FRIEND':
+        case 'profile/SET-DELETED-FRIEND':
             return {
                 ...state,
                 deletedFriend: [action.friendId]
@@ -58,41 +58,41 @@ const profileReducer = (state = initialState, action) =>{
     }
 }
 
-export const saveInfoActionCreator = () =>({type: 'SAVE-INFO'})
+export const saveInfoActionCreator = () =>({type: 'profile/SAVE-INFO'})
 export const reloadTextareaActionCreator = (value, inputName) =>({
-    type: 'RELOAD-TEXTAREA',
+    type: 'profile/RELOAD-TEXTAREA',
     value: value,
     inputName: inputName
 })
 
 export const setProfileInfo = (data) =>({
-    type: 'SET-PROFILE-INFO',
+    type: 'profile/SET-PROFILE-INFO',
     data: data
 })
 
 export const setProfilesList = (data) =>({
-    type: 'SET-PROFILES-LIST',
+    type: 'profile/SET-PROFILES-LIST',
     data: data
 })
 
 export const setTotalProfiles = (count) =>({
-    type: 'SET-TOTAL-PROFILES',
+    type: 'profile/SET-TOTAL-PROFILES',
     count: count
 })
 
 export const setProposals = (proposals) => ({
-    type: 'SET-PROPOSALS',
+    type: 'profile/SET-PROPOSALS',
     proposals: proposals
 })
 
 export const setFriendsList = (friends, totalDocs) =>({
-    type: 'SET-FRIENDS-LIST',
+    type: 'profile/SET-FRIENDS-LIST',
     friends: friends,
     totalDocs: totalDocs
 })
 
 export const setDeletedFriend = (friendId)=>({
-    type: 'SET-DELETED-FRIEND',
+    type: 'profile/SET-DELETED-FRIEND',
     friendId: friendId
 })
 
@@ -101,92 +101,82 @@ export const setDeletedFriend = (friendId)=>({
 
 
 
-export const getProposals = () => (dispatch)=>{
-    profileAPI.getProposals().then(response=>{
-            dispatch(setProposals(response))
-    })
+export const getProposals = () => async (dispatch)=>{
+
+    let response = await profileAPI.getProposals()
+    dispatch(setProposals(response))
 }
 
-export const getProfileInfo = () => (dispatch) =>{
-        profileAPI.getProfileInfo()
-                .then(response =>{
-                    dispatch(setProfileInfo(response))
-                })
+export const getProfileInfo = () => async (dispatch) =>{
+
+    let response = await profileAPI.getProfileInfo()
+    dispatch(setProfileInfo(response))
+}
+
+export const getProfilesList = (page,limit) => async (dispatch) =>{
+
+    let response = await profileAPI.getProfilesList(page,limit)
+    dispatch(setProfilesList(response.items))
+    dispatch(setTotalProfiles(response.totalPages))
 
 }
 
-export const getProfilesList = (page,limit) => (dispatch) =>{
-    profileAPI.getProfilesList(page,limit).then(response =>{
-        dispatch(setProfilesList(response.items))
-        dispatch(setTotalProfiles(response.totalPages))
-    })
-}
+export const postProposal = (userId, currentPage) => async (dispatch) =>{
 
-export const postProposal = (userId, currentPage) => (dispatch) =>{
-    profileActionsAPI.postProposal(userId).then(response =>{
-        if(response.message === 'proposal sended'){
-           dispatch(getProfilesList(currentPage,store.getState().profilePage.pageSize))
-        }
-
-
-    })
-}
-
-export const deleteProposal = (userId, currentPage) => (dispatch) =>{
-    profileActionsAPI.deleteProposal(userId).then(response =>{
-        if(response.message === "proposal deleted"){
-            dispatch(getProfilesList(currentPage,store.getState().profilePage.pageSize))
-        }
-
-    })
-}
-
-export const acceptProposal = (userId) => (dispatch) =>{
-    profileActionsAPI.acceptProposal(userId).then(response =>{
-        if(response.message === "Friend added"){
-            dispatch(getProposals())
-        }
-    })
-}
-
-export const denyProposal = (userId) => (dispatch) => {
-    profileActionsAPI.denyProposal(userId).then(response => {
-        if (response.message === "Proposal denied") {
-            dispatch(getProposals())
-        }
-    })
-}
-
-export const putProfileInfo = (data) =>{
-    return (dispatch) =>{
-        profileAPI.putProfileInfo(data)
-                .then(response =>{
-                    dispatch(setProfileInfo(response.newInfo))
-                })
+    let response = await profileActionsAPI.postProposal(userId)
+    if(response.message === 'proposal sended'){
+        dispatch(getProfilesList(currentPage,store.getState().profilePage.pageSize))
     }
 }
 
-export const getFriendsList = (page,limit) => (dispatch) =>{
-    profileAPI.getFriendsList(page,limit).then(response =>{
-      dispatch(setFriendsList(response.friendsPage, response.totalDocs))
-    })
+export const deleteProposal = (userId, currentPage) => async (dispatch) =>{
+
+    let response = await profileActionsAPI.deleteProposal(userId)
+    if(response.message === "proposal deleted"){
+        dispatch(getProfilesList(currentPage,store.getState().profilePage.pageSize))
+    }
 }
 
-export const addFriendsList = (page, limit) => (dispatch) =>{
+export const acceptProposal = (userId) => async (dispatch) =>{
 
-    profileAPI.getFriendsList(page, limit).then(response=>{
-
-        dispatch(setFriendsList(response.friendsPage, response.totalDocs))
-    })
+    let response = await profileActionsAPI.acceptProposal(userId)
+    if(response.message === "Friend added"){
+        dispatch(getProposals())
+    }
 }
 
-export const deleteFriend = (userId, buttonId) => (dispatch) =>{
-    profileActionsAPI.deleteFriend(userId).then(response=>{
-        if(response.message === "friend deleted"){
-          dispatch(setDeletedFriend(buttonId))
-        }
+export const denyProposal = (userId) => async (dispatch) => {
 
-    })
+    let response = await profileActionsAPI.denyProposal(userId)
+    if (response.message === "Proposal denied") {
+        dispatch(getProposals())
+    }
+}
+
+export const putProfileInfo = (data) => async (dispatch) =>{
+
+    let response = await profileAPI.putProfileInfo(data)
+    dispatch(setProfileInfo(response.newInfo))
+}
+
+export const getFriendsList = (page,limit) => async (dispatch) =>{
+
+    let response = await profileAPI.getFriendsList(page,limit)
+    dispatch(setFriendsList(response.friendsPage, response.totalDocs))
+}
+
+export const addFriendsList = (page, limit) => async (dispatch) =>{
+
+    let response = await profileAPI.getFriendsList(page, limit)
+    dispatch(setFriendsList(response.friendsPage, response.totalDocs))
+}
+
+export const deleteFriend = (userId, buttonId) => async (dispatch) =>{
+
+    let response = await profileActionsAPI.deleteFriend(userId)
+    if(response.message === "friend deleted"){
+        dispatch(setDeletedFriend(buttonId))
+    }
 }
 
 export default profileReducer

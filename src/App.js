@@ -16,6 +16,9 @@ import CounterPage from "./components/content/counters/counterPage/counterPage";
 import {InitializingApp} from "./redux/app-reducer";
 import {connect} from "react-redux";
 import UserPageContainer from "./components/userPage/userPageContainer";
+
+import {getMenuState} from "./redux/selectors/app-selectors";
+
 class App extends React.Component {
     componentDidMount() {
         this.props.InitializingApp()
@@ -27,16 +30,19 @@ class App extends React.Component {
             <div className="row">
 
                 <SideBarContainer />
+                <div className={this.props.menuState === "collapsed" ? "content" : "content sidebar_closed"}>
                 <Route path='/summary'  render={ () => <Summary  /> } />
-                <Route path='/counter/:counterId' render={()=> <CounterPage />} />
-                <Route path='/counters' render={() => <Counters />}/>
-                <Route path='/audiences' render={() => <Audiences />} />
-                <Route path='/profile' render={() => <ProfileContainer />} />
-                <Route path='/profilesettings' render={() => <ProfileSettings />} />
-                <Route exact path='/login'  render={()=> <LoginContainer />} />
-                <Route path='/signup' render={()=> <SignUpContainer />} />
-                <Route path='/friends' render={()=> <FriendsPage />} />
-                <Route path='/users/:tysId' render={()=><UserPageContainer />} />
+                    <Route path='/counter/:counterId' render={()=> <CounterPage />} />
+                    <Route path='/counters' render={() => <Counters />}/>
+                    <Route path='/audiences' render={() => <Audiences />} />
+                    <Route path='/profile' render={() => <ProfileContainer />} />
+                    <Route path='/profilesettings' render={() => <ProfileSettings />} />
+                    <Route exact path='/login'  render={()=> <LoginContainer />} />
+                    <Route path='/signup' render={()=> <SignUpContainer />} />
+                    <Route path='/friends' render={()=> <FriendsPage />} />
+                    <Route path='/users/:tysId' render={()=><UserPageContainer />} />
+            </div>
+
 
 
             </div>
@@ -47,7 +53,7 @@ class App extends React.Component {
 
 let mapStateToProps = (state) =>{
     return{
-
+        menuState: getMenuState(state)
     }
 }
 

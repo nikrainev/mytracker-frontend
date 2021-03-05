@@ -16,7 +16,7 @@ let initialState = {
 
 const countersReducer = (state = initialState,action) =>{
     switch (action.type){
-        case "ADD-COUNTER":{
+        case "counters/ADD-COUNTER":{
             let newCounter = {
                 id: action.counterData._id,
                 name: action.counterData.name,
@@ -32,25 +32,25 @@ const countersReducer = (state = initialState,action) =>{
                 pixelCode: action.pixelCode
             }
         }
-        case "CLEAR-PIXEL-CODE":{
+        case "counters/CLEAR-PIXEL-CODE":{
             return {
                 ...state,
                 pixelCode: ''
             }
         }
-        case "SET-COUNTERS":{
+        case "counters/SET-COUNTERS":{
             return {
                 ...state,
                 counterslistData: action.countersData.items
             }
         }
-        case 'SET-TOTAL-COUNTERS':{
+        case 'counters/SET-TOTAL-COUNTERS':{
             return {
                 ...state,
                 totalCounters: action.totalCounters.totalPages
             }
         }
-        case 'SET-CURRENT-COUNTER':{
+        case 'counters/SET-CURRENT-COUNTER':{
             return {
                 ...state,
                 currentCounter: {
@@ -61,7 +61,7 @@ const countersReducer = (state = initialState,action) =>{
                 }
             }
         }
-        case 'CLEAR-CURRENT-COUNTER':{
+        case 'counters/CLEAR-CURRENT-COUNTER':{
             return {
                 ...state,
                 currentCounter: {
@@ -72,7 +72,7 @@ const countersReducer = (state = initialState,action) =>{
                 }
             }
         }
-        case 'ADD-COUNTER-USERS':{
+        case 'counters/ADD-COUNTER-USERS':{
 
             return {
                 ...state,
@@ -92,55 +92,51 @@ const countersReducer = (state = initialState,action) =>{
 
 
 export const addCounter = (counterData, pixelCode) =>({
-    type: 'ADD-COUNTER',
+    type: 'counters/ADD-COUNTER',
     counterData: counterData,
     pixelCode: pixelCode
 })
 export const setCounters = (countersData) =>({
-    type: 'SET-COUNTERS',
+    type: 'counters/SET-COUNTERS',
     countersData: countersData
 
 })
 export const setTotalCounters = (totalCounters) =>({
-    type: 'SET-TOTAL-COUNTERS',
+    type: 'counters/SET-TOTAL-COUNTERS',
     totalCounters: totalCounters
 })
 
 export const clearPixelCode = () =>({
-    type: 'CLEAR-PIXEL-CODE'
+    type: 'counters/CLEAR-PIXEL-CODE'
 })
 
 export const setCurrentCounter = (counterInfo, counterUsers) =>({
-    type: 'SET-CURRENT-COUNTER',
+    type: 'counters/SET-CURRENT-COUNTER',
     counterInfo: counterInfo,
     counterUsers: counterUsers
 })
 
 export const clearCurrentCounter = () => ({
-    type: 'CLEAR-CURRENT-COUNTER'
+    type: 'counters/CLEAR-CURRENT-COUNTER'
 })
 
 export const addCounterUsers = (users) =>({
-    type: 'ADD-COUNTER-USERS',
+    type: 'counters/ADD-COUNTER-USERS',
     users: users
 })
 
-export const getCounters = (page) =>{
-    return (dispatch) =>{
-        countersAPI.getCounters(page, store.getState().countersPage.pageSize).then(response =>{
-            dispatch(setCounters(response))
-            dispatch(setTotalCounters(response))
-        })
-    }
+export const getCounters = (page) => async (dispatch) =>{
+
+    let response = await countersAPI.getCounters(page, store.getState().countersPage.pageSize)
+    dispatch(setCounters(response))
+    dispatch(setTotalCounters(response))
 }
 
-export const postCounter = (data) => {
-    return (dispatch) => {
-        countersAPI.postCounter(data).then(response =>{
-                dispatch(addCounter(response.newCounter, response.pixelCode))
-                dispatch(reset('addcounter-form'))
-        })
-    }
+export const postCounter = (data) => async (dispatch) => {
+
+    let response = await countersAPI.postCounter(data)
+    dispatch(addCounter(response.newCounter, response.pixelCode))
+    dispatch(reset('addcounter-form'))
 }
 
 export const getCurrentCounter = (counterId) => (dispatch) =>{
@@ -150,12 +146,10 @@ export const getCurrentCounter = (counterId) => (dispatch) =>{
     })
 }
 
-export const getMoreUsers = (page) => (dispatch) =>{
-    usersAPI.getCounterUsers(store.getState().countersPage.currentCounter.counterInfo._id,
-            page, store.getState().countersPage.pageSize).then(response =>{
+export const getMoreUsers = (page) => async (dispatch) =>{
 
-                dispatch(addCounterUsers(response.usersPage))
-    })
+    let response = await usersAPI.getCounterUsers(store.getState().countersPage.currentCounter.counterInfo._id, page, store.getState().countersPage.pageSize)
+    dispatch(addCounterUsers(response.usersPage))
 }
 
 

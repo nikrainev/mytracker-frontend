@@ -25,12 +25,12 @@ const CounterPage = (props) =>{
     },[props.counterInfo])
 
     return (
-            <div className="content">
+            <>
                 {pageState === 'fetching' ?<p>Загрузка</p> :<><CounterInfoContainer counterInfo={props.counterInfo}
                     counterId={counterId} />
                     <UsersListContainer counterUsers={props.counterUsers}
                     counterId={counterId}/></> }
-            </div>
+            </>
     );
 }
 

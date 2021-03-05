@@ -12,13 +12,12 @@ class LoginContainer extends React.Component {
 
 
     render() {
-        return <div className="content">
-            <LoginBlock
+        return <LoginBlock
                        isFetching={this.props.isFetching}
                        isAuth={this.props.isAuth}
                        sendLoginRequest={this.sendLoginRequest}
             />
-        </div>
+
     }
 }
 
