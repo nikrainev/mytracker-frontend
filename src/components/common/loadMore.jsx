@@ -64,7 +64,7 @@ export class LoadMore extends React.Component{
     }
     pagesSelector = () =>{
         if(this.state.isFetching && this.state.pages !== 'empty'){
-            return [this.loaders,this.props.pages]
+            return [this.props.pages, this.loaders]
         }
         else{
             if(this.state.pages === 'empty'){

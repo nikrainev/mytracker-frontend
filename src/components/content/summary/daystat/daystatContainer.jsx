@@ -4,19 +4,18 @@ import {connect} from "react-redux";
 
 
 
+const DaystatContainer = (props) => {
+    return <Daystat graphicData={props.graphicInfo} summaryInfo={props.summaryInfo}/>
+}
+
+
 let mapStateToProps = (state) =>{
     return{
-        graphicData: state.summaryPage.graphicData
-
-    }
-}
-let mapDispatchToProps =(dispatch) =>{
-    return{
-
 
     }
 }
 
-const DaystatContainer = connect(mapStateToProps, mapDispatchToProps())(Daystat)
 
-export default DaystatContainer;
+
+
+export default connect(mapStateToProps)(DaystatContainer)

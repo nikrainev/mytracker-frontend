@@ -1,8 +1,15 @@
+import {usersAPI} from "../api/users-api";
+import store from "./redux-store"
+
 let initialState = {
-    dayusersData: [],
-    pageSize: 5,
-    totalUsers: 17,
-    currentPage: 1,
+    summaryInfo:{
+       totalUsers: 123,
+       dayUsers: 12,
+       dayClicks: 24
+    },
+    summaryUsers: [],
+    pageSize: 7,
+    totalUsers: '',
     graphicData : [
         {value:20, day:"Вчера 11:00 - 12:00"},
         {value:20, day:"Вчера 11:00 - 12:00"},
@@ -58,38 +65,26 @@ let initialState = {
 
 const summaryReducer = (state = initialState,action) =>{
     switch (action.type){
-        case "SET-USERS":{
 
-            if(state.dayusersData.length === 0){
-                return{
-                    ...state,
-                    dayusersData: [...state.dayusersData,  ...action.usersData],
-                    currentPage: state.currentPage + 1
-                }
-            }
-            else{
-                return {
-                    ...state
-                }
-            }
-
-
-        }
-        case "LOAD-NEW-PAGE":{
-            let newCurrentPage = state.currentPage + 1
-            return {
-
-                ...state,
-                dayusersData: [...state.dayusersData, ...action.usersData],
-                currentPage: newCurrentPage
-
-            }
-
-        }
-        case "SET-TOTAL-USERS":{
+        case 'SET-SUMMARY-USERS':{
             return {
                 ...state,
-                totalUsers: action.totalUsers
+                summaryUsers: action.summaryUsers.usersPage,
+                totalUsers: action.summaryUsers.totalDocs
+            }
+        }
+        case 'ADD-SUMMARY-USERS':{
+            return {
+                ...state,
+                summaryUsers: [...state.summaryUsers, ...action.summaryUsers.usersPage],
+                totalUsers: action.summaryUsers.totalDocs
+            }
+        }
+        case 'CLEAR-SUMMARY-SELECTOR':{
+            return {
+                ...state,
+                summaryUsers: [],
+                totalUsers: ''
             }
         }
         default:
@@ -99,24 +94,45 @@ const summaryReducer = (state = initialState,action) =>{
 
 }
 
-export const setUsersActionCreator = (usersData) =>({
-    type: "SET-USERS",
-    usersData: usersData
+const setSummaryInfo = (summaryInfo) =>({
+    type: 'SET-SUMMARY-INFO',
+    summaryInfo: summaryInfo
 })
 
-export const loadNewPageActionCreator = (usersData) =>({
-    type: "LOAD-NEW-PAGE",
-    usersData: usersData
+
+const setGraphicData = (graphicData) => ({
+    type: 'SET-GRAPHIC-DATA',
+    graphicData: graphicData
 })
 
-export const setCurrentPageActionCreator = (currentPage) =>({
-    type: 'SET-CURRENT-PAGE',
-    currentPage: currentPage
 
+
+const setSummaryUsers = (summaryUsers) =>({
+    type: 'SET-SUMMARY-USERS',
+    summaryUsers: summaryUsers
 })
-export const setTotalUsersActionCreator = (totalUsers) =>({
-    type: 'SET-TOTAL-USERS',
-    totalUsers: totalUsers
+
+const addSummaryUsers = (summaryUsers) =>({
+    type: 'ADD-SUMMARY-USERS',
+    summaryUsers: summaryUsers
 })
+
+
+
+
+export const clearSummaryData = () => ({
+    type: 'CLEAR-SUMMARY-SELECTOR'
+})
+
+export const getSummaryData = () => (dispatch) =>{
+    Promise.all([usersAPI.getProfileUsers(1, store.getState().summaryPage.pageSize)]).then(response =>{
+        dispatch(setSummaryUsers(response[0]))
+    })
+}
+
+export const getMoreUsers = (page) => async (dispatch) =>{
+    let response = await usersAPI.getProfileUsers(page, store.getState().summaryPage.pageSize)
+    dispatch(addSummaryUsers(response))
+}
 
 export default summaryReducer

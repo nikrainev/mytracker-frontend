@@ -10,7 +10,6 @@ const UsersListContainer = (props) => {
 
     return <UsersList  usersList={props.counterUsers}
                        pageSize={props.pageSize}
-                       counterId={props.counterId}
                        totalUsers={props.totalUsers}
                        getMoreUsers={props.getMoreUsers}
     />
