@@ -5,6 +5,23 @@ import {Field, reduxForm} from "redux-form";
 import {Input} from "../../../components/common/formControls"
 import {required} from "../../../utils/validation";
 import doneImg from "../../../assets/icons/done.svg";
+import styled from "styled-components";
+import background from "../../../assets/summary-bg.jpg";
+
+const BackGround = styled.div`
+background: url(${background});
+display: block;
+position: fixed;
+top:0;
+left: 0;
+right: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+background-repeat: no-repeat;
+background-size: cover;
+`
+
 const LoginForm = (props) =>{
 
     return (
@@ -28,6 +45,8 @@ const LoginBlock = (props) => {
 
     }
     return  (
+            <>
+                <BackGround ></BackGround>
           <div className="container">
               <div className="login_block">
                   {props.isAuth == false ?
@@ -40,6 +59,7 @@ const LoginBlock = (props) => {
                   }
                       </div>
         </div>
+                </>
 
     );
 }

@@ -112,13 +112,29 @@ let Sidebar = (props) =>{
         props.logout()
     }
 
+    let selectSideBarClassName = () =>{
+        let className = ''
+        if(props.menuState === 'collapsed'){
+            className = s.sidebar
+        }
+        else{
+            className = s.sidebar + " " + s.sidebar_closed
+        }
+
+        if(props.backgoundType === 'backdrop_filter'){
+            className = className + " " + s.backdrop_filter
+        }
+
+        return className
+    }
+
 
 
 
     return (
 
 
-        <div className={props.menuState === 'collapsed' ? s.sidebar : s.sidebar + " " + s.sidebar_closed} > {console.log(props)}
+        <div className={selectSideBarClassName()}>
         <div className={s.sidebar_top}>
             <div className={s.logo}>Трекер</div>
             <div className={s.hamburger} onClick={()=>{props.toggleMenuState()}}>

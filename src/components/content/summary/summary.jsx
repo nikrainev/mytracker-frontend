@@ -10,6 +10,7 @@ import styled from 'styled-components'
 
 
 
+
 const SummaryContainer = (props) =>{
 
 
@@ -31,6 +32,7 @@ const SummaryContainer = (props) =>{
 
     return (
             <>
+
                 {pageState === 'fetching' ?<p>Загрузка</p> :<><DaystatContainer summaryInfo={props.summaryInfo}
                                                                                 graphicInfo={props.graphicInfo} />
                                                                                 <DayusersContainer summaryUsers={props.summaryUsers} /></> }

@@ -5,16 +5,16 @@ import styled from 'styled-components'
 
 const KeyNumbersWr  = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: flex-start;
 align-items: center;
 `
 
 const KeyNumberBlock = styled.div`
     overflow: hidden;
     position: relative;
-    width: calc(33.33% - 8px);
-    padding-bottom: calc(33.3% - 8px); // пропорции блока определяются здесь
-    background: red;
+    width: 200px;
+    padding-bottom: 200px; // пропорции блока определяются здесь
+    margin-right: 11px;
 `
 const KeyNumberContent = styled.div`
     position: absolute;
@@ -22,36 +22,59 @@ const KeyNumberContent = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #f00;
+    background: #f4f4f4;
+    
 `
 
 const KeyNumberName = styled.p`
-font-size: 20px;
+    font-size: 20px;
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
 `
 
 const KeyNumber = styled.p`
-font-size: 40px;
+    font-size: 40px;
+    position: absolute;
+    left: 16px;
+    top: 10px;
 `
 const Daystat = (props) => {
 
     return  (
-            <div className={s.container + ' container'}>
-                <div className="row">
-                    <div className="col-6">
+            <>
+            <div className='container'>
+
                         <KeyNumbersWr>
-                            <KeyNumberBlock><KeyNumberContent><KeyNumber>Клики</KeyNumber>{props.summaryInfo.dayClicks}</KeyNumberContent></KeyNumberBlock>
-                            <KeyNumberBlock><KeyNumberContent><KeyNumber>Пользователи</KeyNumber>{props.summaryInfo.totalUsers}</KeyNumberContent></KeyNumberBlock>
-                            <KeyNumberBlock><KeyNumberContent><KeyNumber>Конверсии</KeyNumber>{props.summaryInfo.dayClicks}</KeyNumberContent></KeyNumberBlock>
+                            <KeyNumberBlock>
+                                <KeyNumberContent>
+                                    <KeyNumber>{props.summaryInfo.dayClicks}</KeyNumber>
+                                    <KeyNumberName>Клики</KeyNumberName>
+                                </KeyNumberContent>
+                            </KeyNumberBlock>
+                            <KeyNumberBlock>
+                                <KeyNumberContent>
+                                    <KeyNumber>{props.summaryInfo.totalUsers}</KeyNumber>
+                                    <KeyNumberName>Пользователи</KeyNumberName>
+                                </KeyNumberContent>
+                            </KeyNumberBlock>
+                            <KeyNumberBlock>
+                                <KeyNumberContent>
+                                    <KeyNumber>{props.summaryInfo.dayClicks}</KeyNumber>
+                                    <KeyNumberName>Конверсии</KeyNumberName>
+                                </KeyNumberContent>
+                            </KeyNumberBlock>
                         </KeyNumbersWr>
-                    </div>
-                    <div className="col-6">
-
-                            <Graphic graphicData={props.graphicData}/>
 
 
-                    </div>
-                </div>
+
             </div>
+            <div className="container">
+                <Graphic graphicData={props.graphicData}/>
+            </div>
+                </>
+
+
 
 
     )

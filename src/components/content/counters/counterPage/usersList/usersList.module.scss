@@ -1,6 +1,6 @@
 .shortUser{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   background: #f7f7f7;
@@ -11,27 +11,5 @@
   height: 47px;
 }
 
-.col_1{
-  width: 7%;
-}
 
-.col_2{
- width: 7%;
-}
-
-.col_3{
- width: 26%;
-}
-
-.col_4{
- width: 20%
-}
-
-.col_5{
- width: 20%;
-}
-
-.col_6{
-  width: 20%;
-}
 

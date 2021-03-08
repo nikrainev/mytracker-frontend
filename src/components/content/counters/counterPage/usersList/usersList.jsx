@@ -4,6 +4,75 @@ import s from './usersList.module.scss'
 import {NavLink} from "react-router-dom";
 import {LoadMore} from "../../../../common/loadMore";
 
+import styled from 'styled-components'
+import AndroidIcon from '../../../../../assets/icons/os/android.svg'
+import WindowsIcon from '../../../../../assets/icons/os/windows.svg'
+import iOSIcon from '../../../../../assets/icons/os/apple.svg'
+import MacOsIcon from '../../../../../assets/icons/os/macos.svg'
+import LinuxIcon from '../../../../../assets/icons/os/linux.svg'
+
+const Time = styled.div`
+  width: 94px;
+  p{
+  padding-left: 12px;
+  }
+  
+`
+
+const Sessions = styled.div`
+  width: 140px;
+`
+
+const Referrer = styled.div`
+  width: calc(60% - 401px);
+  overflow: hidden;
+  position: relative;
+  p{
+  width: 1000px;
+  }
+  &:after{
+     content: '';
+    height: 100%;
+    display: block;
+    width: 40px;
+    background: linear-gradient(to left, #f7f7f7,transparent);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+`
+
+const City = styled.div`
+  width: 40%;
+  overflow: hidden;
+  position: relative;
+  p{
+  width: 1000px;
+  margin-left: 20px;
+  }
+  &:after{
+     content: '';
+    height: 100%;
+    display: block;
+    width: 40px;
+    background: linear-gradient(to left, #f7f7f7,transparent);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+`
+
+const Country = styled.div`
+  width: 47px;
+`
+
+const Os = styled.div`
+  width: 120px;
+  img{
+  width: 20px;
+  }
+`
+
 const LoadingUser = () =>{
     return(
             <p>Загрузка</p>
@@ -17,27 +86,46 @@ const NoUsers = () =>{
 }
 
 
+
+
 const ShortUser = (props) =>{
+    let selectOsIcon = (os) =>{
+        switch(os){
+            case 'Android':
+                return <img src={AndroidIcon} alt=""/>
+            case 'Windows':
+                return <img src={WindowsIcon} alt=""/>
+            case 'iOS':
+                return <img src={iOSIcon} alt=""/>
+            case 'Mac OS':
+                return <img src={MacOsIcon} alt=""/>
+            case 'Linux':
+                return <img src={LinuxIcon} alt=""/>
+
+            default:
+                return <p>Не определено</p>
+        }
+    }
 return(
         <NavLink to={'/users/'+props.tysId} className={s.shortUser}>
-            <div className={s.col_1}>
-                {props.time}
-            </div>
-            <div className={s.col_2}>
-                {props.sessions}
-            </div>
-            <div className={s.col_3}>
-                {props.referrer}
-            </div>
-            <div className={s.col_4}>
-                {props.city}
-            </div>
-            <div className={s.col_5}>
-                {props.country}
-            </div>
-            <div className={s.col_6}>
-                {props.os}
-            </div>
+            <Time>
+                <p>{props.time}</p>
+            </Time>
+            <Sessions>
+                <p>{props.sessions}</p>
+            </Sessions>
+            <Referrer>
+                <p>{props.referrer}</p>
+            </Referrer>
+            <City>
+                <p>{props.city}</p>
+            </City>
+            <Country>
+                <p>{props.country}</p>
+            </Country>
+            <Os>
+                {selectOsIcon(props.os)}
+            </Os>
         </NavLink>
 )
 }
@@ -58,7 +146,7 @@ const UsersList = (props) => {
 
     return (
             <div className="container">
-                Список счётчиков
+
                 <LoadMore pages={users} pageSize={props.pageSize} totalPages={props.totalUsers}
                           pageChanger={props.getMoreUsers} loader={<LoadingUser />} emptyBlock={<NoUsers />} />
             </div>

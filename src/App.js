@@ -38,7 +38,7 @@ class App extends React.Component {
                     <Route path='/profile' render={() => <ProfileContainer />} />
                     <Route path='/profilesettings' render={() => <ProfileSettings />} />
                     <Route exact path='/login'  render={()=> <LoginContainer />} />
-                    <Route path='/signup' render={()=> <SignUpContainer />} />
+                    <Route exact path='/signup' render={()=> <SignUpContainer />} />
                     <Route path='/friends' render={()=> <FriendsPage />} />
                     <Route path='/users/:tysId' render={()=><UserPageContainer />} />
             </div>
