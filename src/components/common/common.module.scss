@@ -157,3 +157,93 @@
     margin-left: 30px;
   }
 }
+
+
+.input_wr{
+  position: relative;
+  height: 76px;
+  input{
+    width: calc(100% - 12px);
+    border: 1px solid rgb(96, 94, 92);
+    height: 30px;
+    padding-left: 10px;
+    outline: none;
+    &.danger{
+      border: 1px solid #d80000;
+    }
+    &:focus{
+      border: 2px solid rgb(0,120, 212);
+      width: calc(100% - 13px);
+      height: 28px;
+      padding-left: 9px;
+    }
+  }
+  .placeholder{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: rgb(50, 49, 48);
+  }
+  .input_danger{
+    font-size: 12px;
+    color: #d80000;
+    margin-top: 5px;
+    display: block;
+
+  }
+  &.danger{
+    .input_danger{
+      display: block;
+    }
+
+  }
+
+}
+
+
+
+.password_strength{
+  position: absolute;
+  bottom: 1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-radius: 0px 4px 0px 4px;
+  overflow: hidden;
+  animation: smoothappearance 0.5s;
+  div{
+
+    width: 125px;
+    height: 6px;
+    display: block;
+  }
+  p{
+    font-size: 11px;
+    letter-spacing: -0.4px;
+    background: white;
+    width: 120px;
+    padding-left: 4px;
+    line-height: 10px;
+  }
+}
+@keyframes smoothappearance{
+  from{
+    opacity: 0%;
+  }
+  to{
+    opacity: 100%;
+  }
+}
+
+.tooWeak{
+  background: red;
+}
+.weak{
+  background: orange;
+}
+.medium{
+  background: #2fafb9;
+}
+.good{
+  background: green;
+}

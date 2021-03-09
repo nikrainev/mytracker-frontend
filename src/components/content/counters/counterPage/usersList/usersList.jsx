@@ -10,7 +10,7 @@ import WindowsIcon from '../../../../../assets/icons/os/windows.svg'
 import iOSIcon from '../../../../../assets/icons/os/apple.svg'
 import MacOsIcon from '../../../../../assets/icons/os/macos.svg'
 import LinuxIcon from '../../../../../assets/icons/os/linux.svg'
-
+import UndefinedOsIcon from '../../../../../assets/icons/os/undefined.svg'
 const Time = styled.div`
   width: 94px;
   p{
@@ -24,7 +24,7 @@ const Sessions = styled.div`
 `
 
 const Referrer = styled.div`
-  width: calc(60% - 401px);
+  width: calc(60% - 404px);
   overflow: hidden;
   position: relative;
   p{
@@ -63,14 +63,32 @@ const City = styled.div`
 `
 
 const Country = styled.div`
-  width: 47px;
+      width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 `
 
 const Os = styled.div`
-  width: 120px;
+  width: 47px;
   img{
   width: 20px;
+    margin: auto;
+    display: block;
   }
+`
+
+const ShortUserLine = styled(NavLink)`
+   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background: #f7f7f7;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  height: 47px;
 `
 
 const LoadingUser = () =>{
@@ -92,22 +110,21 @@ const ShortUser = (props) =>{
     let selectOsIcon = (os) =>{
         switch(os){
             case 'Android':
-                return <img src={AndroidIcon} alt=""/>
+                return <img src={AndroidIcon} alt="Android" />
             case 'Windows':
-                return <img src={WindowsIcon} alt=""/>
+                return <img src={WindowsIcon} alt="Windows" />
             case 'iOS':
-                return <img src={iOSIcon} alt=""/>
+                return <img src={iOSIcon} alt="iOS" />
             case 'Mac OS':
-                return <img src={MacOsIcon} alt=""/>
+                return <img src={MacOsIcon} alt="Mac OS" />
             case 'Linux':
-                return <img src={LinuxIcon} alt=""/>
-
+                return <img src={LinuxIcon} alt="Linux" />
             default:
-                return <p>Не определено</p>
+                return <img src={UndefinedOsIcon} alt="undefined" />
         }
     }
 return(
-        <NavLink to={'/users/'+props.tysId} className={s.shortUser}>
+        <ShortUserLine to={'/users/'+props.tysId} className={s.shortUser}>
             <Time>
                 <p>{props.time}</p>
             </Time>
@@ -117,21 +134,23 @@ return(
             <Referrer>
                 <p>{props.referrer}</p>
             </Referrer>
+            <Country>
+                <i className={s.flag+' '+s['flag-'+props.country]} > </i>
+                <p>{props.country}</p>
+            </Country>
             <City>
                 <p>{props.city}</p>
             </City>
-            <Country>
-                <p>{props.country}</p>
-            </Country>
+
             <Os>
                 {selectOsIcon(props.os)}
             </Os>
-        </NavLink>
+        </ShortUserLine>
 )
 }
 
 const UsersList = (props) => {
-    let users
+    let users = []
     if(props.usersList !== undefined){
         if(props.usersList !== "no users"){
             users = props.usersList.map((user) => <ShortUser time={mongoDate(user.date).time} sessions={user.sessionsNumber}

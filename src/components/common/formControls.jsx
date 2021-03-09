@@ -1,14 +1,18 @@
 import React from "react";
-import s from "../profile/login/login.module.scss";
-export const Input = ({input, meta, ...props}) =>{
+import s from "./common.module.scss";
+import styled from "styled-components"
+export const Input = ({input, meta,placeholder, ...props}) =>{
     return (
 
                 <div className={s.input_wr}>
+                    <p className={s.placeholder}>{placeholder}</p>
+                    <input className={meta.touched && meta.error && s.danger} {...input} { ...props} />
                     {meta.touched && meta.error && <span className={s.input_danger}>{meta.error}</span>}
-                    <input className="plain_input" {...input} {...props} />
                 </div>
     )
 }
+
+
 
 export const Select = () =>{
     return(
@@ -46,11 +50,17 @@ export const PasswordScoreInput = ({input, meta, ...props}) =>{
 
             <div className={s.input_wr}>
                 {meta.touched && meta.error && <span className={s.input_danger}>{meta.error}</span>}
-                <input className="plain_input" {...input} {...props} />
+                <input className={meta.touched && meta.error && s.danger} {...input} {...props} />
                 {strengthValue !== 'none' ?  <div className={s.password_strength}><div className={s[strengthValue]}></div>
                     <p>{strengthText}</p></div> : ''}
             </div>
 
     )
+
+}
+
+
+
+export const Button = () =>{
 
 }

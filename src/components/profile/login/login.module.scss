@@ -1,40 +1,35 @@
 .form{
-  width: 250px;
+  width: 300px;
   margin: auto;
   display: block;
-  input{
-    max-width: 100%;
-    display: block;
-    width: calc(100% - 22px);
-    padding: 10px;
-    border: 1px solid gray;
-
-  }
   button{
-    width: 100%;
+    width: 110px;
     padding: 10px;
-
+    margin-top: 60px;
+    float: right;
   }
 
 }
 
-.input_wr{
-  position: relative;
-  margin-top: 20px;
-  .input_danger{
-    font-size: 12px;
-    position: absolute;
-    top: -16px;
-    color: #d80000;
+.h1{
+  font-size: 25px;
+  color: #404040;
+  font-weight: 500;
+}
 
-  }
-  &.danger{
-    .input_danger{
-      display: block;
-    }
+.login_block{
+  width: 440px;
+  background: white;
+  padding-top: 35px;
+  padding-bottom: 45px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+  border: 1px solid rgba(0,0,0,0.4);
+}
 
-  }
-
+.form_danger_wr{
+  display: block;
+  height: 20px;
 }
 
 .loading_bar{
@@ -42,7 +37,7 @@
   height: 10px;
   display: block;
   position: relative;
-  margin-bottom: 20px;
+
   overflow: hidden;
   &:after{
     content: '';
@@ -76,25 +71,21 @@
 }
 
 .dont_reg_yet{
-  font-size: 14px;
-  text-align: center;
-  padding-top: 20px;
+  font-size: 13px;
+  text-align: left;
+  padding-top: 0px;
   a{
     color: #2673ff;
-    text-decoration: underline;
+    text-decoration: none;
     &:hover{
-      color: #2673ff;
-      text-decoration: none;
+      text-decoration: underline;
+      color: #666;
+
     }
   }
 }
 
-.input_danger{
-  font-size: 12px;
-  position: absolute;
-  top: -16px;
-  color: #d80000;
-}
+
 
 .form_danger{
   width: 100%;
@@ -107,6 +98,7 @@
   display: block;
   margin: auto;
   width: 250px;
+  height: 248px;
   img{
     width: 160px;
     display: block;
@@ -121,49 +113,13 @@
   }
 }
 
-.password_strength{
-  position: absolute;
-  bottom: 1px;
+
+
+
+.login_container{
+  height: calc(100vh - 11px);
+
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  border-radius: 0px 4px 0px 4px;
-  overflow: hidden;
-  animation: smoothappearance 0.5s;
-  div{
-
-    width: 125px;
-    height: 6px;
-    display: block;
-  }
-  p{
-    font-size: 11px;
-    letter-spacing: -0.4px;
-    background: white;
-    width: 120px;
-    padding-left: 4px;
-    line-height: 10px;
-  }
+  justify-content: center;
+  align-items: center;
 }
-@keyframes smoothappearance{
-  from{
-    opacity: 0%;
-  }
-  to{
-    opacity: 100%;
-  }
-}
-
-.tooWeak{
-  background: red;
-}
-.weak{
-  background: orange;
-}
-.medium{
-  background: #2fafb9;
-}
-.good{
-  background: green;
-}
-

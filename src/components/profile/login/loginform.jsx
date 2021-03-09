@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './login.module.scss';
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../../../components/common/formControls"
 import {required} from "../../../utils/validation";
@@ -22,16 +22,31 @@ background-repeat: no-repeat;
 background-size: cover;
 `
 
+const SuccessForm = () =>{
+    const [redirect, setRedirect] = useState(false)
+    useEffect(()=>{
+        setTimeout(()=>{setRedirect(true)},1500)
+    },[])
+    return(
+            <div className={s.success_auth}>
+                {redirect && <Redirect to='/summary' />}
+                <img src={doneImg} alt=""/><p>Вы авторизованы</p>
+            </div>
+    )
+}
+
 const LoginForm = (props) =>{
 
     return (
             <form onSubmit={props.handleSubmit}>
-                {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
+                <h1 className={s.h1}>Вход</h1>
+                <div className={s.form_danger_wr}>{props.error ? <span className={s.form_danger}>{props.error}</span> : ''}</div>
                 <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
-                <Field name="emailInput" type="text"  component={Input} placeholder="Введите почту" validate={required}/>
-                <Field name="passwordInput" type="password"  component={Input} placeholder="Введите пароль" validate={required}/>
-                <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</button>
-                <p className={s.dont_reg_yet}>Ещё нет аккаунта? <NavLink to='signup'>Зарегистрируйтесь</NavLink></p>
+                <Field name="emailInput" type="text"  component={Input} placeholder="Почта" validate={required}/>
+                <Field name="passwordInput" type="password"  component={Input} placeholder="Пароль" validate={required}/>
+                <p className={s.dont_reg_yet}>Нет учётной записи? <NavLink to='signup'>Создайте её!</NavLink></p>
+                <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Войти</button>
+
             </form>
     )
 }
@@ -44,17 +59,19 @@ const LoginBlock = (props) => {
         props.sendLoginRequest(values.emailInput, values.passwordInput)
 
     }
+
+
     return  (
             <>
-                <BackGround ></BackGround>
-          <div className="container">
-              <div className="login_block">
+           <BackGround />
+          <div className={`container ${s.login_container}`}>
+              <div className={s.login_block}>
                   {props.isAuth == false ?
                           <div className={s.form}>
                               <LoginReduxForm isFetching={props.isFetching} onSubmit={onSubmit}/>
                           </div>
                           :
-                          <div className={s.success_auth}><img src={doneImg} alt=""/><p>Вы авторизованы</p></div>
+                          <SuccessForm />
 
                   }
                       </div>
