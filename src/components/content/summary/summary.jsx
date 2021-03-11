@@ -33,9 +33,12 @@ const SummaryContainer = (props) =>{
     return (
             <>
 
-                {pageState === 'fetching' ?<p>Загрузка</p> :<><DaystatContainer summaryInfo={props.summaryInfo}
-                                                                                graphicInfo={props.graphicInfo} />
-                                                                                <DayusersContainer summaryUsers={props.summaryUsers} /></> }
+                {pageState === 'fetching' ?<p>Загрузка</p> :
+                        <>
+                            <div className="container h1-block"><h1 className="h1">Статистика за сутки</h1></div>
+                            <DaystatContainer summaryInfo={props.summaryInfo} graphicInfo={props.graphicInfo} />
+                            <DayusersContainer summaryUsers={props.summaryUsers} />
+                        </> }
             </>
     );
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './addaudience.module.scss';
+import {NavLink} from "react-router-dom";
+import addIcon from "../../../../assets/icons/h1-block/add.svg";
 
 const Addaudienceblock = (props) =>{
     let clicked  = (event) =>{
@@ -54,6 +56,10 @@ const Addaudienceblock = (props) =>{
 
 
     return (
+            <>
+            <div className="h1-block">
+                <h1 className="h1">Аудитории</h1>
+            </div>
             <div className="row">
                 <div className="col-6"><p>Добавьте вашу аудиторию:</p></div>
                 <div className="col-6">
@@ -75,6 +81,7 @@ const Addaudienceblock = (props) =>{
                     </div>
                 </div>
             </div>
+                </>
 
     );
 }

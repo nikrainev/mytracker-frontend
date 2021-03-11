@@ -163,19 +163,20 @@
   position: relative;
   height: 76px;
   input{
-    width: calc(100% - 12px);
+    width: calc(100% - 18px);
     border: 1px solid rgb(96, 94, 92);
     height: 30px;
-    padding-left: 10px;
+    padding: 0px 8px;
     outline: none;
+    font-size: 14px;
     &.danger{
       border: 1px solid #d80000;
     }
     &:focus{
       border: 2px solid rgb(0,120, 212);
-      width: calc(100% - 13px);
+      width: calc(100% - 19px);
       height: 28px;
-      padding-left: 9px;
+      padding-left: 7px;
     }
   }
   .placeholder{
@@ -189,7 +190,6 @@
     color: #d80000;
     margin-top: 5px;
     display: block;
-
   }
   &.danger{
     .input_danger{
@@ -200,15 +200,61 @@
 
 }
 
+.textarea_wr{
+  position: relative;
+  padding-bottom: 22px;
+  textarea{
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 0px 1px #605e5c;
+    width: calc(100% - 18px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    font-weight: 400;
+    margin: auto;
+    display: block;
+    padding: 6px 8px;
+    outline: none;
+    resize: none;
+    &.danger{
+      box-shadow: 0px 0px 0px 1px #d80000;
+    }
+
+    &:focus{
+      border: 1px solid rgb(0,120, 212);
+      box-shadow: 0px 0px 0px 1px rgb(0,120, 212);
+
+    }
+
+
+  }
+  .placeholder{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: rgb(50, 49, 48);
+
+  }
+  .input_danger{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 12px;
+    color: #d80000;
+    display: block;
+  }
+}
+
 
 
 .password_strength{
   position: absolute;
-  bottom: 1px;
+  bottom: 21px;
+  left: 1px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  border-radius: 0px 4px 0px 4px;
   overflow: hidden;
   animation: smoothappearance 0.5s;
   div{

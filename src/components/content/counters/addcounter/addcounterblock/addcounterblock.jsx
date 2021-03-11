@@ -4,6 +4,8 @@ import {Field, reduxForm} from "redux-form";
 import {Input} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 import loader_icon from "../../../../../assets/icons/loading.svg"
+import {NavLink} from "react-router-dom";
+import addIcon from "../../../../../assets/icons/h1-block/add.svg";
 const AddCounterForm = (props) =>{
 
     return (
@@ -84,18 +86,19 @@ const Addcounterblock = (props) => {
 
 
     return (
-      <div className="row">
-          <div className="col-6">
-              {textSelector()}
-
-
-          </div>
-          <div className="col-6">
+            <>
+            <div className="h1-block">
+                <h1 className="h1">Счётчики</h1>
+            </div>
+            <div className="row">
+                <div className="col-6">
+                {textSelector()}
+            </div>
+            <div className="col-6">
               {blockSelector()}
-
-
-          </div>
-      </div>
+            </div>
+            </div>
+            </>
     )
 }
 export default Addcounterblock;

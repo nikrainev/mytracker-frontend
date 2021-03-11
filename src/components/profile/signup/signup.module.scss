@@ -1,18 +1,25 @@
 .signup_form button{
-  width: 100%;
+  width: 110px;
   padding: 10px;
+  margin-top: 60px;
+  float: right;
 }
 
 .dont_reg_yet {
-  text-align: center;
+  font-size: 13px;
+  text-align: left;
+  padding-top: 0px;
   a {
     color: #2673ff;
-    text-decoration: underline;
-
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+      color: #666;
+    }
   }
 }
 .signup_form{
-  width: 250px;
+  width: 300px;
   margin: auto;
   display: block;
 }
@@ -116,20 +123,18 @@
 }
 }
 
-.profile_form_wr{
-  display: flex;
-  width: 700px;
-  justify-content: center;
-  margin: auto;
-  padding-top: 60px;
-}
 
+.profile_form_wr{
+  width: 300px;
+  margin: auto;
+}
 .profile_form{
-  width: 250px;
-  margin-left: 10px;
+  width: 100%;
   button{
-    width: 100%;
+    width: 111px;
     padding: 10px;
+    margin-top: 60px;
+    float: right;
   }
   a{
     color: #2673ff;
@@ -156,4 +161,27 @@
     color: #2673ff;
     padding-left: 15px;
   }
+}
+
+.signup_container{
+  height: calc(100vh - 11px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup_block{
+  width: 440px;
+  background: white;
+  padding-top: 35px;
+  padding-bottom: 45px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+  border: 1px solid rgba(0,0,0,0.4);
+}
+
+.h1{
+  font-size: 25px;
+  color: #404040;
+  font-weight: 500;
 }

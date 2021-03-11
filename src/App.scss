@@ -10,13 +10,58 @@ body{
 
 }
 
+.h1{
+  font-weight: 400;
+  font-size: 27px;
+}
 
+.h1-button{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  transition: .25s all;
+  text-decoration: none;
+  &-icon{
+    display: flex;
+    height: 100%;
+    width: 47px;
+    justify-content: center;
+    align-items: center;
+  }
+  &-text{
+    color: #243a5e;
+    text-decoration: none;
+  }
+  &:hover{
+    opacity: .8;
+  }
+}
+
+.h1-buttons{
+  height: 100%;
+}
+
+.h1-block{
+  padding-top: 9px;
+  padding-bottom: 6px;
+  height: 47px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  &.container{
+    display: flex;
+  }
+}
 
 .container{
   display: block;
   width: calc(100% - 52px);
   overflow: hidden;
   margin: 11px auto auto;
+
 }
 
 .row {
