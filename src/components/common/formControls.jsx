@@ -16,9 +16,7 @@ export const Input = ({input, meta,placeholder, ...props}) =>{
 
 export const Textarea = ({input, meta, placeholder, ...props}) =>{
     const textareaRef = useRef(null);
-    useEffect(()=>{
-        console.log( ReactDOM.findDOMNode(textareaRef.current).style)
-    }, [])
+
     useEffect(() => {
         textareaRef.current.style.height = "50px";
         const scrollHeight = textareaRef.current.scrollHeight;

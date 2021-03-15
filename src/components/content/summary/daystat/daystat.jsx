@@ -54,16 +54,11 @@ const Daystat = (props) => {
                             </KeyNumberBlock>
                             <KeyNumberBlock>
                                 <KeyNumberContent>
-                                    <KeyNumber>{props.summaryInfo.totalUsers}</KeyNumber>
+                                    <KeyNumber>{props.summaryInfo.dayUsers}</KeyNumber>
                                     <KeyNumberName>Пользователи</KeyNumberName>
                                 </KeyNumberContent>
                             </KeyNumberBlock>
-                            <KeyNumberBlock>
-                                <KeyNumberContent>
-                                    <KeyNumber>{props.summaryInfo.dayClicks}</KeyNumber>
-                                    <KeyNumberName>Конверсии</KeyNumberName>
-                                </KeyNumberContent>
-                            </KeyNumberBlock>
+
                         </KeyNumbersWr>
 
 

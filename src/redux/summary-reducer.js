@@ -1,66 +1,17 @@
 import {usersAPI} from "../api/users-api";
+import {summaryAPI} from "../api/summary-api";
 import store from "./redux-store"
+import {getSummaryGraphic} from "./selectors/summary-selectors";
 
 let initialState = {
     summaryInfo:{
-       totalUsers: 123,
-       dayUsers: 12,
-       dayClicks: 24
+       dayUsers: '',
+       dayClicks: ''
     },
     summaryUsers: [],
     pageSize: 7,
     totalUsers: '',
-    graphicData : [
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:20, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:40, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"},
-        {value:30, day:"Вчера 11:00 - 12:00"}
-
-    ]
+    graphicData : []
 }
 
 const summaryReducer = (state = initialState,action) =>{
@@ -85,6 +36,21 @@ const summaryReducer = (state = initialState,action) =>{
                 ...state,
                 summaryUsers: [],
                 totalUsers: ''
+            }
+        }
+        case 'SET-SUMMARY-INFO':{
+            return {
+                ...state,
+                summaryInfo:{
+                    dayClicks: action.summaryInfo.clicks,
+                    dayUsers: action.summaryInfo.users
+                }
+            }
+        }
+        case 'SET-GRAPHIC-DATA':{
+            return {
+                ...state,
+                graphicData: action.graphicData
             }
         }
         default:
@@ -125,8 +91,10 @@ export const clearSummaryData = () => ({
 })
 
 export const getSummaryData = () => (dispatch) =>{
-    Promise.all([usersAPI.getProfileUsers(1, store.getState().summaryPage.pageSize)]).then(response =>{
+    Promise.all([usersAPI.getProfileUsers(1, store.getState().summaryPage.pageSize), summaryAPI.getSummary(), summaryAPI.getSummaryGraphic()]).then(response =>{
         dispatch(setSummaryUsers(response[0]))
+        dispatch(setSummaryInfo(response[1]))
+        dispatch(setGraphicData(response[2]))
     })
 }
 
