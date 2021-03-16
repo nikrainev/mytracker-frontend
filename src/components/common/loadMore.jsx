@@ -47,6 +47,7 @@ export class LoadMore extends React.Component{
             this.setState({isFetching: false})
             this.setState({initialized: true})
         }
+        console.log(this.state.pages)
 
     }
 

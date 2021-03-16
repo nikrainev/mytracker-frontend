@@ -4,11 +4,6 @@ import DaystatContainer from "./daystat/daystatContainer";
 import {connect} from "react-redux";
 import {getSummaryData, clearSummaryData} from "../../../redux/summary-reducer";
 import {getSummaryInfo, getSummaryGraphic, getSummaryUsers} from "../../../redux/selectors/summary-selectors";
-import styled from 'styled-components'
-
-
-
-
 
 
 const SummaryContainer = (props) =>{

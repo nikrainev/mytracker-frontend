@@ -149,10 +149,10 @@ let Sidebar = (props) =>{
                      <div className={s.menu_icon}><img src={eyeIcon} alt=""/></div>
                      <p>Счётчики</p>
                  </NavLink>
-                 <NavLink to={'/audiences'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
+                 {/* <NavLink to={'/audiences'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
                      <div className={s.menu_icon}><img src={auditoriesIcon} alt=""/></div>
                      <p>Аудитории</p>
-                 </NavLink>
+                 </NavLink> */}
                  <NavLink to={'/friends'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
                      <div className={s.menu_icon}><img src={friendsIcon} alt=""/></div>
                      <p>Друзья</p>

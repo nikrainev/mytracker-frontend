@@ -5,9 +5,7 @@
 }
 
 body{
-  min-width: 1100px;
   min-height: 100vh;
-
 }
 
 .h1{
@@ -74,7 +72,7 @@ body{
 
 .content{
   width: calc(100% - 320px);
-  min-height: calc(100vh - 47px);
+  min-height: 100vh;
   transition: .25s ;
   transition-property: margin-left, width;
   margin-left: 320px;
@@ -401,5 +399,22 @@ h2{
       width: 20px;
     }
   }
+
+}
+
+@media screen and (max-width: 1300px){
+  .content {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+}
+
+@media screen and (max-width: 992px){
+  .content {
+    width: 100%;
+    margin-left: 0px;
+    padding-bottom: 47px;
+  }
+
 
 }

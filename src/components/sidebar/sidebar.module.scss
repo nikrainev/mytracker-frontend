@@ -1,6 +1,7 @@
 .sidebar {
   width: 320px;
-
+  top: 0px;
+  left:0px;
   height: 100vh;
   position: fixed;
   z-index: 100;
@@ -179,4 +180,79 @@
 .sidebar {
   border-radius: 1px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 1300px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 992px){
+  .sidebar{
+    width: 100%;
+    height: 47px;
+    top: auto;
+    bottom: 0px;
+    backdrop-filter: blur(10px);
+    flex-direction: row-reverse;
+    overflow: visible;
+    &:before{
+      display: none;
+    }
+    &:after{
+      border-right: none;
+    }
+    .logo{
+      display: none;
+    }
+    &_top{
+      width: 80%;
+    }
+  }
+  .hamburger{
+    display: none;
+  }
+  .sidebar_top{
+    width: calc(100% - 94px);
+  }
+  .sidebar_menu{
+    padding-top: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .link_item.active:before {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #0078d7;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+  }
+
+  .user_login{
+    display: none;
+  }
+
+  .profile_cont{
+    width: 94px;
+    margin-bottom: 0px;
+    height: 100%;
+  }
+  .link_item{
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 750px){
+  .link_item p{
+    display: none;
+  }
+  .menu_icon{
+    margin: auto;
+  }
 }

@@ -91,11 +91,32 @@ const ShortUserLine = styled(NavLink)`
   height: 47px;
 `
 
-const LoadingUser = () =>{
-    return(
-            <p>Загрузка</p>
-    )
-}
+const LoadingUser = styled.div`
+    width: 100%;
+    background: #f7f7f7;
+    margin-bottom: 10px;
+    height: 47px;
+    display: block;
+    animation: loadingScheme 1s infinite ;
+  
+  @keyframes loadingScheme {
+    0%{background: #efefef}
+    50%{background: #dcdcdc}
+    100%{background: #efefef}
+  }
+`
+
+const ListDivider = styled.div`
+    height: 46px;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 10px;
+        display: flex;
+    align-items: flex-end;
+    p{
+    margin-bottom: 5px;
+    }
+`
+
 
 const NoUsers = () =>{
     return(
@@ -153,10 +174,28 @@ const UsersList = (props) => {
     let users = []
     if(props.usersList !== undefined){
         if(props.usersList !== "no users"){
-            users = props.usersList.map((user) => <ShortUser time={mongoDate(user.date).time} sessions={user.sessionsNumber}
-                                                             city={user.city} country={user.country}
-                                                             os={user.os} tysId={user.tysId}
-                                                             referrer={user.referrer}/>)
+            let lastDivider = ''
+            props.usersList.forEach((item, index)=>{
+                if(mongoDate(item.date).comparativeDate !== lastDivider){
+                    lastDivider = mongoDate(item.date).comparativeDate
+                    users.push({divider: mongoDate(item.date).comparativeDate}, item)
+
+                }
+                else{
+                    users.push(item)
+                }
+
+            })
+            users = users.map((user) => {
+                if(user.divider) {
+                    return <ListDivider><p>{user.divider}</p></ListDivider>
+                }
+                else{
+                return <ShortUser key={user.tysId} time={mongoDate(user.date).time} sessions={user.sessionsNumber}
+                                  city={user.city} country={user.country}
+                                  os={user.os} tysId={user.tysId}
+                                  referrer={user.referrer}/>}
+                })
         }
         else{
             users ="empty"

@@ -89,23 +89,28 @@ let Hours48Dot = styled.div`
 
 const Graphic = (props) => {
     const [hideH, setHideH] = useState(false)
+    const hideRef = useRef(false)
     const hRef = useRef(null);
 
-
     const changeHState = (e) =>{
-        if(hideH === false && hRef.current.getBoundingClientRect().x + hRef.current.getBoundingClientRect().width > e.clientX - 50){
 
+
+        if(hRef.current.getBoundingClientRect().x + hRef.current.getBoundingClientRect().width > e.clientX - 50){
+
+            //hideRef.current = true
             setHideH(true)
-            console.log(hideH)
+
+        }
+        else if( hRef.current.getBoundingClientRect().x + hRef.current.getBoundingClientRect().width < e.clientX - 50){
+            //hideRef.current = false
+            setHideH(false)
         }
         else{
-            setHideH(false)
+
         }
 
     }
-    useEffect(()=>{
 
-    }, [])
 
 
 
@@ -116,11 +121,11 @@ const Graphic = (props) => {
                                                                                    colValue={coldata.usersCount}/>)
 
     return  (
-            <GraphicWr onMouseOver={(e)=>{changeHState(e)}} onMouseOut={()=>{setHideH(false)}}>
+            <GraphicWr onMouseLeave={()=>{setHideH(false)}}>
+
                 <GraphicName ref={hRef} hide={hideH}>Пользователи в час</GraphicName>
-               <GraphicColsWR>
+               <GraphicColsWR onMouseMove={(e)=>{changeHState(e)}}>
                    {graphicColElements}
-                   {console.log('render')}
                </GraphicColsWR>
 
               <GraphicBottom>
@@ -136,4 +141,4 @@ const Graphic = (props) => {
 
     )
 }
-export default Graphic;
+export default React.memo(Graphic);
