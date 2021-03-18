@@ -3,7 +3,9 @@ import Addcounter from './addcounter/addcounter.jsx';
 import CounterslistContainer from "./counterslist/counterslistContainer";
 import {CountersListLoading} from "../../common/loadingSchemes"
 import {connect} from "react-redux";
-import addIcon from "../../../assets/icons/h1-block/add.svg"
+import {compose} from "redux";
+import WithAuthRedirect from "../../../hoc/withAuthRedirect";
+
 
 const Counters = (props) =>{
     return (
@@ -24,4 +26,4 @@ const mapStateToProps = (state) => {
         isInitialized: state.app.isInitialized
     }
 }
-export default connect(mapStateToProps)(Counters);
+export default compose(connect(mapStateToProps), WithAuthRedirect)(Counters);

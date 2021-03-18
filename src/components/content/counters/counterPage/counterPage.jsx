@@ -5,6 +5,8 @@ import UsersListContainer from "./usersList/usersListContainer";
 import {clearCurrentCounter, getCurrentCounter} from "../../../../redux/counters-reducer";
 import {connect} from "react-redux";
 import {getCurrentCounterUsers, getCurrentCounterInfo} from "../../../../redux/selectors/counters-selectors";
+import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const CounterPage = (props) =>{
     let {counterId} = useParams()
@@ -40,4 +42,4 @@ let mapStateToProps = (state) => {
        counterUsers: getCurrentCounterUsers(state)
     }
 }
-export default connect(mapStateToProps,{getCurrentCounter, clearCurrentCounter})(CounterPage);
+export default compose(connect(mapStateToProps,{getCurrentCounter, clearCurrentCounter}), WithAuthRedirect)(CounterPage);

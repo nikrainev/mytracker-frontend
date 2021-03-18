@@ -255,4 +255,16 @@
   .menu_icon{
     margin: auto;
   }
+
+  .link_item.active:before {
+    margin-left: 50%;
+    content: '';
+    display: block;
+    height: 4px;
+    width: 47px;
+    background: #0078d7;
+    position: absolute;
+    left: -23.5px;
+    bottom: 0px;
+  }
 }

@@ -415,6 +415,11 @@ h2{
     margin-left: 0px;
     padding-bottom: 47px;
   }
-
-
 }
+
+@media screen and (max-width: 750px){
+  .container{
+    width: calc(100% - 22px);
+  }
+}
+

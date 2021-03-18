@@ -4,6 +4,8 @@ import UserPage from "./userPage";
 import {clearUserInfo, getUserInfo} from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import {getUserInfoFromState, getUserSessionsList} from '../../redux/selectors/users-selectors'
+import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const UserPageContainer = (props) =>{
     let {tysId} = useParams()
@@ -41,4 +43,4 @@ let mapStateToProps = (state) => {
 
     }
 }
-export default connect(mapStateToProps,{clearUserInfo, getUserInfo})(UserPageContainer);
+export default compose(connect(mapStateToProps,{clearUserInfo, getUserInfo}), WithAuthRedirect)(UserPageContainer);

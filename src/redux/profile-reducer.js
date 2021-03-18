@@ -5,6 +5,7 @@ let initialState = {
     soName: '',
     company: '',
     description: '',
+    avatar: 'none',
     pageSize: 5,
     totalProfiles: undefined,
     proposals: [],
@@ -51,6 +52,11 @@ const profileReducer = (state = initialState, action) =>{
                 ...state,
                 deletedFriend: [action.friendId]
             }
+        case 'profile/SET-AVATAR':
+            return {
+                ...state,
+                avatar: action.avatarData
+            }
         default:
                 return state
 
@@ -96,10 +102,18 @@ export const setDeletedFriend = (friendId)=>({
     friendId: friendId
 })
 
+export const setAvatar = (avatarData) =>({
+    type: 'profile/SET-AVATAR',
+    avatarData: avatarData
+})
 
 
 
+export const getAvatar = () => async (dispatch) =>{
+    let response = await profileAPI.getAvatar()
+    dispatch(setAvatar(response))
 
+}
 
 export const getProposals = () => async (dispatch)=>{
 
@@ -108,7 +122,6 @@ export const getProposals = () => async (dispatch)=>{
 }
 
 export const getProfileInfo = () => async (dispatch) =>{
-
     let response = await profileAPI.getProfileInfo()
     dispatch(setProfileInfo(response))
 }

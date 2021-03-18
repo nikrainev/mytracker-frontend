@@ -4,6 +4,8 @@ import DaystatContainer from "./daystat/daystatContainer";
 import {connect} from "react-redux";
 import {getSummaryData, clearSummaryData} from "../../../redux/summary-reducer";
 import {getSummaryInfo, getSummaryGraphic, getSummaryUsers} from "../../../redux/selectors/summary-selectors";
+import WithAuthRedirect from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 const SummaryContainer = (props) =>{
@@ -45,4 +47,4 @@ let mapStateToProps = (state) => {
         summaryUsers: getSummaryUsers(state)
     }
 }
-export default connect(mapStateToProps,{getSummaryData, clearSummaryData})(SummaryContainer);
+export default compose(connect(mapStateToProps,{getSummaryData, clearSummaryData}),WithAuthRedirect)(SummaryContainer);

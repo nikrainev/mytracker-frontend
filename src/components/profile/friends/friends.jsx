@@ -1,11 +1,11 @@
 import React from 'react';
-import s from './friends.module.scss';
 import NewFriendsContainer from "./newFriends/newFriendsContainer";
 import UsersListContainer from "./usersList/usersListContainer";
 import {connect} from "react-redux";
 import {FriendsPageLoader} from "../../common/loadingSchemes";
-import {NavLink} from "react-router-dom";
-import addIcon from "../../../assets/icons/h1-block/add.svg";
+import WithAuthRedirect from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
+
 const FriendsPage = (props) => {
     return  (
             <>
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => {
         isInitialized: state.app.isInitialized
     }
 }
-export default connect(mapStateToProps)(FriendsPage)
+export default compose(connect(mapStateToProps), WithAuthRedirect)(FriendsPage)

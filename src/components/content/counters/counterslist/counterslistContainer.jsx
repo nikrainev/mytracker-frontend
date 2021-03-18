@@ -2,8 +2,7 @@ import React from "react";
 import Counterslist from "./counterslist";
 import {connect} from "react-redux";
 import {setCounters, setTotalCounters, getCounters} from "../../../../redux/counters-reducer";
-import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
-import {compose} from   "redux"
+
 class CounterslistContainer extends React.Component{
     componentDidMount() {
            this.props.getCounters(1)
@@ -37,6 +36,6 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default CounterslistContainer = compose(connect(mapStateToProps, {setCounters, setTotalCounters,
-    getCounters}), WithAuthRedirect)(CounterslistContainer)
+export default connect(mapStateToProps, {setCounters, setTotalCounters,
+    getCounters})(CounterslistContainer)
 
