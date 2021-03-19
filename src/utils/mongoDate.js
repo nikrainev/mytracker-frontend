@@ -8,11 +8,11 @@ const mongoDate = (inputDate) => {
     const millieSecondsCompare = (firstDate, secondDate) =>{
         return (firstDate - secondDate)/(60*60*1000)
     }
-    if(millieSecondsCompare(Date.now(), Date.parse(inputDate)) < (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds())/(3600)){
+    if(millieSecondsCompare(Date.now(), Date.parse(inputDate)) < (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds() + dateNow.getMilliseconds())/(3600)){
        comparativeDate = 'Сегодня'
     }
-    else if (millieSecondsCompare(Date.now(), Date.parse(inputDate)) > (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds())/(3600)
-            && millieSecondsCompare(Date.now(), Date.parse(inputDate)) < 24 + (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds())/(3600)){
+    else if (millieSecondsCompare(Date.now(), Date.parse(inputDate)) > (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds() + dateNow.getMilliseconds())/(3600)
+            && millieSecondsCompare(Date.now(), Date.parse(inputDate)) < 24 + (dateNow.getHours() * 3600 + dateNow.getMinutes() * 60 + dateNow.getSeconds() + dateNow.getMilliseconds())/(3600)){
         comparativeDate = 'Вчера'
     }
     else {

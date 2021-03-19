@@ -18,9 +18,16 @@ const summaryReducer = (state = initialState,action) =>{
     switch (action.type){
 
         case 'SET-SUMMARY-USERS':{
+            let users = ''
+            if(action.summaryUsers.users){
+                users = action.summaryUsers.users
+            }
+            else{
+                users = action.summaryUsers.usersPage
+            }
             return {
                 ...state,
-                summaryUsers: action.summaryUsers.usersPage,
+                summaryUsers: users,
                 totalUsers: action.summaryUsers.totalDocs
             }
         }
@@ -35,7 +42,13 @@ const summaryReducer = (state = initialState,action) =>{
             return {
                 ...state,
                 summaryUsers: [],
-                totalUsers: ''
+                totalUsers: '',
+                graphicData: [],
+                summaryInfo:{
+                    dayClicks: '',
+                    dayUsers: ''
+                }
+
             }
         }
         case 'SET-SUMMARY-INFO':{

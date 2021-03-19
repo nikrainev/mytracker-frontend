@@ -7,6 +7,10 @@ const KeyNumbersWr  = styled.div`
 display: flex;
 justify-content: flex-start;
 align-items: center;
+@media screen and (max-width: 500px){
+justify-content: space-between;
+margin-bottom: 1px;
+}
 `
 
 const KeyNumberBlock = styled.div`
@@ -15,6 +19,12 @@ const KeyNumberBlock = styled.div`
     width: 200px;
     padding-bottom: 200px; // пропорции блока определяются здесь
     margin-right: 11px;
+    @media screen and (max-width: 500px){
+    width: calc(50% - 6px);
+    padding-bottom: calc(50% - 6px);
+    margin-right: 0px;
+    }
+    
 `
 const KeyNumberContent = styled.div`
     position: absolute;
@@ -31,6 +41,9 @@ const KeyNumberName = styled.p`
     position: absolute;
     right: 16px;
     bottom: 10px;
+    @media screen and (max-width: 360px){
+    font-size: 16px;
+    }
 `
 
 const KeyNumber = styled.p`

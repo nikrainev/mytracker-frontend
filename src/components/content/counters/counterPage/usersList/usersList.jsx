@@ -11,16 +11,29 @@ import iOSIcon from '../../../../../assets/icons/os/apple.svg'
 import MacOsIcon from '../../../../../assets/icons/os/macos.svg'
 import LinuxIcon from '../../../../../assets/icons/os/linux.svg'
 import UndefinedOsIcon from '../../../../../assets/icons/os/undefined.svg'
+
+import NoUsersIcon from '../../../../../assets/icons/emptyUsers.svg'
 const Time = styled.div`
   width: 94px;
   p{
   padding-left: 12px;
   }
-  
+  @media screen and (max-width: 1400px){
+  width: 80px;
+  }
+  @media screen and (max-width: 500px){
+  width: 64px;
+  }
 `
 
 const Sessions = styled.div`
   width: 140px;
+  @media screen and (max-width: 1400px){
+  width: 47px;
+  }
+  @media screen and (max-width: 500px){
+  width: 30px;
+  }
 `
 
 const Referrer = styled.div`
@@ -40,6 +53,13 @@ const Referrer = styled.div`
     top: 0px;
     right: 0px;
   }
+  @media screen and (max-width: 1400px){
+  width: calc(70% - 257px);
+  }
+  @media screen and (max-width: 750px){
+  width: calc(100% - 200px);
+  }
+  
 `
 
 const City = styled.div`
@@ -60,6 +80,12 @@ const City = styled.div`
     top: 0px;
     right: 0px;
   }
+  @media screen and (max-width: 1400px){
+  width: 30%;
+  }
+  @media screen and (max-width: 750px){
+  display: none;
+  }
 `
 
 const Country = styled.div`
@@ -67,6 +93,12 @@ const Country = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    @media screen and (max-width: 750px){
+    width: 80px;
+    }
+    @media screen and (max-width: 500px){
+    width: 64px;
+    }
 `
 
 const Os = styled.div`
@@ -117,10 +149,49 @@ const ListDivider = styled.div`
     }
 `
 
+const Visits = styled.span`
+    background: #2980ea;
+    border-radius: 50%;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    display: block;
+`
+
+const NoUsersBlock = styled.div`
+    background: #f7f7f7;
+    padding: 15px;
+    width: calc(100% - 30px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    img{
+    width: 47px;
+   
+    }
+    div{
+    width: 70px;
+    }
+    p{
+    width: calc(100% - 70px);
+    }
+`
+
+
 
 const NoUsers = () =>{
     return(
-            <p>Нет пользователей</p>
+            <NoUsersBlock>
+                <div>
+                    <img src={NoUsersIcon} alt=""/>
+                </div>
+                <p>У Вас ещё нет пользователей, подождите или добавьте новый счётчик</p>
+            </NoUsersBlock>
+
     )
 }
 
@@ -150,7 +221,7 @@ return(
                 <p>{props.time}</p>
             </Time>
             <Sessions>
-                <p>{props.sessions}</p>
+                <Visits>{props.sessions}</Visits>
             </Sessions>
             <Referrer>
                 <p>{props.referrer}</p>

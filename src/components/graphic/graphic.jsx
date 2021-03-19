@@ -27,9 +27,14 @@ let GraphicBottom = styled.div`
     margin: auto;
     margin-top: 8px;
     padding-top: 3px;
+    
     p{
      color: gray;
      position: absolute;
+     font-size: 16px;
+     @media screen and (max-width: 500px){
+     font-size: 13px;
+     }
     }
     div{
             width: 9px;

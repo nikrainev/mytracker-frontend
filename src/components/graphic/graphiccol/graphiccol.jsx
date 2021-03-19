@@ -9,6 +9,9 @@ const Col = styled.div`
  @media screen and (max-width: 1200px){
   width: 6px;
  }
+ @media screen and (max-width: 500px){
+  width: 4px;
+ }
  
 `
 
