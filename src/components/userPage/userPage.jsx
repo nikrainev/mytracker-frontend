@@ -3,76 +3,57 @@ import s from './userPage.module.scss'
 import mongoDate from "../../utils/mongoDate";
 const UserPage = (props) => {
     let userInfo = props.userInfo
-       let sessionCount = 1
-       let userSessions = props.userSessions.map((session)=>
-               <div className={s.session}>
-                <span className={s.sessionNumber}>{sessionCount++}</span>
-                <p className={s.entryTime}>{mongoDate(session.entryTime).time}</p>
-                <p className={s.awayTime}>{mongoDate(session.awayTime).time}</p>
-               </div>)
 
 
-       let DatesMapper = (sessions) =>{
-        let datesMap = []
-         const millieSecondsCompare = (firstDate, secondDate) =>{
-            return (firstDate - secondDate)/(60*60*1000)
-         }
-         for(let i = 0; sessions.length > i; i++){
-             let d = new Date();
-             if(sessions[i].awayTime){
-                 if(millieSecondsCompare(Date.now(), Date.parse(sessions[i].awayTime)) < (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds())/(3600)){
-                     datesMap.push({index: i, date: 'Сегодня'})
-                 }
-                 else if (millieSecondsCompare(Date.now(), Date.parse(sessions[i].awayTime)) > (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds())/(3600)
-                         && millieSecondsCompare(Date.now(), Date.parse(sessions[i].awayTime)) < 24 + (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds())/(3600)){
-                     datesMap.push({index: i, date: 'Вчера'})
-                 }
-                 else {
-                     datesMap.push({index: i, date: mongoDate(sessions[i].awayTime).date})
-                 }
-             }
-         }
-         let cleanDatesMap = [datesMap[0]]
-         for(let i = 1; datesMap.length > i; i++){
-             let prevDate = i - 1
-             if(datesMap[i].date !== datesMap[prevDate].date){
-                 cleanDatesMap.push(datesMap[i])
 
-             }
-         }
-        return cleanDatesMap
-       }
-       console.log(DatesMapper(props.userSessions))
 
-       const getSessionsWithDates = (datesMap, sessions) =>{
-        let sessionsCopy = [...sessions]
-        let datesMapCopy = [...datesMap]
-         for(let i = 0; sessionsCopy.length > i; i++){
+    let users = []
+    let lastDivider = ''
+    props.userSessions.forEach((item, index)=>{
+        if(item.awayTime && mongoDate(item.awayTime).comparativeDate !== lastDivider){
+            lastDivider = mongoDate(item.awayTime).comparativeDate
+            users.push({divider: mongoDate(item.awayTime).comparativeDate}, item)
 
-             for(let ii = 0; datesMapCopy.length > ii; ii++){
-                 if((datesMapCopy[ii].index + ii) === i){
-                     sessionsCopy.splice(i,0, <div className={s.date_divider}>{datesMapCopy[ii].date}</div> )
+        }
+        else{
+            users.push(item)
+        }
 
-                 }
-             }
+    })
+    let sessionCount = 0
+    users = users.map((user) => {
+        if(user.divider) {
+            return <div className={s.date_divider}>{user.divider}</div>
+        }
+        else{
+            return <div className={s.session}>
+                <span className={s.sessionNumber}>{++sessionCount}</span>
+                <div className={s.session_line}>
+                    {user.entryTime ? <p className={s.time}>{mongoDate(user.entryTime).time}</p> : <p className={s.notdefined}>Не определено</p>}
+                    <div className={s.time_line}></div>
+                    {user.awayTime ? <p className={s.time}>{mongoDate(user.awayTime).time}</p> : <p className={s.notdefined}>Не определено</p>}
+                </div>
 
-         }
-         return sessionsCopy
-       }
+            </div>}
+    })
+
+
 
 
 
         return (
+                <>
+                <div className="container h1-block">
+                    <h1 className='h1'>Пользователь <span className={s.tysId}>{userInfo._id}</span></h1>
+                </div>
                 <div className='container'>
 
-                    <div className="row">
-                        <div className="col-6">
-                            <div className={s.main_info}>
-                                <h4 className={s.h4}>Основное:</h4>
-                                <div className={s.label_row}>
-                                    <label htmlFor="">tysId</label>
-                                    <p>{userInfo._id}</p>
-                                </div>
+
+                    <div className={s.row}>
+                        <div className={s.block + " " + s.col_6}>
+
+                                <h3 className={s.h3}>Основное:</h3>
+
                                 <div className={s.label_row}>
                                     <label htmlFor="">URL</label>
                                     <p>{userInfo.referer}</p>
@@ -91,22 +72,23 @@ const UserPage = (props) => {
                                 </div>
 
 
-                            </div>
                         </div>
-                        <div className="col-6">
-                            <div className={s.visits}>
-                                <h4 className={s.h4}>Посещения:</h4>
-                                {getSessionsWithDates(DatesMapper(props.userSessions), userSessions)}
+                        <div className={s.block + " " + s.col_6}>
 
-
+                                <h3 className={s.h3}>Посещения:</h3>
+                            <div className={s.sessions_cont}>
+                                {users}
                             </div>
+
+
+
                         </div>
                     </div>
 
                     <div className={s.device_info}>
                         <h4 className={s.h4}>Устройство:</h4>
-                        <div className="row">
-                            <div className="col-4">
+                        <div className={s.row}>
+                            <div className={s.block + " " + s.col_4}>
                                 <h5 className={s.col_head}>Браузер</h5>
                                 <div className={s.label_row}>
                                     <label htmlFor="">Имя</label>
@@ -122,7 +104,7 @@ const UserPage = (props) => {
                                 </div>
 
                             </div>
-                            <div className="col-4">
+                            <div className={s.block + " " + s.col_4}>
                                 <h5 className={s.col_head}>ОС</h5>
                                 <div className={s.label_row}>
                                     <label htmlFor="">Название</label>
@@ -134,7 +116,7 @@ const UserPage = (props) => {
                                 </div>
 
                             </div>
-                            <div className="col-4">
+                            <div className={s.block + " " + s.col_4}>
                                 <h5 className={s.col_head}>Об утстройстве</h5>
                                 <div className={s.label_row}>
                                     <label htmlFor="">Производитель</label>
@@ -158,10 +140,10 @@ const UserPage = (props) => {
                         </div>
                     </div>
 
-                    <div className={s.geo_info}>
+                    <section>
                         <h4 className={s.h4}>Расшифровка IP:</h4>
-                            <div className="row">
-                                <div className="col-4">
+                            <div className={s.row}>
+                                <div className={s.block + " " + s.col_4}>
                                     <h5 className={s.col_head}>География</h5>
                                     <div className={s.label_row}>
                                         <label htmlFor="">Код страны</label>
@@ -181,7 +163,7 @@ const UserPage = (props) => {
                                     </div>
 
                                 </div>
-                                <div className="col-4">
+                                <div className={s.block + " " + s.col_4}>
                                     <h5 className={s.col_head}>Оператор</h5>
                                     <div className={s.label_row}>
                                         <label htmlFor="">Провайдер</label>
@@ -197,10 +179,10 @@ const UserPage = (props) => {
                                     </div>
 
                                 </div>
-                                <div className="col-4">
+                                <div className={s.block + " " + s.col_4}>
                                     <h5 className={s.col_head}>Остальное</h5>
                                     <div className={s.label_row}>
-                                        <label htmlFor="">Почтовый индекс</label>
+                                        <label htmlFor="">Индекс</label>
                                         <p>{userInfo.data.ipInfo.zip}</p>
                                     </div>
                                     <div className={s.label_row}>
@@ -211,26 +193,28 @@ const UserPage = (props) => {
                                 </div>
                             </div>
 
-                    </div>
-                    <div className={s.headers_info}>
+                    </section>
+                    <section>
                         <h4 className={s.h4}>Заголовки:</h4>
-                        <div className={s.label_row}>
-                            <label htmlFor="">user_agent</label>
-                            <p>{userInfo.data.headers.user_agent}</p>
-                        </div>
-                        <div className={s.label_row}>
-                            <label htmlFor="">accept</label>
-                            <p>{userInfo.data.headers.accept}</p>
-                        </div>
-                        <div className={s.label_row}>
-                            <label htmlFor="">languages</label>
-                            <p>{userInfo.data.headers.languages}</p>
-                        </div>
-                    </div>
 
+                        <div className={s.block + " " + s.col_12}>
+                            <div className={s.label_row}>
+                                <label htmlFor="">user_agent</label>
+                                <p>{userInfo.data.headers.user_agent}</p>
+                            </div>
+                            <div className={s.label_row}>
+                                <label htmlFor="">accept</label>
+                                <p>{userInfo.data.headers.accept}</p>
+                            </div>
+                            <div className={s.label_row}>
+                                <label htmlFor="">languages</label>
+                                <p>{userInfo.data.headers.languages}</p>
+                            </div>
+                        </div>
 
-
+                    </section>
                 </div>
+                    </>
         )
 
 }
