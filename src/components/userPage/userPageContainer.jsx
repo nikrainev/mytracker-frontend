@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {getUserInfoFromState, getUserSessionsList} from '../../redux/selectors/users-selectors'
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {UserPageLoader} from "../common/loadingSchemes";
 
 const UserPageContainer = (props) =>{
     let {tysId} = useParams()
@@ -20,7 +21,7 @@ const UserPageContainer = (props) =>{
         }
     },[])
 
-    useEffect(()=>{
+     useEffect(()=>{
         if(props.userInfo !== ""){
             setPageState("main")
         }
@@ -28,7 +29,7 @@ const UserPageContainer = (props) =>{
 
     return (
             <>
-                {pageState === 'fetching' ?<p>Загрузка</p> :<UserPage userInfo={props.userInfo}
+                {pageState === 'fetching' ?<UserPageLoader /> :<UserPage userInfo={props.userInfo}
                                                                       userSessions={props.userSessions}
                                                                       tysId={props.tysId}
                 /> }

@@ -73,3 +73,35 @@ export const SummaryPageLoader = () =>{
             </div>
     )
 }
+
+export const UserPageLoader = () =>{
+    return (
+            <div className="container">
+                <div className={s.loading_scheme}>
+                    <div className={s.h1 +" "+ s.elem} />
+                    <div className={s.user_stat_row}>
+                        <div className={s.user_main_block +" "+ s.elem} />
+                        <div className={s.user_main_block +" "+ s.elem} />
+                    </div>
+
+                    <div className={s.user_h3 +" "+ s.elem} />
+                    <div className={s.user_blocks_row}>
+                        <div className={s.user_block +" "+ s.elem} />
+                        <div className={s.user_block +" "+ s.elem} />
+                        <div className={s.user_block +" "+ s.elem} />
+                    </div>
+
+                    <div className={s.user_h3 +" "+ s.elem} />
+                    <div className={s.user_blocks_row}>
+                        <div className={s.user_block +" "+ s.elem} />
+                        <div className={s.user_block +" "+ s.elem} />
+                        <div className={s.user_block +" "+ s.elem} />
+                    </div>
+
+                    <div className={s.user_h3 +" "+ s.elem} />
+                    <div className={s.user_block_col_12 +" "+ s.elem} />
+
+                </div>
+            </div>
+    )
+}
