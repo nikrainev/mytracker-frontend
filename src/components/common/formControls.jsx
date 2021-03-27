@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState} from "react";
-import ReactDOM from 'react-dom'
-import s from "./common.module.scss";
 
+import s from "./common.module.scss";
+import styled from 'styled-components'
 
 export const Input = ({input, meta,placeholder, ...props}) =>{
     return (
@@ -84,7 +84,29 @@ export const PasswordScoreInput = ({input, meta, placeholder, ...props}) =>{
 }
 
 
+const ButtonStyled = styled.button`
+    background: ${props=> props.primary ? "#006eb9" : "white" };
+    color: ${props=> props.primary ? "#fff" : "#201f1e"};
+    padding: 8px 20px 7px 20px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border: 1px solid  ${props => props.primary ? "#006eb9" : "#323130"};
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    &:hover{
+    
+    }
+`
 
-export const Button = () =>{
+
+export const Button = (props) =>{
+    return(
+                    <ButtonStyled {...props}/>
+            )
 
 }

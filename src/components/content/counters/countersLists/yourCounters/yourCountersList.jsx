@@ -1,8 +1,8 @@
 import React from 'react';
-import s from './counterslist.module.scss';
-import Shortcounter from './shortcounter/shortcounter.jsx';
-import {Pagination} from "../../../common/pagination";
-import plus from "../../../../assets/icons/plus.svg"
+import s from '../counterslist.module.scss';
+import Shortcounter from '../shortcounter/shortcounter.jsx';
+import {Pagination} from "../../../../common/pagination/pagination";
+import plus from "../../../../../assets/icons/plus.svg"
 const LoadingCounter = ()=>{
     return <div className={s.loading_counter}> </div>
 
@@ -18,7 +18,9 @@ const EmptyBlock = () =>{
 
 
 
-const Counterslist = (props) => {
+
+
+const YourCountersList = (props) => {
 
        let countersElement = []
 
@@ -28,7 +30,9 @@ const Counterslist = (props) => {
                                                                    domen={counter.domen}
                                                                    dayusers={counter.dayusers}
                                                                    allusers={counter.allusers}
-                                                                   status={counter.status}/> )
+                                                                   status={counter.status}
+                                                                   login={counter.login}
+           /> )
        }
        else{
            countersElement = 'empty'
@@ -39,7 +43,7 @@ const Counterslist = (props) => {
             for(let i=0; i < props.pageSize; i++){
             firstLoader.push(<LoadingCounter />)
         }
-       return <div className="container">
+       return <><div className="container">
                    <div className={s.table_head}>
                        <div className={s.name}>
                            <p>Название счётчика</p>
@@ -54,7 +58,7 @@ const Counterslist = (props) => {
                            <p>Пользователей всего</p>
                        </div>
                        <div className={s.status}>
-                           <p>Статус</p>
+                           <p>Владелец</p>
                        </div>
                    </div>
                    <div className={s.list}>
@@ -66,5 +70,9 @@ const Counterslist = (props) => {
                </div>
 
 
+
+       </>
+
+
 }
-export default Counterslist;
+export default YourCountersList;

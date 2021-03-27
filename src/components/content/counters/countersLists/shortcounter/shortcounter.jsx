@@ -17,10 +17,8 @@ const Shortcounter = (props) =>{
                         <div className={s.totalusers}>
                             <p>{props.allusers}</p>
                         </div>
-
-                        <div className={s.status+" "+ s[props.status]}>
-                            <p><span className={s.work}>Активен</span><span className={s.notwork}>Не активен</span>
-                               <span className={s.checking}>Проверяется</span></p>
+                        <div className={s.owner}>
+                            <p>{props.login}</p>
                         </div>
                     </NavLink>
             )

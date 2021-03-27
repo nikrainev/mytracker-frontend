@@ -4,7 +4,7 @@ import CounterInfoContainer from "./counterInfo/counterInfoContainer";
 import UsersListContainer from "./usersList/usersListContainer";
 import {clearCurrentCounter, getCurrentCounter} from "../../../../redux/counters-reducer";
 import {connect} from "react-redux";
-import {getCurrentCounterUsers, getCurrentCounterInfo} from "../../../../redux/selectors/counters-selectors";
+import {getCurrentCounterUsers, getCurrentCounterInfo, getPageSize} from "../../../../redux/selectors/counters-selectors";
 import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 

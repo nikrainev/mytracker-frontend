@@ -35,7 +35,7 @@ export const profileAPI = {
     },
 
     getProfilesList(page, limit){
-        return axiosInstance.get('/friendslist', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
+        return axiosInstance.get('/profileslist', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
                 .then(response =>{
                     return response.data;
                 })

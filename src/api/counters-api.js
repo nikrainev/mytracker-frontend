@@ -14,14 +14,20 @@ export const countersAPI = {
                     console.warn(error)
                 })
     },
-    getCounters(page, limit){
+    getYourCounters(page, limit){
         return axiosInstance.get('/', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
                 .then(response =>{
                     return response.data;
                 })
     },
+    getFriendsCounters(page, limit){
+        return axiosInstance.get('/friendscounters', {headers: {"Authorization": "Bearer "+store.getState().auth.token}, params: {page: page, limit: limit}})
+                .then(response=>{
+                    return response.data
+                })
+    },
     getCounterById(counterId){
-        return axiosInstance.get('/'+counterId, {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+        return axiosInstance.get('/counter/'+counterId, {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
                 .then(response =>{
                     return response.data;
                 })

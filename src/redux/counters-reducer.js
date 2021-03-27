@@ -3,10 +3,17 @@ import store from "./redux-store"
 import {reset} from 'redux-form';
 import {usersAPI} from "../api/users-api";
 let initialState = {
-        counterslistData: [],
-        pageSize: 10,
-        totalCounters: '',
+
+        pageSize: 5,
         pixelCode: '',
+        yourCounters: {
+            counterslistData: [],
+            totalCounters: ''
+        },
+        friendsCounters:{
+            counterslistData: [],
+            totalCounters: ''
+        },
         currentCounter:{
             counterInfo: '',
             counterUsers: '',
@@ -28,8 +35,12 @@ const countersReducer = (state = initialState,action) =>{
 
             return {
                 ...state,
-                counterslistData : [newCounter, ...state.counterslistData],
-                pixelCode: action.pixelCode
+                pixelCode: action.pixelCode,
+                yourCounters: {
+                    ...state.yourCounters,
+                    counterslistData: [newCounter, ...state.counterslistData]
+                }
+
             }
         }
         case "counters/CLEAR-PIXEL-CODE":{
@@ -38,18 +49,49 @@ const countersReducer = (state = initialState,action) =>{
                 pixelCode: ''
             }
         }
-        case "counters/SET-COUNTERS":{
+        case "counters/SET-YOUR-COUNTERS":{
+
             return {
                 ...state,
-                counterslistData: action.countersData.items
+                yourCounters: {
+                    ...state.yourCounters,
+                    counterslistData: action.countersData.items
+                }
+
             }
         }
-        case 'counters/SET-TOTAL-COUNTERS':{
+        case 'counters/SET-YOUR-TOTAL-COUNTERS':{
             return {
                 ...state,
-                totalCounters: action.totalCounters.totalPages
+                yourCounters: {
+                    ...state.yourCounters,
+                    totalCounters: action.totalCounters.totalDocs
+                }
+
             }
         }
+        case "counters/SET-FRIENDS-COUNTERS":{
+
+            return {
+                ...state,
+                friendsCounters: {
+                    ...state.friendsCounters,
+                    counterslistData: action.countersData.items
+                }
+
+            }
+        }
+        case 'counters/SET-FRIENDS-TOTAL-COUNTERS':{
+            return {
+                ...state,
+                friendsCounters: {
+                    ...state.friendsCounters,
+                    totalCounters: action.totalCounters.totalDocs
+                }
+
+            }
+        }
+
         case 'counters/SET-CURRENT-COUNTER':{
             return {
                 ...state,
@@ -96,15 +138,25 @@ export const addCounter = (counterData, pixelCode) =>({
     counterData: counterData,
     pixelCode: pixelCode
 })
-export const setCounters = (countersData) =>({
-    type: 'counters/SET-COUNTERS',
+export const setYourCounters = (countersData) =>({
+    type: 'counters/SET-YOUR-COUNTERS',
     countersData: countersData
-
 })
-export const setTotalCounters = (totalCounters) =>({
-    type: 'counters/SET-TOTAL-COUNTERS',
+export const setYourTotalCounters = (totalCounters) =>({
+    type: 'counters/SET-YOUR-TOTAL-COUNTERS',
     totalCounters: totalCounters
 })
+
+export const setFriendsCounters = (countersData) =>({
+    type: 'counters/SET-FRIENDS-COUNTERS',
+    countersData: countersData
+})
+
+export const setFriendsTotalCounters = (totalCounters) => ({
+    type: 'counters/SET-FRIENDS-TOTAL-COUNTERS',
+    totalCounters: totalCounters
+})
+
 
 export const clearPixelCode = () =>({
     type: 'counters/CLEAR-PIXEL-CODE'
@@ -125,11 +177,25 @@ export const addCounterUsers = (users) =>({
     users: users
 })
 
-export const getCounters = (page) => async (dispatch) =>{
+export const getCounters = () => (dispatch) =>{
+    Promise.all([countersAPI.getYourCounters(1, store.getState().countersPage.pageSize), countersAPI.getFriendsCounters(1, store.getState().countersPage.pageSize)]).then(response=>{
+        dispatch(setYourCounters(response[0]))
+        dispatch(setYourTotalCounters(response[0]))
+        dispatch(setFriendsCounters(response[1]))
+        dispatch(setFriendsTotalCounters(response[1]))
+    })
+}
 
-    let response = await countersAPI.getCounters(page, store.getState().countersPage.pageSize)
-    dispatch(setCounters(response))
-    dispatch(setTotalCounters(response))
+export const changeYourCounters = (page) => async (dispatch) =>{
+    let response = await countersAPI.getYourCounters(page, store.getState().countersPage.pageSize)
+    dispatch(setYourCounters(response))
+    dispatch(setYourTotalCounters(response))
+}
+
+export const changeFriendsCounters = (page) => async (dispatch) =>{
+    let response = await countersAPI.getFriendsCounters(page, store.getState().countersPage.pageSize)
+    dispatch(setFriendsCounters(response))
+    dispatch(setFriendsTotalCounters(response))
 }
 
 export const postCounter = (data) => async (dispatch) => {
@@ -141,7 +207,8 @@ export const postCounter = (data) => async (dispatch) => {
 
 export const getCurrentCounter = (counterId) => (dispatch) =>{
     Promise.all([countersAPI.getCounterById(counterId),
-        usersAPI.getCounterUsers(counterId, 1, store.getState().countersPage.pageSize)]).then(response =>{
+        usersAPI.getCounterUsers(counterId, 1, store.getState().countersPage.pageSize)])
+            .then(response =>{
         dispatch(setCurrentCounter(response[0], response[1]) )
     })
 }

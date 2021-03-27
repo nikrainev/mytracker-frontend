@@ -1,11 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
 import s from '../addcounter.module.scss';
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../../../../common/formControls";
+import {Input, Button} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 import loader_icon from "../../../../../assets/icons/loading.svg"
-import {NavLink} from "react-router-dom";
-import addIcon from "../../../../../assets/icons/h1-block/add.svg";
+
 const AddCounterForm = (props) =>{
 
     return (
@@ -16,6 +15,7 @@ const AddCounterForm = (props) =>{
                     <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
                     <Field name="counterName" type="text"  component={Input} placeholder="Название счётчика" validate={required}/>
                     <Field name="counterDomen" type="text"  component={Input} placeholder="Домен" validate={required}/>
+                    <Button >Отправить</Button >
                     <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</button>
                 </form>
             </div>
