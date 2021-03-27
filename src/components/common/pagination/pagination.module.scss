@@ -1,0 +1,19 @@
+.page_button{
+  font: inherit;
+  font-size: 12px;
+  border: none;
+  width: 40px;
+  margin-right: 20px;
+  background: none;
+  outline: none;
+  position: relative;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+.current_page{
+  color: black;
+  border-bottom: 3px solid #00809d;
+  cursor: inherit;
+}

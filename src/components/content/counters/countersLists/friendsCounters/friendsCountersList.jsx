@@ -11,7 +11,7 @@ const LoadingCounter = ()=>{
 const EmptyBlock = () =>{
     return <div className={s.noCounters}>
         <img src={plus} alt=""/>
-        <p>У вас ещё нет счётчиков,<br /> добавьте свой первый счётчик</p>
+        <p>У ващих друзей ещё нет счётчиков</p>
 
     </div>
 }
@@ -37,7 +37,7 @@ const FriendsCountersList = (props) =>{
 
 
             <div className="container">
-                <h2>Счётчики друзей</h2>
+                <div className={s.list_head}><p>Счётчики ваших друзей</p></div>
 
                 <Pagination pages={countersElement} pageSize={props.pageSize} totalPages={props.totalCounters}
                             pageChanger={props.changePage} loader={<LoadingCounter />} emptyBlock={<EmptyBlock />}/>

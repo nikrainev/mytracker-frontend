@@ -4,7 +4,7 @@ import {reset} from 'redux-form';
 import {usersAPI} from "../api/users-api";
 let initialState = {
 
-        pageSize: 5,
+        pageSize: 4,
         pixelCode: '',
         yourCounters: {
             counterslistData: [],
@@ -38,7 +38,7 @@ const countersReducer = (state = initialState,action) =>{
                 pixelCode: action.pixelCode,
                 yourCounters: {
                     ...state.yourCounters,
-                    counterslistData: [newCounter, ...state.counterslistData]
+                    counterslistData: [newCounter, ...state.yourCounters.counterslistData]
                 }
 
             }

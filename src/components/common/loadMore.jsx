@@ -1,5 +1,16 @@
 import React from "react";
 import s from "./common.module.scss"
+import {Button} from "./formControls";
+import styled from "styled-components"
+
+const LoadMoreButton = styled(Button)`
+margin: auto;
+margin-bottom: 15px;
+max-width: 210px;
+padding: 11px 30px 12px 30px;
+`
+
+
 const LoadMoreComponent = (props) =>{
     let pagesCount = Math.ceil(props.totalPages / props.pageSize)
     const buttonSelector = () =>{
@@ -7,10 +18,10 @@ const LoadMoreComponent = (props) =>{
             return (<></>)
         }
         else if(pagesCount > props.currentPage){
-            return <button className={s.load_more +" attractive-button"} onClick={()=>{props.changePage(props.currentPage+1)}}>Загрузить ещё</button>
+            return <LoadMoreButton onClick={()=>{props.changePage(props.currentPage+1)}}>Загрузить ещё</LoadMoreButton>
         }
         else{
-            return <button disabled className={s.all_loaded}>Загружены все записи</button>
+            return <LoadMoreButton disabled >Загружены все записи</LoadMoreButton>
         }
     }
 

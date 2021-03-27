@@ -87,9 +87,10 @@ export const PasswordScoreInput = ({input, meta, placeholder, ...props}) =>{
 const ButtonStyled = styled.button`
     background: ${props=> props.primary ? "#006eb9" : "white" };
     color: ${props=> props.primary ? "#fff" : "#201f1e"};
-    padding: 8px 20px 7px 20px;
+    font: inherit;
+    padding: 8px 21px 9px 21px;
     font-weight: 600;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.4px;
     border: 1px solid  ${props => props.primary ? "#006eb9" : "#323130"};
     font-size: 13px;
     outline: none;
@@ -98,15 +99,31 @@ const ButtonStyled = styled.button`
     text-align: center;
     border-radius: 2px;
     margin-bottom: 10px;
+    line-height: 100%;
+    
     &:hover{
     
     }
 `
 
+const DisabledStyled = styled.span`
+    padding: 9px 22px 10px 22px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    font-size: 13px;
+    border-radius: 2px;
+    background-color: #f3f2f1;
+    color: #a19f9d;
+    line-height: 100%;
+    margin-bottom: 10px;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+`
 
 export const Button = (props) =>{
-    return(
-                    <ButtonStyled {...props}/>
-            )
+    return (props.disabled  ?<DisabledStyled {...props} /> : <ButtonStyled {...props} />)
+
+
 
 }

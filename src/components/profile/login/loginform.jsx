@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import s from './login.module.scss';
 import {NavLink, Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../../../components/common/formControls"
+import {Input, Button} from "../../../components/common/formControls"
 import {required} from "../../../utils/validation";
 import doneImg from "../../../assets/icons/done.svg";
 import {BackGround} from "../../../components/common/background"
-
+import styled from 'styled-components'
 
 const SuccessForm = () =>{
     const [redirect, setRedirect] = useState(false)
@@ -21,6 +21,12 @@ const SuccessForm = () =>{
     )
 }
 
+const SendButton = styled(Button)`
+ float: right;
+ margin-top: 60px;
+`
+
+
 const LoginForm = (props) =>{
 
     return (
@@ -31,7 +37,8 @@ const LoginForm = (props) =>{
                 <Field name="emailInput" type="text"  component={Input} placeholder="Почта" validate={required}/>
                 <Field name="passwordInput" type="password"  component={Input} placeholder="Пароль" validate={required}/>
                 <p className={s.dont_reg_yet}>Нет учётной записи? <NavLink to='signup'>Создайте её!</NavLink></p>
-                <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Войти</button>
+                <SendButton primary disabled={props.submitting  || (props.invalid && props.anyTouched)} type="submit">Войти</SendButton>
+
 
             </form>
     )

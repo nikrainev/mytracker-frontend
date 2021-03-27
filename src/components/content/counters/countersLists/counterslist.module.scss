@@ -1,8 +1,18 @@
 .table_head{
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  width: calc(100% - 20px);
+  box-sizing: border-box;
+  padding: 11px 10px 11px 10px;
+  width: 100%;
+  background: #f6f5f3;
+  border-top: 1px solid #efefef;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #efefef;
+  p{
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   .name{
     width: 20%;
   }
@@ -22,7 +32,19 @@
 
 }
 
+.list{
+  margin-bottom: 20px;
+}
 
+
+.list_head{
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  display: block;
+  margin-bottom: 7px;
+  padding-bottom: 5px;
+  padding-top: 10px;
+}
 
 .loading_counter{
   height: 47px;
@@ -51,9 +73,7 @@
   to{left:100%}
 }
 
-.list{
-  min-height: 245px;
-}
+
 
 .noCounters{
   background: #f7f7f7;

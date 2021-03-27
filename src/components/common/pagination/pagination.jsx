@@ -1,4 +1,8 @@
 import React from "react";
+import s from "./pagination.module.scss"
+
+
+
 
 const PaginationComponent = (props) =>{
     let pagesCount = Math.ceil(props.totalPages / props.pageSize)
@@ -6,14 +10,14 @@ const PaginationComponent = (props) =>{
     for(let i=1; i<=pagesCount; i++){
         pages.push(i)
     }
-    let pagesButtonsElements = pages.map(page => <span key={page} className={props.currentPage === page && "current-page"}
-                                                       onClick={() => {props.changePage(page)}}>{page}</span>)
+    let pagesButtonsElements = pages.map(page => <button key={page} className={props.currentPage === page ? s.page_button + " " + s.current_page : s.page_button}
+             onClick={() => {props.currentPage !== page && props.changePage(page)}}>{page}</button>)
     let buttonsSelector = () =>{
         if (props.pages === 'empty' || pagesCount === 1){
             return (<></>)
         }
         else{
-            return   <div className="pages-buttons">{pagesButtonsElements}</div>
+            return   <nav className={s.pages_buttons}>{pagesButtonsElements}</nav>
         }
     }
     return(

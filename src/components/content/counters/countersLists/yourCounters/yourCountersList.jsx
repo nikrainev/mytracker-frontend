@@ -61,6 +61,7 @@ const YourCountersList = (props) => {
                            <p>Владелец</p>
                        </div>
                    </div>
+                    <div className={s.list_head}><p>Ваши счётчики</p></div>
                    <div className={s.list}>
 
                      <Pagination pages={countersElement} pageSize={props.pageSize} totalPages={props.totalCounters}

@@ -4,19 +4,23 @@ import {Field, reduxForm} from "redux-form";
 import {Input, Button} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 import loader_icon from "../../../../../assets/icons/loading.svg"
+import styled from 'styled-components'
+
+const SendButton = styled(Button)`
+ float: right;
+`
 
 const AddCounterForm = (props) =>{
-
+    console.log(props)
     return (
 
             <div className={s.addcounter_form}>
                 <form onSubmit={props.handleSubmit}>
                     {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
-                    <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
+                    <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar} />
                     <Field name="counterName" type="text"  component={Input} placeholder="Название счётчика" validate={required}/>
                     <Field name="counterDomen" type="text"  component={Input} placeholder="Домен" validate={required}/>
-                    <Button >Отправить</Button >
-                    <button className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</button>
+                    <SendButton primary disabled={props.submitting  || (props.invalid && props.anyTouched)} type="submit">Отправить</SendButton >
                 </form>
             </div>
     )
