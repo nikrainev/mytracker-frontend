@@ -5,13 +5,12 @@ import {Input, Button} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 import loader_icon from "../../../../../assets/icons/loading.svg"
 import styled from 'styled-components'
-
+import PixelCodeBlock from "../../pixelcode/pixelCode";
 const SendButton = styled(Button)`
  float: right;
 `
 
 const AddCounterForm = (props) =>{
-    console.log(props)
     return (
 
             <div className={s.addcounter_form}>
@@ -31,32 +30,7 @@ const AddCounterForm = (props) =>{
 const AddCounterReduxForm = reduxForm({form: 'addcounter-form'})(AddCounterForm)
 
 
-const PixelCodeBlock = (props) =>{
 
-    const [copySuccess, setCopySuccess] = useState('');
-    const textAreaRef = useRef(null);
-
-    let copyToClipboard = (e) =>{
-        textAreaRef.current.select();
-        document.execCommand('copy');
-        e.target.focus();
-        setCopySuccess('copied');
-        setTimeout(()=>{setCopySuccess('')}, 3000)
-    };
-
-
-
-    return(
-            <div className={s.codeBlock}>
-                <textarea onClick={(e)=>{e.target.select()}} ref={textAreaRef} value={props.pixelCode} name="" id="" cols="30" rows="10" className={s.codeTextarea}> </textarea>
-                    <div className={s.copyButton_wr}>
-                        <button className="control_button" onClick={copyToClipboard}>Скопировать код</button>
-                        {copySuccess === 'copied' ? <div className={s.copied_label}>Скопировано</div> : ''}
-                    </div>
-
-            </div>
-    )
-}
 
 const FetchingForm = (props) => {
     return(
@@ -81,9 +55,9 @@ const Addcounterblock = (props) => {
     }
     const textSelector = () =>{
         switch (props.blockState) {
-            case "form": return <p>Добавьте ваш счётчик <br /><br /> Выбирите название для счётчика и укажите URL с которого хотите получать данные</p>
+            case "form": return <p className={s.text}>Добавьте ваш счётчик <br /><br /> Выбирите название для счётчика и укажите URL с которого хотите получать данные</p>
             case "fetching": return ''
-            case "pixelCode": return <div className={s.last_text}><p>Скопируйте код и вставьте его на ваш сайт через редактор кода.<br /><br />Сразу после этого в разделе данного счётчика
+            case "pixelCode": return <div className={s.last_text + " " + s.text}><p>Скопируйте код и вставьте его на ваш сайт через редактор кода.<br /><br />Сразу после этого в разделе данного счётчика
                 начнёт отображаться статистика о новых посетителях</p><button onClick={()=>{props.makeOneMore()}} className="attractive-button">Создать другой счётчик</button></div>
         }
     }
@@ -94,7 +68,7 @@ const Addcounterblock = (props) => {
             <div className="h1-block">
                 <h1 className="h1">Счётчики</h1>
             </div>
-            <div className="row">
+            <div className={`${s.row} row`}>
                 <div className="col-6">
                 {textSelector()}
             </div>
@@ -106,4 +80,3 @@ const Addcounterblock = (props) => {
     )
 }
 export default Addcounterblock;
-export {PixelCodeBlock}

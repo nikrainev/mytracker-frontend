@@ -11,12 +11,8 @@ import {SummaryPageLoader} from "../../common/loadingSchemes";
 
 const SummaryContainer = (props) =>{
 
-
-
     const [pageState, setPageState] = useState('fetching')
     useEffect(()=>{
-
-
         return( ()=>{
             props.clearSummaryData()
         })
@@ -35,10 +31,9 @@ const SummaryContainer = (props) =>{
 
     useEffect(()=>{
 
-        if(props.summaryUsers && props.summaryUsers.length !== 0){
+        if((props.summaryUsers && props.summaryUsers.length !== 0) && pageState === 'fetching'){
             setPageState("main")
         }
-
 
     },[props.summaryUsers])
 

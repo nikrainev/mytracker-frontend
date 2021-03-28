@@ -24,6 +24,7 @@
 }
 
 .counterInfo {
+  padding-right: 12px;
   span{
     text-align: center;
     font-size: 12px;
@@ -57,3 +58,13 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px){
+  .row{
+    flex-direction: column;
+    :global(.col-6){
+      width: 100%
+    }
+  }
+}
+

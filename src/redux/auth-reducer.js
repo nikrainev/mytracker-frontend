@@ -98,7 +98,7 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
             .then(response => {
                 dispatch(setToken(response.token))
                 dispatch(toggleIsFetching(false))
-                if(response.message == "Auth successful"){
+                if(response.message === "Auth successful"){
                     document.cookie = 'email='+emailInput+'; max-age=360000'
                     document.cookie = 'password='+passwordInput+'; max-age=360000'
                     authAPI.getAuthInfo()
@@ -128,7 +128,7 @@ export const signUpThunkCreator = (email,login,password) =>{
                 authAPI.postLoginInfo(email, password)
                         .then(response => {
                             dispatch(setToken(response.token))
-                            if(response.message == "Auth successful"){
+                            if(response.message === "Auth successful"){
                                 document.cookie = 'email='+email+'; max-age=360000'
                                 document.cookie = 'password='+password+'; max-age=360000'
                                 authAPI.getAuthInfo()

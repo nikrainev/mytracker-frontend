@@ -13,22 +13,123 @@
   text-decoration: none;
 }
 
-.name{
-  width: 20%;
-}
-.domen{
-  width: 20%;
-}
-.dayusers{
-  width: 20%;
-}
-.totalusers{
-  width: 20%;
-}
-.owner{
-  width: 20%;
+@mixin overflow-p {
 
+  overflow: hidden;
+  position: relative;
+  &:after{
+    content: '';
+    height: 100%;
+    display: block;
+    width: 40px;
+    background: linear-gradient(to left,#f7f7f7,transparent);
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  p{
+    width: 1000px;
   }
 
 
 
+}
+
+.name{
+  @include overflow-p;
+  width: 20%;
+}
+
+.domen{
+  @include overflow-p;
+  width: 20%;
+}
+.dayusers{
+  @include overflow-p;
+  width: 20%;
+}
+.totalusers{
+  @include overflow-p;
+  width: 20%;
+}
+.owner{
+  @include overflow-p;
+  width: 20%;
+  }
+
+
+@media screen and (max-width: 1200px){
+
+    .dayusers{
+      width: 18%;
+    }
+    .totalusers{
+      width: 18%;
+    }
+    .name{
+      width: 18%;
+    }
+    .owner{
+      width: 15%;
+    }
+    .domen{
+      width: 31%;
+    }
+  .short_counter{
+    p{
+      font-size: 16px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1100px){
+  .owner{
+    display: none;
+  }
+
+  .dayusers{
+    width: 20%;
+  }
+  .totalusers{
+    width: 20%;
+  }
+  .name{
+    width: 20%;
+  }
+  .domen{
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .totalusers {
+    width: 100px;
+  }
+
+  .dayusers {
+    width: 100px;
+  }
+  .name{
+    width: 150px;
+  }
+  .domen{
+    width: calc(100% - 350px);
+  }
+}
+
+@media screen and (max-width: 500px){
+  .domen{
+   display: none;
+  }
+  .totalusers {
+    width: 100px;
+  }
+
+  .dayusers {
+    width: 100px;
+  }
+  .name{
+    width: calc(100% - 200px);
+  }
+}

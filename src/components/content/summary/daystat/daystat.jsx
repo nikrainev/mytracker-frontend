@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './daystat.module.scss';
 import Graphic from "../../../graphic/graphic";
 import styled from 'styled-components'
 

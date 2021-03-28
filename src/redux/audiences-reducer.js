@@ -113,7 +113,7 @@ const audiencesReducer = (state = initialState,action) =>{
                 audienceCountersSelectSelected: newAudienceCounter
             }
         case 'ADD-AUDIENCE-COUNTER':
-            let deleteOption = state.AudienceCountersSelect.findIndex(option => option.counterId == state.audienceCountersSelectSelected.counterId)
+            let deleteOption = state.AudienceCountersSelect.findIndex(option => option.counterId === state.audienceCountersSelectSelected.counterId)
                 let copySelect = [...state.AudienceCountersSelect]
                 copySelect.splice(deleteOption,1)
 
@@ -126,11 +126,11 @@ const audiencesReducer = (state = initialState,action) =>{
                 audienceCountersSelectSelected: {}
             }
         case 'DELETE-AUDIENCE-COUNTER':
-            let deletedCounter = state.audienceCounters.findIndex(counter => counter.counterId == action.counterId)
+            let deletedCounter = state.audienceCounters.findIndex(counter => counter.counterId === action.counterId)
 
             let copydeletedCounter =  [...state.audienceCounters]
             copydeletedCounter.splice(deletedCounter ,1)
-            let returnCounter = state.counterslistData.filter(counter => counter.id == action.counterId)
+            let returnCounter = state.counterslistData.filter(counter => counter.id === action.counterId)
             return {
                 ...state,
                 audienceCounters: copydeletedCounter,

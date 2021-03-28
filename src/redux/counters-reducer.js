@@ -124,6 +124,22 @@ const countersReducer = (state = initialState,action) =>{
                 }
             }
         }
+        case 'counters/CLEAR-COUNTERS-LISTS':{
+            return {
+                ...state,
+                yourCounters: {
+                    ...state.yourCounters,
+                    counterslistData: [],
+                    totalCounters: ''
+                },
+                friendsCounters:{
+                    ...state.friendsCounters,
+                    counterslistData: [],
+                    totalCounters: ''
+                },
+
+            }
+        }
 
         default:
             return state
@@ -170,6 +186,10 @@ export const setCurrentCounter = (counterInfo, counterUsers) =>({
 
 export const clearCurrentCounter = () => ({
     type: 'counters/CLEAR-CURRENT-COUNTER'
+})
+
+export const clearCountersLists = () =>({
+    type: 'counters/CLEAR-COUNTERS-LISTS'
 })
 
 export const addCounterUsers = (users) =>({

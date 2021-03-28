@@ -57,7 +57,7 @@ const YourCountersList = (props) => {
                        <div className={s.totalusers}>
                            <p>Пользователей всего</p>
                        </div>
-                       <div className={s.status}>
+                       <div className={s.owner}>
                            <p>Владелец</p>
                        </div>
                    </div>

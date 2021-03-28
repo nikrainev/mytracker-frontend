@@ -51,6 +51,7 @@ export class Pagination extends React.Component{
     }
     loaders = []
     componentDidUpdate(prevProps, prevState, snapshot) {
+
         if(prevProps !== this.props){
             this.setState({pages: this.props.pages})
             if(this.props.getCurrentPage === undefined){
@@ -76,8 +77,12 @@ export class Pagination extends React.Component{
             this.loaders.push(<Loader elem={this.props.loader} key={i} />)
         }
 
-        this.setState({isFetching: true})
-
+        if(this.props.pages.length === 0){
+            this.setState({isFetching: true})
+        }
+        else{
+            this.setState({initialized: true})
+        }
     }
 
     pagesSelector = () =>{

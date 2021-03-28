@@ -140,7 +140,7 @@ let Sidebar = (props) =>{
             <div className={s.hamburger} onClick={()=>{props.toggleMenuState()}}>
                 <img src={hamburgerIcon} alt=""/>
             </div>
-             <div className={s.sidebar_menu + " fluent-menu"} onMouseOver={onmouseover} onMouseOut={onmouseout}>
+             <nav className={s.sidebar_menu + " fluent-menu"} onMouseOver={onmouseover} onMouseOut={onmouseout}>
                  <NavLink to={'/summary'} activeClassName={s.active} className={s.link_item + " fluent-line"}>
                     <div className={s.menu_icon}><img src={summaryIcon} alt=""/></div>
                     <p>Сводка</p>
@@ -161,7 +161,7 @@ let Sidebar = (props) =>{
                      <div className={s.menu_icon}><img src={settingsIcon} alt=""/></div>
                      <p>Настройки</p>
                  </NavLink>
-             </div>
+             </nav>
         </div>
             <div className={props.menuState === 'collapsed' ? s.profile_cont : s.profile_cont + " " + s.sidebar_closed}>
               <div className="dropdown-menu">
