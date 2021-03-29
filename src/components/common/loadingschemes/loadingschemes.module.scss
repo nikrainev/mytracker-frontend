@@ -1,0 +1,237 @@
+
+  .elem{
+    background: #dcdcdc;
+    animation: loadingScheme 1s infinite ;
+  }
+  @keyframes loadingScheme {
+    0%{background: #efefef}
+    50%{background: #dcdcdc}
+    100%{background: #efefef}
+  }
+  .add_button{
+    display: block;
+    width: 204px;
+    height: 42px;
+    margin: 30px auto auto;
+  }
+  .counters_table_head{
+    height: 45px;
+    display: block;
+    width: 100%;
+    margin: 0px auto 53px;
+  }
+  .list_ul{
+    height: 47px;
+    display: block;
+    width:100%;
+    margin: 8px auto auto;
+  }
+  .page_buttons{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+  .page_button{
+    display: block;
+    width: 47px;
+    height: 47px;
+    margin-right: 6px;
+  }
+
+  .text_line{
+    height: 40px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 40px auto 10px;
+  }
+  .big_ul{
+    height: 63px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: 10px auto auto;
+  }
+  .list{
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .h2{
+    height: 63px;
+    margin-bottom: 10px;
+    display: block;
+    width: 50%;
+    margin-left: 30px;
+  }
+  .h1{
+    height: 50px;
+    margin-bottom: 25px;
+    display: block;
+    width: 250px;
+    margin-top: 20px;
+  }
+  .day_stat_row{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .day_stat{
+    width: 200px;
+    padding-bottom: 200px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+  }
+  .graphic{
+    width: 100%;
+    height: 250px;
+    margin-bottom: 30px;
+  }
+
+  .load_more_bottom{
+    display: block;
+    width: 200px;
+    height: 41px;
+    margin: 11px auto;
+  }
+
+
+  .user_stat_row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .user_main_block{
+    display: block;
+    width: calc(50% - 12px);
+    height: 185px;
+  }
+
+  .user_h3{
+    display: block;
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
+
+  .user_blocks_row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .user_block{
+    display: block;
+    width: calc(33.33% - 16px);
+    height: 200px;
+  }
+
+  .user_block_col_12{
+    display: block;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 15px;
+  }
+
+  .counters_h1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .h1{
+      margin-top: 10px;
+      margin-bottom: 13px;
+    }
+
+
+  }
+
+  .add_counter{
+    width: 180px;
+    height: 50px;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .margin_55px{
+    display: block;
+    height: 55px;
+  }
+
+  .counter_left{
+    width: 50%;
+  }
+
+  .counter_key_numbers{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+  }
+  .counter_key_number{
+    width: calc(50% - 6px);
+    height: 74px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .counter_desc{
+    width: 100%;
+    height: 51px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .code_block{
+    width: calc(50% - 12px);
+    height: 263px;
+    display: block;
+    margin-bottom: 73px;
+  }
+
+  @media screen and (max-width: 1200px){
+    .counterpage_row{
+      .counter_left{
+        width: 1000%;
+      }
+      .code_block{
+        width: 100%;
+      }
+      flex-wrap: wrap;
+    }
+  }
+
+
+  @media screen and (max-width: 750px){
+
+      .user_stat_row, .user_blocks_row {
+        flex-wrap: wrap;
+      }
+      .user_main_block, .user_block{
+        width: 100%;
+        margin-bottom: 10px;
+        height: 160px;
+      }
+  }
+
+
+
+  @media screen and (max-width: 500px){
+      .h1{
+        width: 150px;
+      }
+    .add_counter{
+      width: 150px;
+    }
+
+      .day_stat_row {
+        justify-content: space-between;
+        margin-bottom: 1px;
+      }
+      .day_stat{
+        width: calc(50% - 6px);
+        padding-bottom: calc(50% - 6px);
+        margin-right: 0px;
+      }
+
+  }

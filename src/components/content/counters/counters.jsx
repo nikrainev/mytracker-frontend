@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Addcounter from './addcounter/addcounter.jsx';
 import YourCounterslistContainer from "./countersLists/yourCounters/yourCountersListContainer";
 import FriendsCountersListContainer from "./countersLists/friendsCounters/friendsCountersListContainer";
-import {CountersListLoading} from "../../common/loadingSchemes"
+import {CountersListLoader} from "../../common/loadingschemes/loadingSchemes"
 import {connect} from "react-redux";
 import {compose} from "redux";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
@@ -40,12 +40,11 @@ const Counters = (props) =>{
 
             <>
                 {pageState === 'fetching' ?
-                        <CountersListLoading />: <>
+                        <CountersListLoader />: <>
                     <Addcounter/>
                     <YourCounterslistContainer pageState={pageState}/>
-                    <FriendsCountersListContainer />
-                    </>}
-           </>
+                    <FriendsCountersListContainer /></>}
+                    </>
     );
 }
 

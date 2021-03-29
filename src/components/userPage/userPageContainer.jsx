@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {getUserInfoFromState, getUserSessionsList} from '../../redux/selectors/users-selectors'
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {UserPageLoader} from "../common/loadingSchemes";
+import {UserPageLoader} from "../common/loadingschemes/loadingSchemes";
 
 const UserPageContainer = (props) =>{
     let {tysId} = useParams()

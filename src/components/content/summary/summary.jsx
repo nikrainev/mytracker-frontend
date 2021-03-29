@@ -6,7 +6,7 @@ import {getSummaryData, clearSummaryData} from "../../../redux/summary-reducer";
 import {getSummaryInfo, getSummaryGraphic, getSummaryUsers} from "../../../redux/selectors/summary-selectors";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {SummaryPageLoader} from "../../common/loadingSchemes";
+import {SummaryPageLoader} from "../../common/loadingschemes/loadingSchemes";
 
 
 const SummaryContainer = (props) =>{
@@ -58,4 +58,4 @@ let mapStateToProps = (state) => {
         isInitialized: state.app.isInitialized
     }
 }
-export default compose(connect(mapStateToProps,{getSummaryData, clearSummaryData}),WithAuthRedirect)(SummaryContainer);
+export default compose(connect(mapStateToProps,{getSummaryData, clearSummaryData}),WithAuthRedirect)(SummaryContainer, SummaryPageLoader);

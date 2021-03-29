@@ -85,13 +85,13 @@ export const PasswordScoreInput = ({input, meta, placeholder, ...props}) =>{
 
 
 const ButtonStyled = styled.button`
-    background: ${props=> props.primary ? "#006eb9" : "white" };
+    background: ${props=> props.primary ? "#0078d4" : "white" };
     color: ${props=> props.primary ? "#fff" : "#201f1e"};
     font: inherit;
     padding: 8px 21px 9px 21px;
     font-weight: 600;
     letter-spacing: 0.4px;
-    border: 1px solid  ${props => props.primary ? "#006eb9" : "#323130"};
+    border: 1px solid  ${props => props.primary ? "#0078d4" : "#323130"};
     font-size: 13px;
     outline: none;
     cursor: pointer;
@@ -102,7 +102,14 @@ const ButtonStyled = styled.button`
     line-height: 100%;
     
     &:hover{
-    
+    background: ${props=> props.primary ? "#106ebe" : "#f3f2f1" };
+    color: ${props=> props.primary ? "#fff" : "#201f1e"};
+    border: 1px solid  ${props => props.primary ? "#106ebe" : "#323130"};
+    }
+    &:active{
+    background: ${props=> props.primary ? "#005a9e" : "#edebe9" };
+    color: ${props=> props.primary ? "#fff" : "#201f1e"};
+    border: 1px solid  ${props => props.primary ? "#005a9e" : "#323130"};
     }
 `
 

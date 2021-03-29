@@ -10,10 +10,6 @@ const mapStateToProps  = (state) =>{
 }
 
 
-
-
-
-
 const WithAuthRedirect = (Component) =>{
 
 
@@ -28,8 +24,8 @@ const WithAuthRedirect = (Component) =>{
 
     }
 
-    let ConnectedWithAuthRedirect = connect(mapStateToProps)(RedirectComponent)
-    return ConnectedWithAuthRedirect
+
+    return connect(mapStateToProps)(RedirectComponent)
 
 }
 export default WithAuthRedirect

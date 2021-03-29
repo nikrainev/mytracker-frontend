@@ -2,7 +2,7 @@ import React from 'react';
 import NewFriendsContainer from "./newFriends/newFriendsContainer";
 import UsersListContainer from "./usersList/usersListContainer";
 import {connect} from "react-redux";
-import {FriendsPageLoader} from "../../common/loadingSchemes";
+import {FriendsPageLoader} from "../../common/loadingschemes/loadingSchemes";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
