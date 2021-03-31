@@ -25,3 +25,7 @@ export const getTotalFriends = (state) =>{
 export const getDeletedFriend = (state) =>{
     return state.profilePage.deletedFriend
 }
+
+export const getAvatarSelector = (state) =>{
+    return state.profilePage.avatar
+}

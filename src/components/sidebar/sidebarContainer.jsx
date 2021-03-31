@@ -7,20 +7,48 @@ import {toggleMenuState} from '../../redux/app-reducer'
 import {getMenuState} from "../../redux/selectors/app-selectors";
 import {useLocation} from "react-router-dom";
 import {getAvatar} from "../../redux/profile-reducer";
+import {getAvatarSelector} from "../../redux/selectors/profileselectors";
 
 let SideBarContainer = (props) => {
    const [cookies, setCookie, removeCookie] = useCookies(["email", "password"]);
-   const [sideBarBackGround, setSideBarBackGround ] = useState('')
+   const [sideBarVisibility, setSideBarVisibility ] = useState('visible')
+   const [profileBlockState, setProfileBlockState] = useState('fetching')
    const pageName = useLocation()
    useEffect(()=>{
        if(pageName.pathname === '/login' || pageName.pathname === '/signup'){
-           setSideBarBackGround('backdrop_filter')
+           setSideBarVisibility('hidden')
        }
        else{
-           setSideBarBackGround('')
+           setSideBarVisibility('')
        }
-   },[pageName.pathname, sideBarBackGround])
-   useEffect(()=>{
+   },[pageName.pathname, sideBarVisibility])
+
+
+    useEffect(()=>{
+        if(props.isInitialized){
+            props.getAvatar()
+        }
+        else{
+            setProfileBlockState('fetching')
+        }
+
+    }, [ props.isInitialized])
+
+
+    useEffect(()=>{
+
+        if((props.avatar && props.avatar.length !== 0) && profileBlockState === 'fetching'){
+            setProfileBlockState("main")
+        }
+
+    },[props.avatar])
+
+
+
+
+
+
+    useEffect(()=>{
        props.getAvatar()
    },[])
    let logOut = () =>{
@@ -29,13 +57,17 @@ let SideBarContainer = (props) => {
         props.deleteProfileData()
 
     }
-        return <Sidebar isAuth={props.isAuth}
+
+    return  sideBarVisibility === 'hidden' ? <></> : <Sidebar isAuth={props.isAuth}
                        profileLogin={props.profileLogin}
                        logout={logOut}
                        menuState={props.menuState}
                        toggleMenuState={props.toggleMenuState}
-                       backgoundType={sideBarBackGround}
-        />
+                       avatar={props.avatar}
+                       fetching={profileBlockState}
+    />
+
+
 
 }
 
@@ -44,7 +76,9 @@ let mapStateToProps = (state) =>{
         token: state.auth.token,
         isAuth: state.auth.isAuth,
         profileLogin: state.auth.login,
-        menuState: getMenuState(state)
+        menuState: getMenuState(state),
+        isInitialized: state.app.isInitialized,
+        avatar:  getAvatarSelector(state)
     }
 }
 

@@ -108,6 +108,10 @@ let Sidebar = (props) =>{
 
     } */
 
+
+
+
+
     let logout = () =>{
         props.logout()
     }
@@ -120,13 +124,9 @@ let Sidebar = (props) =>{
         else{
             className = s.sidebar + " " + s.sidebar_closed
         }
-
-        if(props.backgoundType === 'backdrop_filter'){
-            className = className + " " + s.backdrop_filter
-        }
-
         return className
     }
+
 
 
 
@@ -172,11 +172,15 @@ let Sidebar = (props) =>{
                               <NavLink to="/login" className='dropdown-menu-link' activeClassName='active'>Войти</NavLink>}
                   </div>
               </div>
-               <div className={s.empty_img}>
-                   <img src={profileIcon} alt=""/>
+               <div className={s.avatar}>
+
+                   {props.fetching === 'fetching' ? <div className={s.avatar_loader} /> : <img className={props.avatar === 'none' ? s.none : s.uploaded}
+                                                                           src={props.avatar === 'none' ? profileIcon : props.avatar}
+                                                                           alt=""/>}
+
                </div>
                 <div className={s.user_login}>
-                    {props.isAuth === true ? <NavLink to="/profile" >{props.profileLogin}</NavLink> : "Профиль" }
+                    {props.fetching === 'fetching' ? <div className={s.login_loader} /> :  <div className={s.login_wr}><p>{props.profileLogin}</p></div>}
                 </div>
 
             </div>

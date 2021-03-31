@@ -47,7 +47,7 @@ export const profileAPI = {
                 })
     },
     getAvatar(){
-        return axiosInstance.get('/avatar', {header: {"Authorization": "Bearer "+store.getState().auth.token}})
+        return axiosInstance.get('/avatar', {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
                 .then(response =>{
                     return response.data
                 })

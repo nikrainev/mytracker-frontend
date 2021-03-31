@@ -33,7 +33,7 @@ const LoginForm = (props) =>{
             <form onSubmit={props.handleSubmit}>
                 <h1 className={s.h1}>Вход</h1>
                 <div className={s.form_danger_wr}>{props.error ? <span className={s.form_danger}>{props.error}</span> : ''}</div>
-                <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar}></div>
+                <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar} />
                 <Field name="emailInput" type="text"  component={Input} placeholder="Почта" validate={required}/>
                 <Field name="passwordInput" type="password"  component={Input} placeholder="Пароль" validate={required}/>
                 <p className={s.dont_reg_yet}>Нет учётной записи? <NavLink to='signup'>Создайте её!</NavLink></p>
@@ -57,7 +57,7 @@ const LoginBlock = (props) => {
     return  (
             <>
            <BackGround />
-          <div className={`container ${s.login_container}`}>
+          <div className="fullpage_container">
               <div className={s.login_block}>
                   {props.isAuth == false ?
                           <div className={s.form}>

@@ -88,7 +88,7 @@ const SignUpBlock = (props) => {
     return  (
             <>
             <BackGround />
-                <div className={`container ${s.signup_container}`}>
+                <div className="fullpage_container">
                     <div className={s.signup_block}>
                     {props.signUpState === 'signUpForm' ?
                    <ProfileFormBlock profileId={props.profileId} email={props.email}

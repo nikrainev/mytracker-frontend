@@ -114,7 +114,7 @@
   }
 }
 
-.empty_img{
+.avatar{
   width: 40px;
   height: 40px;
   border: 1px solid #c1c1c1;
@@ -128,10 +128,46 @@
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
-  img{
-    width: 25px;
+  overflow: hidden;
+
+}
+.uploaded {
+     width: 100%;
+   }
+.none {
+  width: 20px;
+}
+
+.avatar_loader{
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #dcdcdc;
+  animation: loadingScheme 1s infinite ;
+}
+
+@keyframes loadingScheme {
+  0%{background: #efefef}
+  50%{background: #dcdcdc}
+  100%{background: #efefef}
+}
+
+.login_loader{
+  display: block;
+  height: 21px;
+  width: 100px;
+  background: #dcdcdc;
+  animation: loadingScheme 1s infinite ;
+}
+
+.login_wr{
+  overflow: hidden;
+  width: 120px;
+  p{
+    width: 1000px;
   }
 }
+
 
 .profile_cont{
   display: flex;

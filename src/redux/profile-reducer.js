@@ -5,7 +5,7 @@ let initialState = {
     soName: '',
     company: '',
     description: '',
-    avatar: 'none',
+    avatar: '',
     pageSize: 5,
     totalProfiles: undefined,
     proposals: [],
@@ -55,7 +55,7 @@ const profileReducer = (state = initialState, action) =>{
         case 'profile/SET-AVATAR':
             return {
                 ...state,
-                avatar: action.avatarData
+                avatar: action.avatarData.avatar
             }
         default:
                 return state

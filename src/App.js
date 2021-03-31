@@ -18,20 +18,25 @@ import {connect} from "react-redux";
 import UserPageContainer from "./components/userPage/userPageContainer";
 
 import {getMenuState} from "./redux/selectors/app-selectors";
+import {compose} from "redux";
+
 
 class App extends React.Component {
     componentDidMount() {
         this.props.InitializingApp()
     }
 
+
     render (){
+        {console.log('update')}
         return <div className="app-wrapper">
 
             <div className="row">
 
                 <SideBarContainer />
                 <div className={this.props.menuState === "collapsed" ? "content" : "content sidebar_closed"}>
-                <Route path='/summary'  render={ () => <Summary  /> } />
+                    <Route exact path='/'  render={ () => <Summary  /> } />
+                    <Route path='/summary'  render={ () => <Summary  /> } />
                     <Route path='/counter/:counterId' render={()=> <CounterPage />} />
                     <Route path='/counters' render={() => <Counters />}/>
                     <Route path='/audiences' render={() => <Audiences />} />
@@ -58,6 +63,6 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps, {InitializingApp})(App)
+export default compose(connect(mapStateToProps, {InitializingApp}))(App)
 
 
