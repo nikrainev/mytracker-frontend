@@ -28,7 +28,7 @@ const Dayusers = (props) => {
         }
     }
     else{
-        dayUserElements = dayusers.map(dayuser => <Shortuser id={dayuser.id} country={dayuser.country} time={dayuser.time} date={dayuser.date} revenue={dayuser.revenue} />)
+        dayUserElements = dayusers.map(dayuser => <Shortuser key={dayuser.id} id={dayuser.id} country={dayuser.country} time={dayuser.time} date={dayuser.date} revenue={dayuser.revenue} />)
     }
 
 

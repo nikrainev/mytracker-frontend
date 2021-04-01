@@ -257,9 +257,9 @@ const UsersList = (props) => {
                 }
 
             })
-            users = users.map((user) => {
+            users = users.map((user, index) => {
                 if(user.divider) {
-                    return <ListDivider><p>{user.divider}</p></ListDivider>
+                    return <ListDivider key={index}><p>{user.divider}</p></ListDivider>
                 }
                 else{
                 return <ShortUser key={user.tysId} time={mongoDate(user.date).time} sessions={user.sessionsNumber}

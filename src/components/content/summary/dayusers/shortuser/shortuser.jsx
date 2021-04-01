@@ -20,7 +20,7 @@ const Shortuser = (props) =>{
 
     return  (
 
-                <NavLink to={'/users/'+props.id} className={s.shortuser}>
+                <NavLink  to={'/users/'+props.id} className={s.shortuser}>
                     <div className={s.user_alias}>
 
                     </div>
