@@ -22,6 +22,7 @@ import {compose} from "redux";
 
 
 class App extends React.Component {
+
     componentDidMount() {
         this.props.InitializingApp()
     }

@@ -16,8 +16,9 @@ const CounterPage = (props) =>{
     const [pageState, setPageState] = useState('fetching')
 
     useEffect(()=>{
-
+        document.title = 'Счётчик'
         return () =>{
+            document.title = ''
             props.clearCurrentCounter()
         }
     },[])
@@ -36,6 +37,7 @@ const CounterPage = (props) =>{
     useEffect(()=>{
 
         if((props.counterInfo && props.counterInfo.length !== 0) && pageState === 'fetching'){
+            document.title = 'Счётчик ' + props.counterInfo.name
             setPageState("main")
         }
 

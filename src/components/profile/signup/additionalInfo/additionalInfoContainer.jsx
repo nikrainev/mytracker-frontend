@@ -3,9 +3,7 @@ import {connect} from "react-redux";
 import AdditionalInfo from "./additionalInfo"
 const AdditionalInfoContainer = () =>{
     return(
-        <div>
-
-        </div>
+       <AdditionalInfo />
     )
 }
 

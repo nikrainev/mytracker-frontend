@@ -13,7 +13,9 @@ const SummaryContainer = (props) =>{
 
     const [pageState, setPageState] = useState('fetching')
     useEffect(()=>{
+        document.title = 'Сводка'
         return( ()=>{
+            document.title = ''
             props.clearSummaryData()
         })
     },[])

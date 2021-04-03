@@ -16,7 +16,9 @@ const UserPageContainer = (props) =>{
     const [pageState, setPageState] = useState('fetching')
     useEffect(()=>{
         props.getUserInfo(tysId)
+        document.title = 'Пользователь'
         return () =>{
+            document.title = ''
             props.clearUserInfo()
         }
     },[])
@@ -24,6 +26,7 @@ const UserPageContainer = (props) =>{
      useEffect(()=>{
         if(props.userInfo !== ""){
             setPageState("main")
+            document.title = 'Пользователь ' + props.userInfo.data.ipInfo.city
         }
     },[props.userInfo])
 

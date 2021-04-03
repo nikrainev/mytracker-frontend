@@ -11,7 +11,7 @@ const FriendsPage = (props) => {
             <>
                 {props.isInitialized ?
 
-
+                       
                         <div className="container">
                             <div className="h1-block">
                             <h1 className="h1">Друзья</h1>

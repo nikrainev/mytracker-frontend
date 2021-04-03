@@ -13,7 +13,9 @@ const Counters = (props) =>{
 
     const [pageState, setPageState] = useState('fetching')
     useEffect(()=>{
+        document.title = 'Счётчики'
         return( ()=>{
+            document.title = ''
             props.clearCountersLists()
         })
     },[])

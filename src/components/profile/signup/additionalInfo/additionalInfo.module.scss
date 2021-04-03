@@ -1,0 +1,38 @@
+.profile_form_wr{
+  width: 300px;
+  margin: auto;
+}
+.profile_form{
+  width: 100%;
+  button{
+    width: 111px;
+    padding: 10px;
+    margin-top: 60px;
+    float: right;
+  }
+  a{
+    color: #2673ff;
+    text-decoration: underline;
+  }
+}
+
+.photo_cont{
+  width: 70px;
+  display: block;
+  height: 70px;
+  background: #e4e4e4;
+  border-radius: 50%;
+  border: 2px solid #d4d4d4;
+
+}
+
+.add_photo_row{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 15px;
+  p{
+    color: #2673ff;
+    padding-left: 15px;
+  }
+}

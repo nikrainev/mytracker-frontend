@@ -9,20 +9,21 @@ let initialState = {
     regDate: null,
     token:'',
     isAuth: false,
-    isFetching: false,
-    signUpState: 'signUpForm'
+    stage: '',
+    isFetching: false
 }
 
 
 const authReducer =(state =initialState, action) =>{
     switch (action.type){
-        case "auth/SET_USER_DATA":
+        case "auth/SET_PROFILE_DATA":
             return{
                 ...state,
                 profileId: action.data.userId,
                 email: action.data.email,
                 login: action.data.login,
                 regDate: action.data.regDate,
+                stage: action.data.stage
 
             }
         case "auth/SET_TOKEN":
@@ -47,13 +48,6 @@ const authReducer =(state =initialState, action) =>{
                 ...state,
                 isFetching: action.isFetching
             }
-
-        case 'auth/TOGGLE_SIGNUP_STATE':
-            return {
-                ...state,
-                signUpState: action.signUpState
-            }
-
         default:
             return state
     }
@@ -61,7 +55,7 @@ const authReducer =(state =initialState, action) =>{
 
 
 export const setProfileData = (authProfileData) => ({
-    type: "auth/SET_USER_DATA",
+    type: "auth/SET_PROFILE_DATA",
     data: authProfileData})
 export const setToken = (token) =>({
     type: 'auth/SET_TOKEN',
@@ -83,11 +77,11 @@ export const toggleIsFetching = (isFetching)=>({
 })
 
 
-export const setSignUpState = (signUpState) =>{return {
-    type: 'auth/TOGGLE_SIGNUP_STATE',
-    signUpState: signUpState
-}}
 
+export const UpdateAuthInfo = () => async (dispatch) =>{
+     let response  = await authAPI.getAuthInfo()
+     dispatch(setProfileData(response))
+}
 
 
 export const loginThunkCreator = (emailInput, passwordInput) =>{
@@ -101,12 +95,7 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
                 if(response.message === "Auth successful"){
                     document.cookie = 'email='+emailInput+'; max-age=360000'
                     document.cookie = 'password='+passwordInput+'; max-age=360000'
-                    authAPI.getAuthInfo()
-                            .then(response => {
-                                console.log(response)
-
-                                dispatch(setProfileData(response))
-                            })
+                    UpdateAuthInfo()
                 }
             })
             .catch(error => {
@@ -121,25 +110,21 @@ export const signUpThunkCreator = (email,login,password) =>{
     return (dispatch) =>{
         dispatch(toggleIsFetching(true))
         signUpAPI.postSignUpInfo(email,login,password).then(response => {
-            dispatch(toggleIsFetching(false))
             if(response.data.message === 'user created'){
 
-                dispatch(setSignUpState('userInfoForm'))
+
+                dispatch(toggleIsFetching(false))
                 authAPI.postLoginInfo(email, password)
                         .then(response => {
                             dispatch(setToken(response.token))
                             if(response.message === "Auth successful"){
                                 document.cookie = 'email='+email+'; max-age=360000'
                                 document.cookie = 'password='+password+'; max-age=360000'
-                                authAPI.getAuthInfo()
-                                        .then(response => {
-                                            dispatch(setProfileData(response))
-                                        })
-
+                                UpdateAuthInfo()
                             }
                         })
                         .catch(error => {
-                            dispatch(toggleIsFetching(false))
+                            console.log(error)
                         })
             }
 
@@ -176,6 +161,15 @@ export const AuthThunkCreator = () => async (dispatch)=>{
     }
 }
 
+export const ConfirmEmail = (token) => (dispatch) =>{
+    signUpAPI.confirmEmail()
+            .then(response=>{
+                console.log(response)
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+}
 
 
 export  default authReducer

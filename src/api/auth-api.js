@@ -28,6 +28,15 @@ export const signUpAPI = {
                 .then(response =>{
                     return response;
                 })
+    },
+    confirmEmail(token){
+        return authedInstance.put('confirmemail/'+token)
+                .then(response =>{
+                    return response;
+                })
+                .catch(error=>{
+                    return error
+                })
     }
 
 }
