@@ -14,3 +14,39 @@
   font-weight: 500;
   margin-bottom: 20px;
 }
+
+  .timer_p{
+    min-height: 34px;
+    p{
+      font-size: 13px;
+      margin-bottom: 0px;
+    }
+
+  }
+
+.button_cont{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sent_badge{
+      background: black;
+      width: 160px;
+      text-align: center;
+      padding-top: 3px;
+      padding-bottom: 4px;
+      position: absolute;
+      right: -20px;
+      top: 3px;
+      font-size: 14px;
+      color: white;
+      &:before{
+        content: '';
+        position: absolute;
+        left: -12px;
+        bottom: 6px;
+        border: 7px solid transparent;
+        border-right: 9px solid black;
+      }
+}

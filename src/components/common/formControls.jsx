@@ -131,6 +131,8 @@ const DisabledStyled = styled.span`
 export const Button = (props) =>{
     return (props.disabled  ?<DisabledStyled {...props} /> : <ButtonStyled {...props} />)
 
+}
 
-
+export const FormFetching = (props) =>{
+    return  <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar} />
 }

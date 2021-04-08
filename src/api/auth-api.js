@@ -37,6 +37,13 @@ export const signUpAPI = {
                 .catch(error=>{
                     return error
                 })
+    },
+    sendEmail(){
+
+        return authedInstance.post('send_message/', {}, {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+                .then(response=>{
+            return response
+        })
     }
 
 }

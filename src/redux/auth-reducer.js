@@ -1,6 +1,6 @@
-
 import {authAPI, signUpAPI} from "../api/auth-api";
 import {stopSubmit} from "redux-form";
+
 
 let initialState = {
     profileId: null,
@@ -78,7 +78,7 @@ export const toggleIsFetching = (isFetching)=>({
 
 
 
-export const UpdateAuthInfo = () => async (dispatch) =>{
+export const updateAuthInfo = () => async (dispatch) =>{
      let response  = await authAPI.getAuthInfo()
      dispatch(setProfileData(response))
 }
@@ -95,7 +95,7 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
                 if(response.message === "Auth successful"){
                     document.cookie = 'email='+emailInput+'; max-age=360000'
                     document.cookie = 'password='+passwordInput+'; max-age=360000'
-                    UpdateAuthInfo()
+                    dispatch(updateAuthInfo())
                 }
             })
             .catch(error => {
@@ -112,7 +112,6 @@ export const signUpThunkCreator = (email,login,password) =>{
         signUpAPI.postSignUpInfo(email,login,password).then(response => {
             if(response.data.message === 'user created'){
 
-
                 dispatch(toggleIsFetching(false))
                 authAPI.postLoginInfo(email, password)
                         .then(response => {
@@ -120,7 +119,7 @@ export const signUpThunkCreator = (email,login,password) =>{
                             if(response.message === "Auth successful"){
                                 document.cookie = 'email='+email+'; max-age=360000'
                                 document.cookie = 'password='+password+'; max-age=360000'
-                                UpdateAuthInfo()
+                                dispatch(updateAuthInfo())
                             }
                         })
                         .catch(error => {
@@ -161,6 +160,14 @@ export const AuthThunkCreator = () => async (dispatch)=>{
     }
 }
 
+export const SendEmail = () => async (dispatch) =>{
+    dispatch(toggleIsFetching(true))
+    await signUpAPI.sendEmail()
+    dispatch(toggleIsFetching(false))
+}
+
+
+
 export const ConfirmEmail = (token) => (dispatch) =>{
     signUpAPI.confirmEmail()
             .then(response=>{
@@ -170,6 +177,8 @@ export const ConfirmEmail = (token) => (dispatch) =>{
                 console.log(error)
             })
 }
+
+
 
 
 export  default authReducer
