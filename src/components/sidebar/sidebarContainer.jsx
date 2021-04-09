@@ -15,7 +15,7 @@ let SideBarContainer = (props) => {
    const [profileBlockState, setProfileBlockState] = useState('fetching')
    const pageName = useLocation()
    useEffect(()=>{
-       if(pageName.pathname.split('/').includes('login')  || pageName.pathname.split('/').includes('signup')){
+       if(['login', 'signup', 'auth'].some(el => pageName.pathname.split('/').includes(el))){
            setSideBarVisibility('hidden')
        }
        else{

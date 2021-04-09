@@ -30,12 +30,13 @@ export const signUpAPI = {
                 })
     },
     confirmEmail(token){
-        return authedInstance.put('confirmemail/'+token)
+        return authedInstance.put('confirm_email/'+token)
                 .then(response =>{
-                    return response;
+                    return response.data.message
                 })
                 .catch(error=>{
-                    return error
+
+                    return error.response.data.error
                 })
     },
     sendEmail(){

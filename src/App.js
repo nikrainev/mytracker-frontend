@@ -18,6 +18,7 @@ import {connect} from "react-redux";
 import UserPageContainer from "./components/userPage/userPageContainer";
 import NotFoundPage from "./components/content/NotFoundPage/notFoundPage";
 import {getMenuState} from "./redux/selectors/app-selectors";
+import ConfirmEmailContainerRef from './components/profile/signup/confirmEmailRef/confirmEmailRefContainer'
 import {compose} from "redux";
 
 
@@ -47,6 +48,7 @@ class App extends React.Component {
                     <Route  path='/signup' render={()=> <SignUpContainer />} />
                     <Route  path='/friends' render={()=> <FriendsPage />} />
                     <Route  path='/users/:tysId' render={()=><UserPageContainer />} />
+                    <Route  path='/auth/confirmemail/:confirmToken' render={()=><ConfirmEmailContainerRef />} />
                     <Route path='*' render={()=><NotFoundPage />} />
                     </Switch>
             </div>

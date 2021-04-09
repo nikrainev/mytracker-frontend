@@ -10,7 +10,8 @@ let initialState = {
     token:'',
     isAuth: false,
     stage: '',
-    isFetching: false
+    isFetching: false,
+    confirmEmailResult: ''
 }
 
 
@@ -48,6 +49,11 @@ const authReducer =(state =initialState, action) =>{
                 ...state,
                 isFetching: action.isFetching
             }
+        case 'auth/SET_CONFIRM_EMAIL_RESULT':
+            return {
+                ...state,
+                confirmEmailResult: action.result
+            }
         default:
             return state
     }
@@ -76,6 +82,10 @@ export const toggleIsFetching = (isFetching)=>({
     isFetching: isFetching
 })
 
+export const setConfirmEmailResult = (result) =>({
+    type: 'auth/SET_CONFIRM_EMAIL_RESULT',
+    result: result
+})
 
 
 export const updateAuthInfo = () => async (dispatch) =>{
@@ -169,13 +179,18 @@ export const SendEmail = () => async (dispatch) =>{
 
 
 export const ConfirmEmail = (token) => (dispatch) =>{
-    signUpAPI.confirmEmail()
+
+    signUpAPI.confirmEmail(token)
             .then(response=>{
-                console.log(response)
+                dispatch(setConfirmEmailResult(response))
+
             })
             .catch(error=>{
-                console.log(error)
+                dispatch(setConfirmEmailResult(error))
+
             })
+
+
 }
 
 

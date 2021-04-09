@@ -1,5 +1,5 @@
 import React from "react";
-import loadingImg from "../../assets/icons/small-loading.svg";
+import loadingImg from "../../assets/icons/loading.svg";
 import doneImg from "../../assets/icons/done.svg";
 import s from "./common.module.scss"
 import {offsetText} from "../../utils/textTransformation";
