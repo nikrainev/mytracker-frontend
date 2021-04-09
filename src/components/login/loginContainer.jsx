@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginBlock from "./loginform";
 import {connect} from "react-redux";
-import {loginThunkCreator} from "../../../redux/auth-reducer";
+import {loginThunkCreator} from "../../redux/auth-reducer";
 
 class LoginContainer extends React.Component {
 

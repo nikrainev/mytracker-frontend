@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import s from "./confirmEmail.module.scss"
-import {Button, FormFetching} from "../../../common/formControls";
+import {Button, FormFetching} from "../../common/formControls";
 
 const ConfirmEmail = (props) =>{
     const [buttonDisabled, setButtonDisabled] = useState(false)

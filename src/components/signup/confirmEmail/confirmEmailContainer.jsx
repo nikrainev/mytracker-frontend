@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import ConfirmEmail from "./confirmEmail"
-import {SendEmail} from  '../../../../redux/auth-reducer'
+import {SendEmail} from '../../../redux/auth-reducer'
 const ConfirmEmailContainer = (props) =>{
 
 

@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import ConfirmEmailRef from "./confirmEmailRef"
-import {ConfirmEmail} from "../../../../redux/auth-reducer";
+import {ConfirmEmail} from "../../../redux/auth-reducer";
 const ConfirmEmailContainerRef = (props) =>{
     let {confirmToken} = useParams()
     useEffect(()=>{

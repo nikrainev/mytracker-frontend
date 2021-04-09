@@ -1,7 +1,7 @@
 import {usersAPI} from "../api/users-api";
 import {summaryAPI} from "../api/summary-api";
 import store from "./redux-store"
-import {getSummaryGraphic} from "./selectors/summary-selectors";
+
 
 let initialState = {
     summaryInfo:{

@@ -45,6 +45,14 @@ export const signUpAPI = {
                 .then(response=>{
             return response
         })
+    },
+    putAdditionalInfo(name, soName, company, description){
+        return authedInstance.put('additional_information/', {name: name, soName: soName, company: company, descriptions: description},
+                {headers: {"Authorization": "Bearer "+store.getState().auth.token}})
+                .then(response =>{
+                    return response
+                }
+    )
     }
 
 }

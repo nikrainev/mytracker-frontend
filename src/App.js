@@ -8,9 +8,9 @@ import Counters from "./components/content/counters/counters";
 import Audiences from "./components/content/audiences/audiences";
 import  {Route, Switch} from "react-router-dom";
 import ProfileSettings from "./components/profile/profilesettings/profilesettings";
-import LoginContainer from "./components/profile/login/loginContainer"
+import LoginContainer from "./components/login/loginContainer"
 import ProfileContainer from "./components/profile/profilePage/profileContainer";
-import SignUpContainer from "./components/profile/signup/signupContainer"
+import SignUpContainer from "./components/signup/signupContainer"
 import FriendsPage from "./components/profile/friends/friends";
 import CounterPage from "./components/content/counters/counterPage/counterPage";
 import {InitializingApp} from "./redux/app-reducer";
@@ -18,7 +18,7 @@ import {connect} from "react-redux";
 import UserPageContainer from "./components/userPage/userPageContainer";
 import NotFoundPage from "./components/content/NotFoundPage/notFoundPage";
 import {getMenuState} from "./redux/selectors/app-selectors";
-import ConfirmEmailContainerRef from './components/profile/signup/confirmEmailRef/confirmEmailRefContainer'
+import ConfirmEmailContainerRef from './components/signup/confirmEmailRef/confirmEmailRefContainer'
 import {compose} from "redux";
 
 

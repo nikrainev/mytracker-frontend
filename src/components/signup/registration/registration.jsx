@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./registration.module.scss"
 import {Field, reduxForm} from "redux-form";
-import {Button, Input, PasswordScoreInput} from "../../../common/formControls";
-import {checkEmail, checkLogin, checkPassword, passwordsMatch, required} from "../../../../utils/validation";
+import {Button, Input, PasswordScoreInput} from "../../common/formControls";
+import {checkEmail, checkLogin, checkPassword, passwordsMatch, required} from "../../../utils/validation";
 import {NavLink} from "react-router-dom";
+import loading from "../../../assets/icons/loading.svg";
 
 const SignUpForm = (props) =>{
     return (
@@ -17,7 +18,7 @@ const SignUpForm = (props) =>{
                 <Field name="password" type="password"  component={PasswordScoreInput} placeholder="Придумайте пароль" validate={[required, checkPassword]}/>
                 <Field name="repeatPassword" type="password"  component={Input} placeholder="Повторите пароль" validate={[required, passwordsMatch]}/>
                 <p className={s.dont_reg_yet}>Уже есть аккаунт? <NavLink to='/login'>Войти</NavLink></p>
-                <Button primary className='control_button' disabled={props.submitting || props.error}  type="submit" >Отправить</Button>
+                <Button primary  disabled={props.submitting || props.error}  type="submit" >Отправить</Button>
 
             </form>
 

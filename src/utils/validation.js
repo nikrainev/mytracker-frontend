@@ -8,3 +8,4 @@ export const checkPassword = value => (value && /^[0-9a-z#!_-]/i.test(value) ? u
 
 export const passwordsMatch = (value, allValues) =>
         value !== allValues.password ? 'Пароли не совпадают' : undefined;
+export const minLength = (value) => (value && value.length > 1 ? undefined : 'Минимум 2 символа')

@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import s from './login.module.scss';
 import {NavLink, Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {Input, Button} from "../../../components/common/formControls"
-import {required} from "../../../utils/validation";
-import doneImg from "../../../assets/icons/done.svg";
-import {BackGround} from "../../../components/common/background"
+import {Input, Button} from "../common/formControls"
+import {required} from "../../utils/validation";
+import doneImg from "../../assets/icons/done.svg";
+import {BackGround} from "../common/background"
 import styled from 'styled-components'
 
 const SuccessForm = () =>{

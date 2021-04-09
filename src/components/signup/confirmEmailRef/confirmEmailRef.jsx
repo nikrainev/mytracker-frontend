@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import s from "./confirmEmailRef.module.scss"
-import loading from '../../../../assets/icons/loading.svg'
-import {BackGround} from "../../../common/background";
-import clockImg from '../../../../assets/icons/clockError.svg'
-import errorImg from '../../../../assets/icons/error.svg'
-import successImg from '../../../../assets/icons/done.svg'
+import loading from '../../../assets/icons/loading.svg'
+import {BackGround} from "../../common/background";
+import clockImg from '../../../assets/icons/clockError.svg'
+import errorImg from '../../../assets/icons/error.svg'
+import successImg from '../../../assets/icons/done.svg'
 import {NavLink, Redirect} from "react-router-dom";
 const FetchingBlock = () =>{
     return(

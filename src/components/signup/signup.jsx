@@ -1,17 +1,25 @@
 import React, {useEffect} from 'react';
 import s from './signup.module.scss';
 import {Route, Redirect} from "react-router-dom";
-import {BackGround} from "../../common/background";
+import {BackGround} from "../common/background";
 
 import RegistrationContainer from "./registration/registrationContainer";
 import ConfirmEmailContainer from "./confirmEmail/confirmEmailContainer";
 import AdditionalInfoContainer from "./additionalInfo/additionalInfoContainer";
 import Success from "./success/success";
+import loading from "../../assets/icons/loading.svg";
 
 
 
 
 
+const FetchingBlock = () =>{
+    return(
+            <div className={s.fetching_block}>
+                <img src={loading} alt=""/>
+            </div>
+    )
+}
 
 
 
@@ -46,11 +54,14 @@ const SignUpBlock = (props) => {
             <BackGround />
                 <div className="fullpage_container">
                     <div className={s.signup_block}>
-                        <Route exact path='/signup' render={()=><RegistrationContainer />}/>
-                        <Route exact path='/signup/confirm_email/' render={()=><ConfirmEmailContainer />}/>
-                        <Route path='/signup/additional_info' render={()=><AdditionalInfoContainer />} />
-                        <Route path='/signup/success' render={()=><Success />} />
-                        {redirectCallBack()}
+                        <Route exact path='/signup' render={(props)=>(props.isInitialized ? <RegistrationContainer /> : <FetchingBlock />)}/>
+                        <Route exact path='/signup/confirm_email/' render={()=>(props.isInitialized ? <ConfirmEmailContainer /> : <FetchingBlock />)}/>
+                        <Route path='/signup/additional_info' render={()=>(props.isInitialized ? <AdditionalInfoContainer /> : <FetchingBlock />)} />
+                        <Route path='/signup/success' render={()=>(props.isInitialized ? <Success /> : <FetchingBlock />)} />
+
+
+
+                        {props.isInitialized && redirectCallBack()}
 
                     </div>
                 </div>

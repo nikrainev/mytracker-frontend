@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Registration from "./registration"
-import {signUpThunkCreator} from "../../../../redux/auth-reducer";
+import {signUpThunkCreator} from "../../../redux/auth-reducer";
 
 const RegistrationContainer = (props) =>{
 

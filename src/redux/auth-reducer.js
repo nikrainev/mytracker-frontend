@@ -187,10 +187,13 @@ export const ConfirmEmail = (token) => (dispatch) =>{
             })
             .catch(error=>{
                 dispatch(setConfirmEmailResult(error))
-
             })
+}
 
-
+export const SendAdditionalInfo = (name, soName, company, description) => (dispatch)=>{
+    signUpAPI.putAdditionalInfo(name, soName, company, description).then(response =>{
+        dispatch(updateAuthInfo())
+    })
 }
 
 
