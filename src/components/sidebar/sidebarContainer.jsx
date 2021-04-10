@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Sidebar from "./sidebar";
 import {connect} from "react-redux";
 import {useCookies} from "react-cookie";
-import {deleteProfileData, setProfileData, setToken} from "../../redux/auth-reducer";
+import {setToken} from "../../redux/auth-reducer";
 import {toggleMenuState} from '../../redux/app-reducer'
 import {getMenuState} from "../../redux/selectors/app-selectors";
 import {useLocation} from "react-router-dom";
@@ -25,14 +25,14 @@ let SideBarContainer = (props) => {
 
 
     useEffect(()=>{
-        if(props.isInitialized){
+        if(props.isInitialized && props.isAuth){
             props.getAvatar()
         }
         else{
             setProfileBlockState('fetching')
         }
 
-    }, [ props.isInitialized])
+    }, [ props.isInitialized, props.isAuth])
 
 
     useEffect(()=>{
@@ -45,16 +45,11 @@ let SideBarContainer = (props) => {
 
 
 
-
-
-
-    useEffect(()=>{
-       props.getAvatar()
-   },[])
    let logOut = () =>{
        removeCookie("email");
        removeCookie("password")
-        props.deleteProfileData()
+
+       window.location.reload()
 
     }
 
@@ -83,4 +78,4 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps, {setToken,setProfileData, deleteProfileData, toggleMenuState, getAvatar})(SideBarContainer)
+export default connect(mapStateToProps, {setToken, toggleMenuState, getAvatar})(SideBarContainer)

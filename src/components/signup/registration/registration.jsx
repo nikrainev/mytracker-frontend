@@ -4,7 +4,6 @@ import {Field, reduxForm} from "redux-form";
 import {Button, Input, PasswordScoreInput} from "../../common/formControls";
 import {checkEmail, checkLogin, checkPassword, passwordsMatch, required} from "../../../utils/validation";
 import {NavLink} from "react-router-dom";
-import loading from "../../../assets/icons/loading.svg";
 
 const SignUpForm = (props) =>{
     return (

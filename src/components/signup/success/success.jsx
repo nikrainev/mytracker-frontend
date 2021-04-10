@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import s from "./success.module.scss"
 import successImg from '../../../assets/icons/done.svg'
 import {Redirect} from "react-router-dom";
+import WithSignUpStagePreloader from "../../../hoc/withAuthStageRedirect";
 const Success = () =>{
     const [redirect, setRedirect] = useState(false)
     useEffect(()=>{
@@ -19,4 +20,4 @@ const Success = () =>{
 }
 
 
-export default Success
+export default  WithSignUpStagePreloader(Success)

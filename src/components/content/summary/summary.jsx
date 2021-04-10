@@ -7,15 +7,15 @@ import {getSummaryInfo, getSummaryGraphic, getSummaryUsers} from "../../../redux
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {SummaryPageLoader} from "../../common/loadingschemes/loadingSchemes";
+import {useDocTitle} from "../../../utils/customHooks";
 
 
 const SummaryContainer = (props) =>{
-
     const [pageState, setPageState] = useState('fetching')
+    const [title, setTitle] = useDocTitle('Сводка')
+
     useEffect(()=>{
-        document.title = 'Сводка'
         return( ()=>{
-            document.title = ''
             props.clearSummaryData()
         })
     },[])

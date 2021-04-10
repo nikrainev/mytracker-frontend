@@ -3,8 +3,10 @@ import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import ConfirmEmailRef from "./confirmEmailRef"
 import {ConfirmEmail} from "../../../redux/auth-reducer";
+import {useDocTitle} from "../../../utils/customHooks";
 const ConfirmEmailContainerRef = (props) =>{
     let {confirmToken} = useParams()
+    const [title, setTitle] = useDocTitle('Подтверждение почты')
     useEffect(()=>{
         props.ConfirmEmail(confirmToken)
     }, [])

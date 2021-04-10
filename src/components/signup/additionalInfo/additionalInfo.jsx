@@ -44,7 +44,7 @@ const AdditionalInfo = (props)=>{
                     <div className={s.photo_cont} />
                     <p className={s.add_photo}>Добавить фото</p>
                 </div>
-                <FormFetching />
+                <FormFetching isFetching={props.isFetching}/>
                 <ProfileFormReduxForm onSubmit={onSubmit}  />
 
             </div>

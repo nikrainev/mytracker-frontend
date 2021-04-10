@@ -9,7 +9,7 @@ let initialState = {
     regDate: null,
     token:'',
     isAuth: false,
-    stage: '',
+    stage: undefined,
     isFetching: false,
     confirmEmailResult: ''
 }
@@ -103,8 +103,8 @@ export const loginThunkCreator = (emailInput, passwordInput) =>{
                 dispatch(setToken(response.token))
                 dispatch(toggleIsFetching(false))
                 if(response.message === "Auth successful"){
-                    document.cookie = 'email='+emailInput+'; max-age=360000'
-                    document.cookie = 'password='+passwordInput+'; max-age=360000'
+                    document.cookie = 'email='+emailInput+'; max-age=2592000;  secure; path=/'
+                    document.cookie = 'password='+passwordInput+'; max-age=2592000;  secure; path=/'
                     dispatch(updateAuthInfo())
                 }
             })
@@ -191,8 +191,10 @@ export const ConfirmEmail = (token) => (dispatch) =>{
 }
 
 export const SendAdditionalInfo = (name, soName, company, description) => (dispatch)=>{
+    dispatch(toggleIsFetching(true))
     signUpAPI.putAdditionalInfo(name, soName, company, description).then(response =>{
         dispatch(updateAuthInfo())
+        dispatch(toggleIsFetching(false))
     })
 }
 

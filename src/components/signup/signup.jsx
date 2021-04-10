@@ -26,7 +26,10 @@ const FetchingBlock = () =>{
 
 const SignUpBlock = (props) => {
 
+
+
     let redirectCallBack = () =>{
+
         switch (props.regStage){
             case '':{
                 return <Redirect to='/signup'/>
@@ -54,12 +57,10 @@ const SignUpBlock = (props) => {
             <BackGround />
                 <div className="fullpage_container">
                     <div className={s.signup_block}>
-                        <Route exact path='/signup' render={(props)=>(props.isInitialized ? <RegistrationContainer /> : <FetchingBlock />)}/>
-                        <Route exact path='/signup/confirm_email/' render={()=>(props.isInitialized ? <ConfirmEmailContainer /> : <FetchingBlock />)}/>
-                        <Route path='/signup/additional_info' render={()=>(props.isInitialized ? <AdditionalInfoContainer /> : <FetchingBlock />)} />
-                        <Route path='/signup/success' render={()=>(props.isInitialized ? <Success /> : <FetchingBlock />)} />
-
-
+                        <Route exact path='/signup' render={()=>(<RegistrationContainer />)}/>
+                        <Route exact path='/signup/confirm_email/' render={()=>( <ConfirmEmailContainer />)}/>
+                        <Route exact path='/signup/additional_info' render={()=>(<AdditionalInfoContainer /> )} />
+                        <Route exact path='/signup/success' render={()=>(<Success />)} />
 
                         {props.isInitialized && redirectCallBack()}
 

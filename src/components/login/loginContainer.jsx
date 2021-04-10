@@ -2,23 +2,24 @@ import React from 'react';
 import LoginBlock from "./loginform";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../redux/auth-reducer";
+import {useDocTitle} from "../../utils/customHooks";
 
-class LoginContainer extends React.Component {
-
-    sendLoginRequest = (email, password) => {
-        this.props.loginThunkCreator(email, password)
+let LoginContainer = (props) => {
+    const [title, setTitle] = useDocTitle('Вход')
+    let sendLoginRequest = (email, password) => {
+        props.loginThunkCreator(email, password)
     }
 
 
 
-    render() {
+
         return <LoginBlock
-                       isFetching={this.props.isFetching}
-                       isAuth={this.props.isAuth}
-                       sendLoginRequest={this.sendLoginRequest}
+                       isFetching={props.isFetching}
+                       isAuth={props.isAuth}
+                       sendLoginRequest={sendLoginRequest}
             />
 
-    }
+
 }
 
 let mapStateToProps = (state) =>{
@@ -28,5 +29,4 @@ let mapStateToProps = (state) =>{
     }
 }
 
-export default LoginContainer = connect(mapStateToProps,
-        {loginThunkCreator})(LoginContainer)
+export default connect(mapStateToProps, {loginThunkCreator})(LoginContainer)

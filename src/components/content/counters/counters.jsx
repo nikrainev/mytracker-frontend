@@ -7,15 +7,15 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {getCounters, clearCountersLists} from "../../../redux/counters-reducer";
-import {getYourCounters} from "../../../redux/selectors/counters-selectors";
+import {getYourTotalCounters} from "../../../redux/selectors/counters-selectors";
+import {useDocTitle} from "../../../utils/customHooks";
 
 const Counters = (props) =>{
-
     const [pageState, setPageState] = useState('fetching')
+    const [title, setTitle] = useDocTitle('Счётчики')
+
     useEffect(()=>{
-        document.title = 'Счётчики'
         return( ()=>{
-            document.title = ''
             props.clearCountersLists()
         })
     },[])
@@ -33,11 +33,11 @@ const Counters = (props) =>{
 
     useEffect(()=>{
 
-        if((props.countersListData && props.countersListData.length !== 0) && pageState === 'fetching'){
+        if(props.totalCounters !== '' && pageState === 'fetching'){
             setPageState("main")
         }
 
-    },[props.countersListData])
+    },[props.totalCounters])
     return (
 
             <>
@@ -52,9 +52,9 @@ const Counters = (props) =>{
 
 const mapStateToProps = (state) => {
     return {
-        countersListData: getYourCounters(state),
+        totalCounters: getYourTotalCounters(state),
         isInitialized: state.app.isInitialized,
 
     }
 }
-export default compose(connect(mapStateToProps, {getCounters, clearCountersLists}), WithAuthRedirect)(Counters);
+export default compose(connect(mapStateToProps, {getCounters,  clearCountersLists}), WithAuthRedirect)(Counters);

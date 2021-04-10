@@ -19,6 +19,7 @@ export const profileAPI = {
                 .then(response =>{
                     return response.data;
                 })
+
     },
     getProfileInfoById(userId){
         return axiosInstance.get('/userid/'+userId)

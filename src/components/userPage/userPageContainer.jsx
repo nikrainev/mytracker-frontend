@@ -7,18 +7,18 @@ import {getUserInfoFromState, getUserSessionsList} from '../../redux/selectors/u
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {UserPageLoader} from "../common/loadingschemes/loadingSchemes";
+import {useDocTitle} from "../../utils/customHooks";
 
 const UserPageContainer = (props) =>{
     let {tysId} = useParams()
-
-
-
     const [pageState, setPageState] = useState('fetching')
+    const [title, setTitle] = useDocTitle('Пользователь')
+
     useEffect(()=>{
         props.getUserInfo(tysId)
-        document.title = 'Пользователь'
+
         return () =>{
-            document.title = ''
+
             props.clearUserInfo()
         }
     },[])
@@ -26,7 +26,7 @@ const UserPageContainer = (props) =>{
      useEffect(()=>{
         if(props.userInfo !== ""){
             setPageState("main")
-            document.title = 'Пользователь ' + props.userInfo.data.ipInfo.city
+            setTitle('Пользователь ' + props.userInfo.data.ipInfo.city)
         }
     },[props.userInfo])
 

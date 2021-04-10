@@ -8,20 +8,19 @@ import {getCurrentCounterUsers, getCurrentCounterInfo} from "../../../../redux/s
 import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {CounterPageLoader} from "../../../../components/common/loadingschemes/loadingSchemes";
 import {compose} from "redux";
+import {useDocTitle} from "../../../../utils/customHooks";
 
 const CounterPage = (props) =>{
     let {counterId} = useParams()
-
-
     const [pageState, setPageState] = useState('fetching')
+    const [title, setTitle] = useDocTitle('Счётчик')
 
     useEffect(()=>{
-        document.title = 'Счётчик'
         return () =>{
-            document.title = ''
             props.clearCurrentCounter()
         }
     },[])
+
 
     useEffect(()=>{
         if(props.isInitialized){
@@ -37,7 +36,7 @@ const CounterPage = (props) =>{
     useEffect(()=>{
 
         if((props.counterInfo && props.counterInfo.length !== 0) && pageState === 'fetching'){
-            document.title = 'Счётчик ' + props.counterInfo.name
+            setTitle('Счётчик '+props.counterInfo.name)
             setPageState("main")
         }
 

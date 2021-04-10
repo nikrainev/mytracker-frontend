@@ -2,9 +2,11 @@ import React from 'react';
 import s from './notFoundPage.module.scss';
 import notFoundGif from '../../../assets/notFound.gif'
 import  {NavLink} from "react-router-dom";
+import {useDocTitle} from "../../../utils/customHooks";
 
 
 const NotFoundPage = (props) => {
+    const [title, setTitle] = useDocTitle('404 - страница не найдена')
 
 
 
