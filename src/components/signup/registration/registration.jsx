@@ -17,7 +17,7 @@ const SignUpForm = (props) =>{
                 <Field name="password" type="password"  component={PasswordScoreInput} placeholder="Придумайте пароль" validate={[required, checkPassword]}/>
                 <Field name="repeatPassword" type="password"  component={Input} placeholder="Повторите пароль" validate={[required, passwordsMatch]}/>
                 <p className={s.dont_reg_yet}>Уже есть аккаунт? <NavLink to='/login'>Войти</NavLink></p>
-                <Button primary  disabled={props.submitting || props.error}  type="submit" >Отправить</Button>
+                <Button className={s.button} primary  disabled={props.submitting  || (props.invalid && props.anyTouched) || props.isFetching}  type="submit" >Отправить</Button>
 
             </form>
 
