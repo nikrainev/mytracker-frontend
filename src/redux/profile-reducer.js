@@ -192,4 +192,11 @@ export const deleteFriend = (userId, buttonId) => async (dispatch) =>{
     }
 }
 
+export const updateAvatar = (file) => async (dispatch) =>{
+    let response = await profileAPI.updateAvatar(file)
+    if (response.avatar){
+        dispatch(setAvatar(response.avatar))
+    }
+}
+
 export default profileReducer

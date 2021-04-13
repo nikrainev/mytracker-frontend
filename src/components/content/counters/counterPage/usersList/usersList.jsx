@@ -242,9 +242,11 @@ return(
 }
 
 const UsersList = (props) => {
+
     let users = []
     if(props.usersList !== undefined){
-        if(props.usersList !== "no users"){
+        if(props.usersList !== "no users" && props.usersList !== "you do not have counters"){
+
             let lastDivider = ''
             props.usersList.forEach((item, index)=>{
                 if(mongoDate(item.date).comparativeDate !== lastDivider){

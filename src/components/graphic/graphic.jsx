@@ -122,7 +122,7 @@ const Graphic = (props) => {
     let maxUsersCount = props.graphicData.map((coldata) => (coldata.usersCount))
     maxUsersCount = Math.max.apply(null, maxUsersCount)
 
-    let graphicColElements = props.graphicData.map((coldata, index) => <Graphiccol key={coldata.hour} colData={coldata.hour} colHeight={coldata.usersCount / maxUsersCount}
+    let graphicColElements = props.graphicData.map((coldata, index) => <Graphiccol key={coldata.time} colData={coldata.time} colHeight={coldata.usersCount / maxUsersCount}
                                                                                    colValue={coldata.usersCount}/>)
 
     return  (

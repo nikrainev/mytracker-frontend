@@ -88,10 +88,8 @@ class YourFriendsContainer extends React.Component{
                         pageSize={this.props.pageSize}
                         totalFriends={this.props.totalFriends}
                         deleteFriend={this.deleteFriend}
-                        addToFriendsList={this.props.addFriendsList}
-
-
-                /></div>
+                        addToFriendsList={this.props.addFriendsList}/>
+                </div>
         )
     }
 }

@@ -1,0 +1,64 @@
+.avatar_cont{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #c1c1c1;
+  background: #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: .25s all;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.emptyAvatar{
+  width: 20px;
+}
+
+.avatar{
+width: 100%;
+}
+
+.line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+  width: 100%;
+  height: 63px;
+  margin-bottom: 10px;
+}
+
+.names_row{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
+  width: calc(30%);
+  p{
+    margin-left: 10px;
+  }
+}
+
+.company{
+  width: calc(30%);
+}
+
+.description{
+  width: calc(40% - 270px);
+  overflow: hidden;
+  position: relative;
+  .description_p{
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+}
+
+.buttons{
+  width: 270px;
+  box-sizing: border-box;
+  padding-right: 10px;
+}

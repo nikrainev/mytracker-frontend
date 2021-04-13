@@ -1,9 +1,10 @@
 import React from 'react';
 import s2 from '../../friends/friends.module.scss';
 import s from './yourFriends.module.scss'
-import {offsetText} from "../../../../utils/textTransformation";
+
 import {LoadMore} from "../../../common/loadMore";
 import friendIcon from '../../../../assets/icons/users.svg'
+import ProfileLine from "../../profileLine/profileLine";
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
@@ -32,18 +33,11 @@ const YourFriends = (props) => {
 
     }
     if(props.friends !== "no friends"){
-        let i = 0
-        friendsList = props.friends.map((friend)=> <div className={s2.line}>
-            <div className={s2.names_row}>
-                <p className="name">{friend.name}</p>
-                <p className="soname">{friend.soName}</p>
-            </div>
-            <div className={s2.company}>{friend.company}</div>
-            <div className={s2.description}><p className={s2.description_p}>{offsetText(friend.description)}</p></div>
-            {buttonSelector(friend.userId, i++)}
-
-        </div>)
-    }else{
+        console.log(props.friends)
+        friendsList = props.friends.map((friend, index)=>
+                <ProfileLine {...friend} buttonsComponent={buttonSelector(friend.userId, index)}/>)
+    }
+    else{
         friendsList = "empty"
     }
     return  (

@@ -11,6 +11,7 @@ class YourProfile extends React.Component{
                             <div className={s.photo_wr}>
                                 <p>Добавить фото</p>
                             </div>
+                            <input name="myFile" type="file" />
                         </div>
                         <div className={s.info_col}>
                             <div className={s.info_inputs}>

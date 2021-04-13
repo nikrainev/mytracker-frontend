@@ -11,7 +11,7 @@ const LoadingCounter = ()=>{
 const EmptyBlock = () =>{
     return <div className={s.noCounters}>
         <img src={plus} alt=""/>
-        <p>У ващих друзей ещё нет счётчиков</p>
+        <p>У ваших друзей ещё нет счётчиков</p>
 
     </div>
 }

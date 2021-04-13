@@ -84,22 +84,44 @@ export const PasswordScoreInput = ({input, meta, placeholder, ...props}) =>{
 }
 
 
-const ButtonStyled = styled.button`
+let ButtonJSX = (props) =>{
+    return(
+            <button {...props}>
+                {props.icon && <IconCont ><img src={props.icon} alt=""/></IconCont>}
+                <span>{props.children}</span>
+            </button>
+    )
+}
+
+const IconCont = styled.div`
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    img{
+        width: 100%;
+        
+    }
+   
+`
+
+const ButtonStyled = styled(ButtonJSX)`
     background: ${props=> props.primary ? "#0078d4" : "white" };
     color: ${props=> props.primary ? "#fff" : "#201f1e"};
     font: inherit;
-    padding: 8px 21px 9px 21px;
+    padding: ${props => props.icon ? "6px 21px 8px 21px" : "8px 21px 9px 21px"};
     font-weight: 600;
     letter-spacing: 0.4px;
     border: 1px solid  ${props => props.primary ? "#0078d4" : "#323130"};
     font-size: 13px;
     outline: none;
     cursor: pointer;
-    display: block;
     text-align: center;
     border-radius: 2px;
     margin-bottom: 10px;
     line-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     &:hover{
     background: ${props=> props.primary ? "#106ebe" : "#f3f2f1" };
@@ -129,6 +151,7 @@ const DisabledStyled = styled.span`
 `
 
 export const Button = (props) =>{
+
     return (props.disabled  ?<DisabledStyled {...props} /> : <ButtonStyled {...props} />)
 
 }

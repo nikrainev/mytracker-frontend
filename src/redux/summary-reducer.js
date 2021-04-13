@@ -19,11 +19,12 @@ const summaryReducer = (state = initialState,action) =>{
 
         case 'SET-SUMMARY-USERS':{
             let users = ''
-            if(action.summaryUsers.users){
-                users = action.summaryUsers.users
+            console.log(action)
+            if(action.summaryUsers.usersPage){
+                users = action.summaryUsers.usersPage
             }
             else{
-                users = action.summaryUsers.usersPage
+                users = action.summaryUsers.message
             }
             return {
                 ...state,

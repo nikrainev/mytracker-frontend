@@ -77,6 +77,7 @@ const Daystat = (props) => {
 
             </div>
             <div className="container">
+
                 <Graphic graphicData={props.graphicData}/>
             </div>
                 </>
