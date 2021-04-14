@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './newFriends.module.scss';
-import s2 from './../friends.module.scss'
+import s2 from '../friends.module.scss'
 import openfolder from '../../../../assets/icons/mail-open.svg'
 import Proposal from "./proposal/proposal";
 

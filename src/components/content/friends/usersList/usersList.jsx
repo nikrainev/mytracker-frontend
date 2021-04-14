@@ -3,7 +3,7 @@ import s2 from '../friends.module.scss';
 import s from './usersList.module.scss'
 import {offsetText} from "../../../../utils/textTransformation";
 import {Pagination} from "../../../common/pagination/pagination";
-import ProfileLine from "../../profileLine/profileLine";
+import ProfileLine from "../../../profile/profileLine/profileLine";
 
 
 const LoadingProfile = () =>{

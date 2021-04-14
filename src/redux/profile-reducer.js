@@ -22,8 +22,13 @@ let initialState = {
 const profileReducer = (state = initialState, action) =>{
     switch(action.type){
         case 'profile/SET-PROFILE-INFO':
+
             return {
-                ...state, ...action.data
+                ...state,
+                name: action.data.name ? action.data.name : state.name,
+                soName: action.data.soName ? action.data.soName : state.soName,
+                company: action.data.company ? action.data.company : state.company,
+                description: action.data.description ? action.data.description : state.description
             }
         case 'profile/SET-PROFILES-LIST':
             return {

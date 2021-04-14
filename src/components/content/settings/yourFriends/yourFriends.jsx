@@ -4,7 +4,7 @@ import s from './yourFriends.module.scss'
 
 import {LoadMore} from "../../../common/loadMore";
 import friendIcon from '../../../../assets/icons/users.svg'
-import ProfileLine from "../../profileLine/profileLine";
+import ProfileLine from "../../../profile/profileLine/profileLine";
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>

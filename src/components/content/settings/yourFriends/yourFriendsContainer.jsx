@@ -20,26 +20,13 @@ class YourFriendsContainer extends React.Component{
 
             if(prevProps.friends !== this.props.friends){
                 if(typeof this.props.friends === "object"){
-                    let friendsFetching = this.props.friends.map((friend)=> ({
-                        userId: friend.userId,
-                        name: friend.name,
-                        soName: friend.soName,
-                        company: friend.company,
-                        description: friend.description,
-                        isFetching: false
-                    }))
+                    let friendsFetching = this.props.friends.map((friend)=> ({...friend, isFetching: false}))
                     this.setState({friends: [...this.state.friends, ...friendsFetching]})
 
                 }
                 else{
                     if(typeof this.props.friends === 'object'){
-                        let friendsFetching = this.props.friends.map((friend)=> ({
-                            userId: friend.userId,
-                            name: friend.name,
-                            soName: friend.soName,
-                            company: friend.company,
-                            description: friend.description,
-                            isFetching: false
+                        let friendsFetching = this.props.friends.map((friend)=> ({...friend, isFetching: false
                         }))
                         this.setState({friends: friendsFetching})
                     }

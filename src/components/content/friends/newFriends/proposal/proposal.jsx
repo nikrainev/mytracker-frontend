@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import s from "../newFriends.module.scss";
 import {Button} from "../../../../common/formControls";
 
-import acceptIcon from  '../../../../../assets/icons/accept.svg'
-import dismissIcon from  '../../../../../assets/icons/dismiss.svg'
-import ProfileLine from "../../../profileLine/profileLine";
+import acceptIcon from '../../../../../assets/icons/accept.svg'
+import dismissIcon from '../../../../../assets/icons/dismiss.svg'
+import ProfileLine from "../../../../profile/profileLine/profileLine";
 
 
 
