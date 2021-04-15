@@ -40,3 +40,34 @@
   }
 }
 
+.loader{
+  width: 260px;
+  img{
+    width: 18px;
+    margin: auto;
+    animation: fetching 2s infinite;
+    display: block;
+  }
+}
+
+
+@keyframes fetching {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+@media screen and (max-width: 650px){
+  .buttons_row {
+    margin-right: 0px;
+    margin: auto;
+    height: 32px;
+    width: calc(100% - 20px);
+    button{
+      width: calc(50% - 6px);
+    }
+  }
+  .loader {
+    width: 100%;
+    height: 32px;
+  }
+}

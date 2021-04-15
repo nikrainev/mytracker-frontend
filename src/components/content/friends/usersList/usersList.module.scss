@@ -16,3 +16,60 @@
 .usersList{
   margin-top: 20px;
 }
+
+.buttons_cont{
+  width: 100%;
+  div{
+    float: right;
+  }
+  button{
+    float: right;
+    margin-bottom: 0px;
+  }
+}
+
+.fetching{
+  width: 167px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  img{
+    width: 18px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    animation: fetching 2s infinite;
+  }
+}
+
+@keyframes fetching {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+
+.yourfriend{
+  width: 167px;
+  p{
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .buttons_cont{
+    div{
+      float: none;
+      margin-left: 10px;
+    }
+    button{
+      float: none;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import s from "../newFriends.module.scss";
 import {Button} from "../../../../common/formControls";
-
 import acceptIcon from '../../../../../assets/icons/accept.svg'
 import dismissIcon from '../../../../../assets/icons/dismiss.svg'
+import loadingButton from '../../../../../assets/icons/loading.svg'
 import ProfileLine from "../../../../profile/profileLine/profileLine";
 
 
@@ -27,7 +27,7 @@ const Proposal = (props) => {
             </div>
         }
         else {
-            return <p>Загрузка</p>
+            return <div className={s.loader}><img src={loadingButton} alt=""/></div>
         }
 
 
@@ -35,7 +35,7 @@ const Proposal = (props) => {
 
 
     return  (
-            <ProfileLine {...props} buttonsComponent={buttonSelector(props.userId, props.buttonKey)}/>
+            <ProfileLine {...props}  buttonsComponent={buttonSelector(props.userId, props.buttonKey)}/>
     )
 }
 

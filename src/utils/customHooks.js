@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const useDocTitle = title => {
   const [docTitle, setDocTitle] = useState(title);
@@ -14,3 +14,5 @@ const useDocTitle = title => {
 };
 
 export {useDocTitle};
+
+

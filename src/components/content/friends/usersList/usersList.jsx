@@ -1,10 +1,10 @@
 import React from 'react';
 import s2 from '../friends.module.scss';
 import s from './usersList.module.scss'
-import {offsetText} from "../../../../utils/textTransformation";
 import {Pagination} from "../../../common/pagination/pagination";
 import ProfileLine from "../../../profile/profileLine/profileLine";
-
+import {Button} from "../../../common/formControls";
+import loadingIcon from "../../../../assets/icons/loading.svg"
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
@@ -28,27 +28,27 @@ const UsersList = (props) => {
                 case 'It is you':
                     return
                 case 'proposal sent':
-                    return <p onClick={() => {
+                    return <Button onClick={() => {
                         deleteProposal(id, buttonId)
-                    }}>Заявка отправлена</p>
+                    }}>Заявка отправлена</Button>
                 case 'Your friend':
-                    return <p>Ваш друг</p>
+                    return <div className={s.yourfriend}><p>Ваш друг</p></div>
                 case 'plain user':
-                    return <button onClick={() => {
-                        postProposal(id, buttonId)
-                    }} className={s.add_button}>Добавить в друзья</button>
+                    return <Button primary onClick={() => {
+                    postProposal(id, buttonId)
+                }}>Добавить в друзья</Button>
                 default:
                     return
             }
         } else {
-            return <p>Загрузка</p>
+            return <div className={s.fetching}><img src={loadingIcon} alt=""/></div>
         }
 
 
     }
 
     let profilesArr = props.profilesList.map((profile, index) =>
-            <ProfileLine {...profile} buttonsComponent={buttonSelector(profile.friendStatus, profile._id, index)}/>
+            <ProfileLine  {...profile} key={profile._id} buttonsComponent={<div className={s.buttons_cont}>{buttonSelector(profile.friendStatus, profile._id, index)}</div>}/>
     )
 
     return (

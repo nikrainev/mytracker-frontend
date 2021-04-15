@@ -1,17 +1,4 @@
-.delete_button{
-  display: block;
-  width: 200px;
-  font-size: 20px;
-  text-align: center;
-  outline: none;
-  cursor: pointer;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-right: 10px;
-  background: transparent;
-  border: 2px solid #914242;
-  color:  #914242;
-}
+
 
 .yourFriends{
   margin-top: 50px;
@@ -29,4 +16,9 @@
     opacity: .6;
     margin-right: 20px;
   }
+}
+
+button.button{
+  float: right;
+  margin-bottom: 0px;
 }

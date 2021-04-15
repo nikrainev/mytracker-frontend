@@ -5,6 +5,7 @@ import s from './yourFriends.module.scss'
 import {LoadMore} from "../../../common/loadMore";
 import friendIcon from '../../../../assets/icons/users.svg'
 import ProfileLine from "../../../profile/profileLine/profileLine";
+import {Button} from "../../../common/formControls";
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
@@ -25,7 +26,7 @@ const YourFriends = (props) => {
 
     let buttonSelector = (userId, buttonId) =>{
         if(props.friends[buttonId].isFetching === false){
-            return <button className={s.delete_button} onClick={()=>{deleteFriend(userId, buttonId)}}>Удалить из друзей</button>
+            return <Button className={s.button}  onClick={()=>{deleteFriend(userId, buttonId)}}>Удалить из друзей</Button>
         }
         else{
             return <p>Загрузка</p>
