@@ -12,7 +12,6 @@ const AddcounterblockContainer = (props) => {
     let postCounter = (name, domen) =>{
         props.postCounter({name: name, domen: domen})
         setBlockState("fetching")
-        console.log(props.pixelCode)
     }
 
     let makeOneMore = () =>{

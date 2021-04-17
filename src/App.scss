@@ -433,3 +433,9 @@ h2{
   }
 }
 
+
+@media screen and (max-width: 480px){
+.fullpage_container{
+  align-items: flex-start;
+}
+}

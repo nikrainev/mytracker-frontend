@@ -15,4 +15,8 @@ height: 100%;
 z-index: -1;
 background-repeat: no-repeat;
 background-size: cover;
+    background-position: center top;
+    @media screen and (max-width: 480px){
+        background: white;
+    }
 `

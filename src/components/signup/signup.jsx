@@ -2,24 +2,11 @@ import React, {useEffect} from 'react';
 import s from './signup.module.scss';
 import {Route, Redirect} from "react-router-dom";
 import {BackGround} from "../common/background";
-
 import RegistrationContainer from "./registration/registrationContainer";
 import ConfirmEmailContainer from "./confirmEmail/confirmEmailContainer";
 import AdditionalInfoContainer from "./additionalInfo/additionalInfoContainer";
 import Success from "./success/success";
-import loading from "../../assets/icons/loading.svg";
 
-
-
-
-
-const FetchingBlock = () =>{
-    return(
-            <div className={s.fetching_block}>
-                <img src={loading} alt=""/>
-            </div>
-    )
-}
 
 
 

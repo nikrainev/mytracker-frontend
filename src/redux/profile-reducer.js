@@ -6,15 +6,13 @@ let initialState = {
     company: '',
     description: '',
     avatar: '',
-    pageSize: 5,
+    pageSize: 2,
     totalProfiles: undefined,
     proposals: [],
     profilesList: [],
     friendsList: [],
     totalFriends: undefined,
     deletedFriend: undefined
-
-
 }
 
 
@@ -62,6 +60,14 @@ const profileReducer = (state = initialState, action) =>{
                 ...state,
                 avatar: action.avatarData.avatar
             }
+        case 'profile/CLEAR-FRIENDS-PAGE':{
+            return {
+                ...state,
+                profilesList: [],
+                totalProfiles: undefined,
+                proposals: []
+            }
+        }
         default:
                 return state
 
@@ -112,6 +118,10 @@ export const setAvatar = (avatarData) =>({
     avatarData: avatarData
 })
 
+export const clearFriendsPage = () =>({
+    type: 'profile/CLEAR-FRIENDS-PAGE'
+})
+
 
 
 export const getAvatar = () => async (dispatch) =>{
@@ -120,24 +130,36 @@ export const getAvatar = () => async (dispatch) =>{
 
 }
 
-export const getProposals = () => async (dispatch)=>{
 
-    let response = await profileAPI.getProposals()
-    dispatch(setProposals(response))
-}
 
 export const getProfileInfo = () => async (dispatch) =>{
     let response = await profileAPI.getProfileInfo()
     dispatch(setProfileInfo(response))
 }
 
-export const getProfilesList = (page,limit) => async (dispatch) =>{
 
+
+export const getProposals = () => async (dispatch)=>{
+    let response = await profileAPI.getProposals()
+    dispatch(setProposals(response))
+}
+
+export const getProfilesList = (page,limit) => async (dispatch) =>{
     let response = await profileAPI.getProfilesList(page,limit)
     dispatch(setProfilesList(response.items))
     dispatch(setTotalProfiles(response.totalPages))
-
 }
+
+
+export const getFriendsPage = () => (dispatch) =>{
+    Promise.all([profileAPI.getProposals(), profileAPI.getProfilesList(1,store.getState().profilePage.pageSize)]).then(response=>{
+        dispatch(setProposals(response[0]))
+        dispatch(setProfilesList(response[1].items))
+        dispatch(setTotalProfiles(response[1].totalPages))
+
+    })
+}
+
 
 export const postProposal = (userId, currentPage) => async (dispatch) =>{
 

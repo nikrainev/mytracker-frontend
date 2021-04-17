@@ -3,25 +3,26 @@ import NewFriends from "./newFriends";
 
 import {connect} from "react-redux";
 import {getProposalsList} from "../../../../redux/selectors/profileselectors";
-import {getProposals, acceptProposal, denyProposal} from "../../../../redux/profile-reducer";
+import {acceptProposal, denyProposal} from "../../../../redux/profile-reducer";
 
 class NewFriendsContainer extends React.Component{
     state = {
-        isFetching: false,
         buttonsState: []
     }
+
     componentDidMount() {
-     this.setState({isFetching: true})
-     this.props.getProposals()
+        if(typeof this.props.proposals == 'object'){
+            let listButtons = this.props.proposals.map((profile)=> ({isFetching: false}))
+            this.setState({buttonsState: listButtons})
+        }
     }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props){
-            this.setState({isFetching: false})
             if(typeof this.props.proposals == 'object'){
                 let listButtons = this.props.proposals.map((profile)=> ({isFetching: false}))
                 this.setState({buttonsState: listButtons})
             }
-
         }
     }
 
@@ -33,10 +34,10 @@ class NewFriendsContainer extends React.Component{
 
     render(){
         return  (
+
                 <NewFriends proposals={this.props.proposals}
                             acceptProposal={this.props.acceptProposal}
                             denyProposal={this.props.denyProposal}
-                            isFetching={this.state.isFetching}
                             buttonsState={this.state.buttonsState}
                             chanhgeButtonsState={this.changeButtonState}
 
@@ -52,4 +53,4 @@ let mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps, {getProposals, acceptProposal, denyProposal})(NewFriendsContainer);
+export default connect(mapStateToProps, { acceptProposal, denyProposal})(NewFriendsContainer);

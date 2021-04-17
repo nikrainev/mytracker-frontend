@@ -32,10 +32,11 @@ const Proposal = (props) => {
 
 
     }
+    console.log(props)
 
 
     return  (
-            <ProfileLine {...props}  buttonsComponent={buttonSelector(props.userId, props.buttonKey)}/>
+            <ProfileLine {...props} _id={props.userId}  buttonsComponent={buttonSelector(props.userId, props.buttonKey)}/>
     )
 }
 

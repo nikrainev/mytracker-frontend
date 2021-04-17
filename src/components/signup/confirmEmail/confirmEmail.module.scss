@@ -50,3 +50,13 @@
         border-right: 9px solid black;
       }
 }
+
+@media screen and (max-width: 480px){
+  .confirm_block{
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+
+  }
+}

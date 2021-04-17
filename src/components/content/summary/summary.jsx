@@ -32,7 +32,6 @@ const SummaryContainer = (props) =>{
 
 
     useEffect(()=>{
-        console.log(props.summaryInfo)
         if(props.summaryInfo.dayClicks !== undefined && props.summaryInfo.dayClicks !== '' && pageState === 'fetching'){
             setPageState("main")
         }

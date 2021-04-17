@@ -1,7 +1,7 @@
 import React from 'react';
 import UsersList from "./usersList";
 import {connect} from "react-redux";
-import {getProfilesList, postProposal, deleteProposal, setProposals} from "../../../../redux/profile-reducer";
+import {postProposal, deleteProposal, setProposals, getProfilesList} from "../../../../redux/profile-reducer";
 import {selectProfilesList, getTotalProfiles, getPageSize} from "../../../../redux/selectors/profileselectors"
 class UsersListContainer extends React.Component{
 
@@ -11,10 +11,7 @@ class UsersListContainer extends React.Component{
         currentPage: 1
     }
 
-    componentDidMount() {
-        this.props.getProfilesList(1, this.props.pageSize)
 
-    }
 
     getCurrentPage = (currentPage) =>{
         this.setState({currentPage: currentPage})
@@ -26,13 +23,16 @@ class UsersListContainer extends React.Component{
         this.setState({listButtons: copyListButtons})
     }
 
+    componentDidMount() {
+            let listButtons = this.props.profilesList.map((profile)=> ({isFetching: false}))
+            this.setState({listButtons: listButtons})
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props !== prevProps){
             this.setState({profilesList: this.props.profilesList})
             for(let i = 0; i < this.state.profilesList.length; i++){
-
                 if(this.state.profilesList[i] && this.props.profilesList[i]){
-
                     if( this.state.profilesList[i].friendStatus !== this.props.profilesList[i].friendStatus){
                         let copyListButtons = {...this.state.listButtons}
                         copyListButtons[i].isFetching = false
@@ -42,10 +42,7 @@ class UsersListContainer extends React.Component{
                 }
 
             }
-            if(this.state.listButtons.length === 0){
-                let listButtons = this.props.profilesList.map((profile)=> ({isFetching: false}))
-                this.setState({listButtons: listButtons})
-            }
+
 
         }
 
@@ -85,4 +82,4 @@ let mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps, {getProfilesList, postProposal, deleteProposal, setProposals})(UsersListContainer);
+export default connect(mapStateToProps, {postProposal, deleteProposal, setProposals, getProfilesList})(UsersListContainer);

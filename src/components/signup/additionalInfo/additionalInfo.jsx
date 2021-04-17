@@ -19,7 +19,7 @@ const ProfileForm = (props)=>{
                 <Field name="soName" type="text"  component={Input} placeholder="Фамилия" validate={[required, minLength]}/>
                 <Field name="company" type="text"  component={Input} placeholder="Компания" />
                 <Field name="about" type='text' component={Textarea} placeholder="О вас"  />
-                <Button primary  disabled={props.submitting  || (props.invalid && props.anyTouched) || props.isFetching} type='submit'>Отправить</Button>
+                <Button className={s.button} primary  disabled={props.submitting  || (props.invalid && props.anyTouched) || props.isFetching} type='submit'>Отправить</Button>
             </form>
 
     )

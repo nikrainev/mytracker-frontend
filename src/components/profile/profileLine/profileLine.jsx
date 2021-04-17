@@ -55,6 +55,7 @@ const Description = (props) =>{
 
 
 const ProfileLine = (props) => {
+
     return  (
         <div key={props.key} className={s.line}>
             <div className={s.names_row} >

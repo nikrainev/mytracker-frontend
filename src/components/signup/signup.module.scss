@@ -33,3 +33,11 @@
   from{transform: rotate(0deg)}
   to{transform: rotate(360deg)}
 }
+
+@media screen and (max-width: 480px){
+  .signup_block{
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+}
