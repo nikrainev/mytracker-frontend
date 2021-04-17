@@ -19,7 +19,6 @@ const summaryReducer = (state = initialState,action) =>{
 
         case 'SET-SUMMARY-USERS':{
             let users = ''
-            console.log(action)
             if(action.summaryUsers.usersPage){
                 users = action.summaryUsers.usersPage
             }

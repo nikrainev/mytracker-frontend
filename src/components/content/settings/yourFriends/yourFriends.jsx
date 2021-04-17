@@ -34,7 +34,6 @@ const YourFriends = (props) => {
 
     }
     if(props.friends !== "no friends"){
-        console.log(props.friends)
         friendsList = props.friends.map((friend, index)=>
                 <ProfileLine {...friend} buttonsComponent={buttonSelector(friend.userId, index)}/>)
     }

@@ -3,6 +3,7 @@ import loadingImg from "../../assets/icons/loading.svg";
 import doneImg from "../../assets/icons/done.svg";
 import s from "./common.module.scss"
 import {offsetText} from "../../utils/textTransformation";
+import {Input} from "./formControls";
 
 export class EditInput extends React.Component{
     state = {
@@ -42,9 +43,9 @@ export class EditInput extends React.Component{
                     {this.state.inputEditMode
                             ?
 
-                                        <div>
+                                        <div className={s.input_wr + " " + s.editInput}>
                                             <input onChange={this.reloadNameInput} value={this.state.inputText}
-                                                   type="text" className='plain_input' placeholder={this.props.placeholder}
+                                                   type="text"  placeholder={this.props.placeholder}
                                                    onBlur={() => {this.changeCondition(false)}} autoFocus={true}/>
 
                                         </div>

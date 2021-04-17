@@ -117,20 +117,23 @@
 .input_wr{
   position: relative;
   height: 76px;
+  &.editInput{
+    height: auto;
+  }
   input{
-    width: calc(100% - 18px);
+    width: 100%;
     border: 1px solid rgb(96, 94, 92);
-    height: 30px;
+    height: 32px;
     padding: 0px 8px;
     outline: none;
     font-size: 14px;
+    box-sizing: border-box;
     &.danger{
       border: 1px solid #d80000;
     }
     &:focus{
       border: 2px solid rgb(0,120, 212);
-      width: calc(100% - 19px);
-      height: 28px;
+      width: 100%;
       padding-left: 7px;
     }
   }
@@ -150,7 +153,6 @@
     .input_danger{
       display: block;
     }
-
   }
 
 }

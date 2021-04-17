@@ -5,9 +5,7 @@ import Shortuser from "./shortuser/shortuser";
 
 const LoadingShortuser = () =>{
     return (
-            <div className={s.loading_shortuser}>
-
-            </div>
+            <div className={s.loading_shortuser} />
     )
 
 }
