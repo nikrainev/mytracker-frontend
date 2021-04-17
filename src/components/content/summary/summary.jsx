@@ -7,36 +7,12 @@ import {getSummaryInfo} from "../../../redux/selectors/summary-selectors";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {SummaryPageLoader} from "../../common/loadingschemes/loadingSchemes";
-import {useDocTitle} from "../../../utils/customHooks";
+import {useDocTitle, usePagePreloader} from "../../../utils/customHooks";
 
 
 const SummaryContainer = (props) =>{
-    const [pageState, setPageState] = useState('fetching')
     const [title, setTitle] = useDocTitle('Сводка')
-
-    useEffect(()=>{
-        return( ()=>{
-            props.clearSummaryData()
-        })
-    },[])
-
-    useEffect(()=>{
-        if(props.isInitialized){
-            props.getSummaryData()
-        }
-        else{
-            setPageState('fetching')
-        }
-
-    }, [ props.isInitialized])
-
-
-    useEffect(()=>{
-        if(props.summaryInfo.dayClicks !== undefined && props.summaryInfo.dayClicks !== '' && pageState === 'fetching'){
-            setPageState("main")
-        }
-
-    },[props.summaryInfo.dayClicks])
+    const [pageState] = usePagePreloader(props.isInitialized, props.summaryInfo.dayClicks, props.getSummaryData, props.clearSummaryData)
 
     return (
             <>
@@ -53,7 +29,6 @@ const SummaryContainer = (props) =>{
 
 let mapStateToProps = (state) => {
     return{
-        isInitialized: state.app.isInitialized,
         summaryInfo: getSummaryInfo(state)
     }
 }

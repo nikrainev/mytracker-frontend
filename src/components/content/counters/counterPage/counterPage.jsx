@@ -8,39 +8,20 @@ import {getCurrentCounterUsers, getCurrentCounterInfo} from "../../../../redux/s
 import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {CounterPageLoader} from "../../../../components/common/loadingschemes/loadingSchemes";
 import {compose} from "redux";
-import {useDocTitle} from "../../../../utils/customHooks";
+import {useDocTitle, usePagePreloader} from "../../../../utils/customHooks";
 
 const CounterPage = (props) =>{
     let {counterId} = useParams()
-    const [pageState, setPageState] = useState('fetching')
+
     const [title, setTitle] = useDocTitle('Счётчик')
-
-    useEffect(()=>{
-        return () =>{
-            props.clearCurrentCounter()
-        }
-    },[])
+    const [pageState] = usePagePreloader(props.isInitialized, props.counterInfo, ()=>{props.getCurrentCounter(counterId)},  props.clearCurrentCounter)
 
 
     useEffect(()=>{
-        if(props.isInitialized){
-            props.getCurrentCounter(counterId)
-        }
-        else{
-            setPageState('fetching')
-        }
-
-    }, [props.isInitialized])
-
-
-    useEffect(()=>{
-
-        if((props.counterInfo && props.counterInfo.length !== 0) && pageState === 'fetching'){
+        if(pageState === 'main'){
             setTitle('Счётчик '+props.counterInfo.name)
-            setPageState("main")
         }
-
-    },[props.counterInfo])
+    },[pageState])
 
 
 
@@ -60,7 +41,6 @@ let mapStateToProps = (state) => {
     return{
        counterInfo: getCurrentCounterInfo(state),
        counterUsers: getCurrentCounterUsers(state),
-       isInitialized: state.app.isInitialized,
     }
 }
 export default compose(connect(mapStateToProps,{getCurrentCounter, clearCurrentCounter}), WithAuthRedirect)(CounterPage);

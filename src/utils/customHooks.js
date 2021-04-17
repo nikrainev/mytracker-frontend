@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-const useDocTitle = title => {
+export const useDocTitle = title => {
   const [docTitle, setDocTitle] = useState(title);
 
   useEffect(() => {
@@ -13,6 +13,36 @@ const useDocTitle = title => {
   return [docTitle, setDocTitle];
 };
 
-export {useDocTitle};
 
 
+
+export const usePagePreloader = (isInit, observableData, getter, deleteData) =>{
+    const [pageState, setPageState] = useState('fetching')
+
+    useEffect(()=>{
+        return( ()=>{
+            deleteData()
+        })
+    },[])
+
+    useEffect(()=>{
+        if(isInit){
+            getter()
+        }
+        else{
+            setPageState('fetching')
+        }
+
+    }, [isInit])
+
+
+    useEffect(()=>{
+        if(observableData !== undefined && observableData !== '' && pageState === 'fetching'){
+            setPageState("main")
+        }
+
+    },[observableData])
+
+    return [pageState]
+
+}

@@ -8,36 +8,13 @@ import {compose} from "redux";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {getCounters, clearCountersLists} from "../../../redux/counters-reducer";
 import {getYourTotalCounters} from "../../../redux/selectors/counters-selectors";
-import {useDocTitle} from "../../../utils/customHooks";
+import {useDocTitle, usePagePreloader} from "../../../utils/customHooks";
 
 const Counters = (props) =>{
-    const [pageState, setPageState] = useState('fetching')
+    const [pageState] = usePagePreloader(props.isInitialized, props.totalCounters, props.getCounters, props.clearCountersLists)
     const [title, setTitle] = useDocTitle('Счётчики')
 
-    useEffect(()=>{
-        return( ()=>{
-            props.clearCountersLists()
-        })
-    },[])
 
-    useEffect(()=>{
-        if(props.isInitialized){
-            props.getCounters()
-        }
-        else{
-            setPageState('fetching')
-        }
-
-    }, [props.isInitialized])
-
-
-    useEffect(()=>{
-
-        if(props.totalCounters !== '' && pageState === 'fetching'){
-            setPageState("main")
-        }
-
-    },[props.totalCounters])
     return (
 
             <>
@@ -52,9 +29,7 @@ const Counters = (props) =>{
 
 const mapStateToProps = (state) => {
     return {
-        totalCounters: getYourTotalCounters(state),
-        isInitialized: state.app.isInitialized,
-
+        totalCounters: getYourTotalCounters(state)
     }
 }
 export default compose(connect(mapStateToProps, {getCounters,  clearCountersLists}), WithAuthRedirect)(Counters);

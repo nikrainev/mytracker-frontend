@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {FriendsPageLoader} from "../../common/loadingschemes/loadingSchemes";
 import WithAuthRedirect from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {useDocTitle} from "../../../utils/customHooks";
+import {useDocTitle, usePagePreloader} from "../../../utils/customHooks";
 
 import {clearFriendsPage, getFriendsPage} from "../../../redux/profile-reducer";
 import {getTotalProfiles} from "../../../redux/selectors/profileselectors";
@@ -13,35 +13,7 @@ import {getTotalProfiles} from "../../../redux/selectors/profileselectors";
 
 const FriendsPage = (props) => {
     const [title, setTitle] = useDocTitle('Друзья')
-    const [pageState, setPageState] = useState('fetching')
-
-    useEffect(()=>{
-        return( ()=>{
-            props.clearFriendsPage()
-        })
-    },[])
-
-
-    useEffect(()=>{
-        if(props.isInitialized){
-            props.getFriendsPage()
-        }
-        else{
-            setPageState('fetching')
-        }
-
-    }, [props.isInitialized])
-
-
-    useEffect(()=>{
-        if(props.totalProfiles !== undefined && props.totalProfiles !== '' && pageState === 'fetching'){
-            setPageState("main")
-        }
-
-    },[props.totalProfiles])
-
-
-
+    const [pageState] = usePagePreloader(props.isInitialized, props.totalProfiles, props.getFriendsPage, props.clearFriendsPage)
 
     return  (
             <>
