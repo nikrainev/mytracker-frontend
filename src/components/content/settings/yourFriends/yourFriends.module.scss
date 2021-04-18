@@ -1,7 +1,6 @@
-
-
 .yourFriends{
-  margin-top: 50px;
+  padding-top: 50px;
+  display: block;
 }
 
 .noFriends{
@@ -23,3 +22,47 @@ button.button{
   margin-bottom: 0px;
 }
 
+.fetching{
+  width: 167px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  float: right;
+  img{
+    width: 18px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    animation: fetching 2s infinite;
+  }
+}
+.overflow{
+  overflow: visible;
+}
+
+@keyframes fetching {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+@media screen and (max-width: 650px){
+  .yourFriends{
+    padding-top: 30px;
+  }
+
+  button.button{
+    float: none;
+    margin-left: 10px;
+    margin-bottom: 0px;
+  }
+  .fetching{
+    float: none;
+    margin-left: 10px;
+  }
+}

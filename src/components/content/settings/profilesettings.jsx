@@ -6,6 +6,7 @@ import {useDocTitle, usePagePreloader} from "../../../utils/customHooks";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {getSettingsPage} from "../../../redux/profile-reducer";
+import {SettingsLoader} from "../../common/loadingschemes/loadingSchemes";
 
 const ProfileSettings = (props) =>{
     const [title, setTitle] = useDocTitle('Настройки')
@@ -13,7 +14,7 @@ const ProfileSettings = (props) =>{
     return(
 
             <>
-                {pageState === 'fetching' ? <p>Загрузка</p> :
+                {pageState === 'fetching' ? <SettingsLoader /> :
                         <>
                             <div className="container h1-block">
                                 <h1 className="h1">Настройки</h1>

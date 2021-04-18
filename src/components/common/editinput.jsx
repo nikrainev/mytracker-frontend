@@ -1,9 +1,10 @@
 import React from "react";
 import loadingImg from "../../assets/icons/loading.svg";
-import doneImg from "../../assets/icons/done.svg";
+import doneImg from "../../assets/icons/success-check.svg";
 import s from "./common.module.scss"
 import {offsetText} from "../../utils/textTransformation";
-import {Input} from "./formControls";
+import {Textarea} from "./formControls";
+
 
 export class EditInput extends React.Component{
     state = {
@@ -38,7 +39,7 @@ export class EditInput extends React.Component{
     }
     render (){
         return <div  onClick={() =>{this.changeCondition(true)}}  className={s.withedit_block}>
-            {this.state.isFetching === true ? <img className={s.loading_bar} src={loadingImg} alt=""/> : ''}
+            {this.state.isFetching === true ? <img className={s.loading_editInput} src={loadingImg} alt=""/> : ''}
             {this.state.wasUpdated === true ? <img className={s.done_check} src={doneImg} alt=""/> : ''}
                     {this.state.inputEditMode
                             ?
@@ -74,9 +75,6 @@ export class EditTextarea extends React.Component{
 
 
     changeCondition = (inputState,e) =>{
-        if(e){
-            console.log(e.target)
-        }
 
         this.setState({inputEditMode: inputState})
         if(!inputState && this.state.inputText !== this.props.inputText){
@@ -102,17 +100,17 @@ export class EditTextarea extends React.Component{
     }
     render (){
         return <div  onClick={(e) =>{this.changeCondition(true, e)}}  className={s.withedit_block}>
-            {this.state.isFetching === true ? <img className={s.loading_bar} src={loadingImg} alt=""/> : ''}
+            {this.state.isFetching === true ? <img className={s.loading_editInput} src={loadingImg} alt=""/> : ''}
             {this.state.wasUpdated === true ? <img className={s.done_check} src={doneImg} alt=""/> : ''}
             {this.state.inputEditMode
                     ?
 
-                    <div>
-                        <textarea onChange={this.reloadNameInput} value={this.state.inputText}
-                                  wrap="soft" className='plain_textarea'
+                    <div className={s.withedit_textarea}>
+                        <Textarea meta={{error: '', touched:''}} onChange={this.reloadNameInput} input={{value:this.state.inputText}}
+                                  wrap="soft"
                                   type="text"  placeholder={this.props.placeholder}
                                   cols="30" rows="10"
-                                  onBlur={() => {this.changeCondition(false)}} autoFocus={true}> </textarea>
+                                  onBlur={() => {this.changeCondition(false)}} autoFocus={true}> </Textarea>
                     </div>
                     :
                     <div className={s.withedit_current}>{this.props.inputText === '' ? this.props.placeholder :<p>{offsetText(this.props.inputText)}</p>}</div>

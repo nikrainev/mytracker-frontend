@@ -6,6 +6,7 @@ import {LoadMore} from "../../../common/loadMore";
 import friendIcon from '../../../../assets/icons/users.svg'
 import ProfileLine from "../../../profile/profileLine/profileLine";
 import {Button} from "../../../common/formControls";
+import loadingIcon from "../../../../assets/icons/loading.svg";
 
 const LoadingProfile = () =>{
     return <div className={s2.loading_profile}> </div>
@@ -29,19 +30,19 @@ const YourFriends = (props) => {
             return <Button className={s.button}  onClick={()=>{deleteFriend(userId, buttonId)}}>Удалить из друзей</Button>
         }
         else{
-            return <p>Загрузка</p>
+            return <div className={s.fetching}><img src={loadingIcon} alt=""/></div>
         }
 
     }
     if(props.friends !== "no friends"){
         friendsList = props.friends.map((friend, index)=>
-                <ProfileLine {...friend} buttonsComponent={buttonSelector(friend.userId, index)}/>)
+                <ProfileLine _id={friend.userId} {...friend} buttonsComponent={buttonSelector(friend.userId, index)}/>)
     }
     else{
         friendsList = "empty"
     }
     return  (
-            <div className={s2.yourFriends}>
+            <div className={s.yourFriends}>
                 <h2>Ваши друзья:</h2>
                 <LoadMore pages={friendsList} pageSize={props.pageSize} totalPages={props.totalFriends}
                           pageChanger={props.addToFriendsList} loader={<LoadingProfile />} emptyBlock={<NoFriends />}

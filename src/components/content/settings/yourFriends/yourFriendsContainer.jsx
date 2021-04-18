@@ -2,7 +2,7 @@ import React from 'react';
 import YourFriends from "./yourFriends";
 import {getFriends, getPageSize, getTotalFriends, getDeletedFriend} from "../../../../redux/selectors/profileselectors";
 import {getFriendsList, deleteFriend, addFriendsList, setFriendsList, clearSettingsPage} from "../../../../redux/profile-reducer";
-
+import s from './yourFriends.module.scss'
 import {connect} from "react-redux";
 
 class YourFriendsContainer extends React.Component{
@@ -72,7 +72,7 @@ class YourFriendsContainer extends React.Component{
 
     render(){
         return  (
-                <div className='container'>
+                <div className={`container  ${s.overflow}`}>
                 <YourFriends
                         friends={this.state.friends}
                         pageSize={this.props.pageSize}

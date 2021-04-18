@@ -218,10 +218,15 @@ export const denyProposal = (userId) => async (dispatch) => {
     }
 }
 
-export const putProfileInfo = (data) => async (dispatch) =>{
+export const putProfileInfo = (data) => (dispatch) =>{
 
-    let response = await profileAPI.putProfileInfo(data)
-    dispatch(setProfileInfo(response.newInfo))
+     profileAPI.putProfileInfo(data)
+             .then(response=>{
+                 dispatch(setProfileInfo(response.newInfo))
+            })
+             .catch(error=>{
+                dispatch(getProfileInfo)
+            })
 }
 
 export const getFriendsList = (page,limit) => async (dispatch) =>{

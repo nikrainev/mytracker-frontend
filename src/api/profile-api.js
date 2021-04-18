@@ -11,7 +11,7 @@ export const profileAPI = {
                     return response.data;
                 })
                 .catch(error => {
-                    console.warn(error)
+                    return error.response.data.error
                 })
     },
     getProfileInfo(){

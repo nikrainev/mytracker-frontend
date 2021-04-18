@@ -60,6 +60,24 @@
   top: 5px;
 }
 
+.loading_editInput{
+  position: absolute;
+  width: 20px;
+  right: 0px;
+  top: 5px;
+  animation: fetching 2s infinite;
+}
+
+
+
+@keyframes fetching {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+.withedit_textarea{
+
+}
 
 .input_wr{
   position: relative;

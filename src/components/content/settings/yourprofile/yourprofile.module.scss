@@ -24,3 +24,21 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 650px){
+  .profile_cont {
+  flex-direction: column;
+    align-items: center;
+  }
+  .info_inputs{
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0px;
+  }
+
+  .info_col{
+    width: 100%;
+    padding-top: 50px;
+  }
+
+}

@@ -199,6 +199,44 @@
     display: block;
   }
 
+  .settings_row{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 64px;
+  }
+
+  .avatar_cont{
+    width: 220px;
+    display: block;
+  }
+  .settings_input{
+    width: 100%;
+    height: 31px;
+    margin-bottom: 17px;
+    display: block;
+  }
+  .settings_inputs{
+    width: 400px;
+    display: block;
+  }
+  .avatar{
+    display: block;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin: auto;
+  }
+
+  .avatar_text{
+    width: 123px;
+    height: 20px;
+    display: block;
+    margin: auto;
+    margin-top: 12px;
+  }
+
+
 
   @media screen and (max-width: 1200px){
     .counterpage_row{
@@ -223,6 +261,16 @@
         margin-bottom: 10px;
         height: 160px;
       }
+  }
+
+  @media screen and (max-width: 650px){
+    .settings_row{
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar_cont{
+      margin-bottom: 50px;
+    }
   }
 
 
