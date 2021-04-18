@@ -45,10 +45,21 @@ const profileReducer = (state = initialState, action) =>{
                 proposals: action.proposals
             }
         case 'profile/SET-FRIENDS-LIST':
+            let totalDocs = ''
+            let friendsList = []
+            if(action.totalDocs){
+                totalDocs = action.totalDocs
+                friendsList = action.friends
+            }
+            else{
+                totalDocs = 0
+                friendsList = 'no friends'
+            }
+
             return {
                 ...state,
-                friendsList: action.friends,
-                totalFriends: action.totalDocs
+                friendsList: friendsList,
+                totalFriends: totalDocs
             }
         case 'profile/SET-DELETED-FRIEND':
             return {
@@ -66,6 +77,14 @@ const profileReducer = (state = initialState, action) =>{
                 profilesList: [],
                 totalProfiles: undefined,
                 proposals: []
+            }
+        }
+        case 'profile/CLEAR-SETTINGS_PAGE':{
+            return {
+                ...state,
+                friendsList: [],
+                totalFriends: undefined
+
             }
         }
         default:
@@ -121,6 +140,12 @@ export const setAvatar = (avatarData) =>({
 export const clearFriendsPage = () =>({
     type: 'profile/CLEAR-FRIENDS-PAGE'
 })
+
+export const clearSettingsPage = () =>({
+    type: 'profile/CLEAR-SETTINGS_PAGE'
+})
+
+
 
 
 
@@ -224,6 +249,13 @@ export const updateAvatar = (file) => async (dispatch) =>{
     if (response.avatar){
         dispatch(setAvatar(response.avatar))
     }
+}
+
+export const getSettingsPage = () => (dispatch)=>{
+    Promise.all([profileAPI.getFriendsList(1, store.getState().profilePage.pageSize), profileAPI.getProfileInfo()]).then(response=>{
+        dispatch(setFriendsList(response[0].friendsPage, response[0].totalDocs))
+        dispatch(setProfileInfo(response[1]))
+    })
 }
 
 export default profileReducer

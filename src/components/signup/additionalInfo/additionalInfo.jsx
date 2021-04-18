@@ -14,7 +14,7 @@ const ProfileForm = (props)=>{
     return(
 
             <form className={s.profile_form} onSubmit={props.handleSubmit}>
-
+                <FormFetching  isFetching={props.isFetching}/>
                 <Field name="name" type="text"  component={Input} placeholder="Имя" validate={[required, minLength]}/>
                 <Field name="soName" type="text"  component={Input} placeholder="Фамилия" validate={[required, minLength]}/>
                 <Field name="company" type="text"  component={Input} placeholder="Компания" />

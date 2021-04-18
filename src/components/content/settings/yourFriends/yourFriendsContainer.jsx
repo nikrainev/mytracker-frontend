@@ -1,7 +1,7 @@
 import React from 'react';
 import YourFriends from "./yourFriends";
 import {getFriends, getPageSize, getTotalFriends, getDeletedFriend} from "../../../../redux/selectors/profileselectors";
-import {getFriendsList, deleteFriend, addFriendsList, setFriendsList} from "../../../../redux/profile-reducer";
+import {getFriendsList, deleteFriend, addFriendsList, setFriendsList, clearSettingsPage} from "../../../../redux/profile-reducer";
 
 import {connect} from "react-redux";
 
@@ -10,9 +10,19 @@ class YourFriendsContainer extends React.Component{
         friends: []
     }
     componentDidMount() {
-        this.props.getFriendsList(1, this.props.pageSize)
+        if (this.props.friends !== "no friends") {
+        let friendsFetching = this.props.friends.map((friend) => ({
+            ...friend, isFetching: false}))
+            this.setState({friends: friendsFetching})
+        }
+        else{
+            this.setState({friends: "no friends"})
+        }
     }
+
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+
         if(prevProps !== this.props){
             if(prevProps.deletedFriend !== this.props.deletedFriend){
                 this.deleteFriendLocal(this.props.deletedFriend[0])
@@ -25,15 +35,7 @@ class YourFriendsContainer extends React.Component{
 
                 }
                 else{
-                    if(typeof this.props.friends === 'object'){
-                        let friendsFetching = this.props.friends.map((friend)=> ({...friend, isFetching: false
-                        }))
-                        this.setState({friends: friendsFetching})
-                    }
-                    else{
                         this.setState({friends: this.props.friends})
-                    }
-
                 }
             }
 
@@ -49,6 +51,7 @@ class YourFriendsContainer extends React.Component{
 
     componentWillUnmount() {
         this.props.setFriendsList([],undefined)
+        this.props.clearSettingsPage()
     }
 
     deleteFriendLocal = (friendId) =>{
@@ -69,7 +72,7 @@ class YourFriendsContainer extends React.Component{
 
     render(){
         return  (
-                <div className="container">
+                <div className='container'>
                 <YourFriends
                         friends={this.state.friends}
                         pageSize={this.props.pageSize}
@@ -89,4 +92,4 @@ let mapStateToProps = (state)=>{
         deletedFriend: getDeletedFriend(state)
     }
 }
-export default connect(mapStateToProps,{getFriendsList, deleteFriend, addFriendsList, setFriendsList})(YourFriendsContainer);
+export default connect(mapStateToProps,{getFriendsList, deleteFriend, addFriendsList, setFriendsList, clearSettingsPage})(YourFriendsContainer);

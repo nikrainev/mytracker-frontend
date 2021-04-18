@@ -36,6 +36,15 @@
 
 @font-face {
     font-family: 'Segoe UI';
+    src: local('Segoe UI Normal'), local('SegoeUI-Normal'),
+    url('SegoeUI-SemiBold.woff2') format('woff2'),
+    url('SegoeUI-SemiBold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Segoe UI';
     src: local('Segoe UI Bold'), local('SegoeUI-Bold'),
         url('SegoeUI-Bold.woff2') format('woff2'),
         url('SegoeUI-Bold.woff') format('woff');

@@ -48,7 +48,7 @@ const Referrer = styled.div`
     height: 100%;
     display: block;
     width: 40px;
-    background: linear-gradient(to left, #f7f7f7,transparent);
+    background: linear-gradient(to left, #f7f7f7, #fff0);
     position: absolute;
     top: 0px;
     right: 0px;
@@ -75,7 +75,7 @@ const City = styled.div`
     height: 100%;
     display: block;
     width: 40px;
-    background: linear-gradient(to left, #f7f7f7,transparent);
+    background: linear-gradient(to left, #f7f7f7, #fff0);
     position: absolute;
     top: 0px;
     right: 0px;

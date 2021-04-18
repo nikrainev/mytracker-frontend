@@ -25,16 +25,18 @@ class UsersListContainer extends React.Component{
 
     componentDidMount() {
             let listButtons = this.props.profilesList.map((profile)=> ({isFetching: false}))
+            this.setState({profilesList: this.props.profilesList})
             this.setState({listButtons: listButtons})
 
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+
         if(this.props !== prevProps){
             this.setState({profilesList: this.props.profilesList})
             for(let i = 0; i < this.state.profilesList.length; i++){
+
                 if(this.state.profilesList[i] && this.props.profilesList[i]){
-                    console.log('yep')
                     if( this.state.profilesList[i].friendStatus !== this.props.profilesList[i].friendStatus){
 
                         let copyListButtons = [...this.state.listButtons]

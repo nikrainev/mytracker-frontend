@@ -2,6 +2,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+
 }
 .photo_col{
   width: 200px;
@@ -12,7 +13,8 @@
 
 
 .info_inputs{
-  max-width: 600px;
+  max-width: 400px;
+  padding-left: 20px;
   input[type='text'] {
     width: 100%;
     display: block;

@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./registration.module.scss"
 import {Field, reduxForm} from "redux-form";
-import {Button, Input, PasswordScoreInput} from "../../common/formControls";
+import {Button, FormFetching, Input, PasswordScoreInput} from "../../common/formControls";
 import {checkEmail, checkLogin, checkPassword, passwordsMatch, required} from "../../../utils/validation";
 import {NavLink} from "react-router-dom";
 
@@ -11,7 +11,7 @@ const SignUpForm = (props) =>{
             <form onSubmit={props.handleSubmit}>
                 <h1 className={s.h1}>Регистрация</h1>
                 {props.error ? <span className={s.form_danger}>{props.error}</span> : ''}
-                <div className={props.isFetching === true ? s.loading_bar + " " + s.active : s.loading_bar} />
+                <FormFetching isFetching={props.isFetching} />
                 <Field name="login" type="text"  component={Input} placeholder="Придумайте логин" validate={[required, checkLogin]}/>
                 <Field name="email" type="text"  component={Input} placeholder="Ваша почта" validate={[required, checkEmail]}/>
                 <Field name="password" type="password"  component={PasswordScoreInput} placeholder="Придумайте пароль" validate={[required, checkPassword]}/>

@@ -44,6 +44,12 @@ export const InitializingApp = () => (dispatch) =>{
     Promise.all([promise]).then(()=>{
                 dispatch(setInitializedSuccess())
             })
+
+
+    setTimeout(function refresh () {
+        dispatch(AuthThunkCreator())
+        setTimeout(()=>{refresh()}, 60*60*1000);
+    }, 60*60*1000)
 }
 
 export const toggleMenuState = () => ({
