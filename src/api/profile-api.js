@@ -54,9 +54,14 @@ export const profileAPI = {
                 })
     },
     updateAvatar(file){
-        return axiosInstance.post('/avatar', {avatarImage: file}, {headers: {"Authorization": "Bearer "+store.getState().auth.token}}).then(response =>{
-            return response.data
-        })
+        let fd = new FormData();
+        fd.append('file',file)
+        return axiosInstance.post('/avatar', {avatarImage: fd}, {headers:
+                    {"Authorization": "Bearer "+store.getState().auth.token,
+                        'Content-Type': 'multipart/form-data' }})
+                .then(response =>{
+                    return response.data
+                })
     }
 }
 
