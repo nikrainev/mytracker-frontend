@@ -1,9 +1,12 @@
 .profile_form_wr{
   width: 300px;
   margin: auto;
+  padding-top: 20px;
 }
 .profile_form{
   width: 100%;
+  margin-top: 10px;
+
   .button{
     width: 111px;
     padding: 10px;
@@ -16,27 +19,6 @@
   }
 }
 
-.photo_cont{
-  width: 70px;
-  display: block;
-  height: 70px;
-  background: #e4e4e4;
-  border-radius: 50%;
-  border: 2px solid #d4d4d4;
-
-}
-
-.add_photo_row{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-bottom: 15px;
-  padding-top: 10px;
-  p{
-    color: #2673ff;
-    padding-left: 15px;
-  }
-}
 
 
 .email{
@@ -51,5 +33,14 @@
     text-align: center;
     font-size: 13px;
     line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .profile_form_wr{
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
   }
 }

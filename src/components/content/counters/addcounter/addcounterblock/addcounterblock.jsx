@@ -4,6 +4,7 @@ import {Field, reduxForm} from "redux-form";
 import {Input, Button} from "../../../../common/formControls";
 import {required} from "../../../../../utils/validation";
 import loader_icon from "../../../../../assets/icons/loading.svg"
+import AddIcon from "../../../../../assets/icons/h1-block/add.svg"
 import styled from 'styled-components'
 import PixelCodeBlock from "../../pixelcode/pixelCode";
 const SendButton = styled(Button)`
@@ -58,7 +59,7 @@ const Addcounterblock = (props) => {
             case "form": return <p className={s.text}>Добавьте ваш счётчик <br /><br /> Выбирите название для счётчика и укажите URL с которого хотите получать данные</p>
             case "fetching": return ''
             case "pixelCode": return <div className={s.last_text + " " + s.text}><p>Скопируйте код и вставьте его на ваш сайт через редактор кода.<br /><br />Сразу после этого в разделе данного счётчика
-                начнёт отображаться статистика о новых посетителях</p><button onClick={()=>{props.makeOneMore()}} className="attractive-button">Создать другой счётчик</button></div>
+                начнёт отображаться статистика о новых посетителях</p><Button icon={AddIcon} onClick={()=>{props.makeOneMore()}} >Создать другой счётчик</Button></div>
         }
     }
 

@@ -33,7 +33,6 @@ const LoginForm = (props) =>{
             <form onSubmit={props.handleSubmit}>
                 <h1 className={s.h1}>Вход</h1>
                 <div className={s.form_danger_wr}>{props.error ? <span className={s.form_danger}>{props.error}</span> : ''}</div>
-                <FormFetching isFetching={props.isFetching}/>
                 <Field name="emailInput" type="text"  component={Input} placeholder="Почта" validate={required}/>
                 <Field name="passwordInput" type="password"  component={Input} placeholder="Пароль" validate={required}/>
                 <p className={s.dont_reg_yet}>Нет учётной записи? <NavLink to='signup'>Создайте её!</NavLink></p>
@@ -59,7 +58,8 @@ const LoginBlock = (props) => {
            <BackGround />
           <div className="fullpage_container">
               <div className={s.login_block}>
-                  {props.isAuth == false ?
+                  <FormFetching isFetching={props.isFetching}/>
+                  {props.isAuth === false ?
                           <div className={s.form}>
                               <LoginReduxForm isFetching={props.isFetching} onSubmit={onSubmit}/>
                           </div>

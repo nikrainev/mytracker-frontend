@@ -69,7 +69,7 @@ const profileReducer = (state = initialState, action) =>{
         case 'profile/SET-AVATAR':
             return {
                 ...state,
-                avatar: action.avatarData.avatar
+                avatar: action.avatarData
             }
         case 'profile/CLEAR-FRIENDS-PAGE':{
             return {
@@ -151,7 +151,7 @@ export const clearSettingsPage = () =>({
 
 export const getAvatar = () => async (dispatch) =>{
     let response = await profileAPI.getAvatar()
-    dispatch(setAvatar(response))
+    dispatch(setAvatar(response.avatar))
 
 }
 

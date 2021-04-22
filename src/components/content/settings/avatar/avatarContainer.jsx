@@ -8,12 +8,14 @@ import WithAuthRedirect from "../../../../hoc/withAuthRedirect";
 import {getAvatarSelector} from "../../../../redux/selectors/profileselectors";
 import {usePagePreloader} from "../../../../utils/customHooks";
 
-const AvatarContainer = (props) =>{
-    const [pageState] = usePagePreloader(props.isInitialized, props.avatar, props.getAvatar, ()=>{})
+const AvatarContainer = (props) => {
+    const [pageState] = usePagePreloader(props.isInitialized, props.avatar, props.getAvatar, () => {
+    })
 
-    return(
+    return (
             <>
-            {pageState === 'fetching' ? <p>Загрузка</p> : <Avatar avatar={props.avatar} updateAvatar={props.updateAvatar}/>}
+                {pageState === 'fetching' ? <p>Загрузка</p> :
+                        <Avatar isRegForm={props.isRegForm} avatar={props.avatar} updateAvatar={props.updateAvatar}/>}
             </>
     )
 
@@ -22,8 +24,9 @@ const AvatarContainer = (props) =>{
 
 let mapStateToProps = (state) => {
     return{
-        avatar: getAvatarSelector(state)
+        avatar: getAvatarSelector(state),
+        isInitialized: state.app.isInitialized
     }
 }
 
-export default compose(connect(mapStateToProps, {getSettingsPage, getAvatar, updateAvatar}), WithAuthRedirect)(AvatarContainer);
+export default connect(mapStateToProps, {getSettingsPage, getAvatar, updateAvatar})(AvatarContainer);

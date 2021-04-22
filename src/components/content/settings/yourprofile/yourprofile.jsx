@@ -9,7 +9,7 @@ const YourProfile = (props) =>{
                 <div className="container">
                     <div className={s.profile_cont}>
                         <div className={s.photo_col}>
-                            <AvatarContainer />
+                            <AvatarContainer isRegForm={false} />
                         </div>
                         <div className={s.info_col}>
                             <div className={s.info_inputs}>

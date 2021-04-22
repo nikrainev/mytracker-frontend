@@ -3,7 +3,7 @@ import s from "./additionalInfo.module.scss"
 import {Field, reduxForm} from "redux-form";
 import {Button, FormFetching, Input, Textarea} from "../../common/formControls";
 import {minLength, required} from "../../../utils/validation";
-
+import AvatarContainer from "../../../components/content/settings/avatar/avatarContainer"
 
 
 
@@ -40,10 +40,8 @@ const AdditionalInfo = (props)=>{
 
             <div className={s.profile_form_wr}>
                 <div className={s.email}><p>{props.email}</p></div>
-                <div className={s.add_photo_row}>
-                    <div className={s.photo_cont} />
-                    <p className={s.add_photo}>Добавить фото</p>
-                </div>
+
+                <AvatarContainer isRegForm={true} />
                 <FormFetching isFetching={props.isFetching}/>
                 <ProfileFormReduxForm onSubmit={onSubmit}  />
 
