@@ -127,7 +127,7 @@ export const signUpThunkCreator = (email,login,password) =>{
                         .then(response => {
                             dispatch(setToken(response.token))
                             if(response.message === "Auth successful"){
-                                document.cookie = 'email='+email+'; max-age=; secure; path=/'
+                                document.cookie = 'email='+email+'; max-age=360000; secure; path=/'
                                 document.cookie = 'password='+password+'; max-age=360000; secure; path=/'
                                 dispatch(updateAuthInfo())
                             }
