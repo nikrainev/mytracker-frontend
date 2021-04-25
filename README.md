@@ -1,6 +1,6 @@
 ## Фронтенд трекера
 
-Проект доступен по адресу [https://trackyour.site]
+Проект доступен по адресу [trackyour.site](https://trackyour.site)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
